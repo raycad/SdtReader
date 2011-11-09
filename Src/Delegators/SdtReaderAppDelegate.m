@@ -3,65 +3,93 @@
 //  SdtReader
 //
 //  Created by raycad on 11/9/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 seedotech. All rights reserved.
 //
 
 #import "SdtReaderAppDelegate.h"
+#import "RssReaderViewController.h"
+#import "Common.h"
 
 @implementation SdtReaderAppDelegate
 
-
-@synthesize window=_window;
+@synthesize window              = m_window;
+@synthesize tabBarController    = m_tabBarController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // Initialize view controller map
+    m_viewControllerMap = [[NSMutableDictionary alloc] init];
+    
+    m_tabBarController = [[UITabBarController alloc] init];
+    
+    UINavigationController *sourceManagerNavigationController = [[UINavigationController alloc] init];
+    id sourceManagerViewController = [self getViewControllerByIdString:(id)RssReaderViewControllerIdString];
+    if (sourceManagerViewController) {
+        [sourceManagerNavigationController pushViewController:sourceManagerViewController animated:NO]; 
+    }
+    
+    m_tabBarController.viewControllers = [NSArray arrayWithObjects:sourceManagerNavigationController, nil];    
+    
+    // Add sub view to the window
+    [self.window addSubview:[self.tabBarController view]];
+    
     // Override point for customization after application launch.
     [self.window makeKeyAndVisible];
+    
+    [sourceManagerViewController release];
+    [sourceManagerNavigationController release];
+    
     return YES;
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application
+- (id)createViewControllerByIdString:(NSString *)viewControllerIdString
 {
-    /*
-     Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-     Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-     */
+    id viewController = nil;
+    if (viewControllerIdString == RssReaderViewControllerIdString) {
+        viewController = [[RssReaderViewController alloc] init];
+    } else
+        return nil;
+    
+    return viewController;
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application
+- (id)getViewControllerByIdString:(NSString *)viewControllerIdString
 {
-    /*
-     Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-     If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-     */
+    if (!m_viewControllerMap)
+        return nil;
+    
+    id viewController = [m_viewControllerMap objectForKey:viewControllerIdString];
+    if (!viewController) {
+        // Create the view controller
+        viewController = [self createViewControllerByIdString:viewControllerIdString];
+        // Map the view controller
+        [m_viewControllerMap setObject:viewController forKey:viewControllerIdString];    
+        [viewController release];
+    }
+    
+    return viewController;
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-    /*
-     Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-     */
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    /*
-     Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-     */
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    /*
-     Called when the application is about to terminate.
-     Save data if appropriate.
-     See also applicationDidEnterBackground:.
-     */
+- (void)releaseMemory
+{       
+    // Free momery of view controllers
+    id viewController;
+    NSArray *keys = [m_viewControllerMap allKeys];
+    for (NSString *key in keys) {
+        viewController = [m_viewControllerMap objectForKey:key];
+        if (viewController) 
+            [viewController release];
+    }
+    [m_viewControllerMap removeAllObjects];
+    
+    [m_window release];
+    [m_viewControllerMap release];
+    [m_tabBarController release];
 }
 
 - (void)dealloc
 {
-    [_window release];
+    [self releaseMemory];
     [super dealloc];
 }
 
