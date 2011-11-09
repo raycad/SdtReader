@@ -1,0 +1,343 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7681FD51146A915F00CF8C27 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7681FD50146A915F00CF8C27 /* UIKit.framework */; };
+		7681FD53146A915F00CF8C27 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7681FD52146A915F00CF8C27 /* Foundation.framework */; };
+		7681FD55146A915F00CF8C27 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7681FD54146A915F00CF8C27 /* CoreGraphics.framework */; };
+		7681FD5B146A915F00CF8C27 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7681FD59146A915F00CF8C27 /* InfoPlist.strings */; };
+		7681FD64146A915F00CF8C27 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7681FD62146A915F00CF8C27 /* MainWindow.xib */; };
+		7681FD79146A960D00CF8C27 /* SdtReaderAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7681FD78146A960D00CF8C27 /* SdtReaderAppDelegate.m */; };
+		7681FD7D146A962D00CF8C27 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 7681FD7C146A962D00CF8C27 /* Common.m */; };
+		7681FD81146A965600CF8C27 /* ReaderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7681FD80146A965600CF8C27 /* ReaderModel.m */; };
+		7681FD86146A966200CF8C27 /* ModelessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7681FD83146A966200CF8C27 /* ModelessViewController.m */; };
+		7681FD87146A966200CF8C27 /* SdtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7681FD85146A966200CF8C27 /* SdtViewController.m */; };
+		7681FD89146A971400CF8C27 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7681FD88146A971400CF8C27 /* main.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		7681FD4C146A915F00CF8C27 /* SdtReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SdtReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7681FD50146A915F00CF8C27 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		7681FD52146A915F00CF8C27 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7681FD54146A915F00CF8C27 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		7681FD58146A915F00CF8C27 /* SdtReader-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SdtReader-Info.plist"; sourceTree = "<group>"; };
+		7681FD5A146A915F00CF8C27 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7681FD5C146A915F00CF8C27 /* SdtReader-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SdtReader-Prefix.pch"; sourceTree = "<group>"; };
+		7681FD63146A915F00CF8C27 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		7681FD76146A960D00CF8C27 /* ModalViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModalViewControllerDelegate.h; path = Src/Delegators/ModalViewControllerDelegate.h; sourceTree = SOURCE_ROOT; };
+		7681FD77146A960D00CF8C27 /* SdtReaderAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SdtReaderAppDelegate.h; path = Src/Delegators/SdtReaderAppDelegate.h; sourceTree = SOURCE_ROOT; };
+		7681FD78146A960D00CF8C27 /* SdtReaderAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SdtReaderAppDelegate.m; path = Src/Delegators/SdtReaderAppDelegate.m; sourceTree = SOURCE_ROOT; };
+		7681FD7B146A962D00CF8C27 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Common.h; path = Src/Global/Common.h; sourceTree = "<group>"; };
+		7681FD7C146A962D00CF8C27 /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Common.m; path = Src/Global/Common.m; sourceTree = "<group>"; };
+		7681FD7F146A965600CF8C27 /* ReaderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReaderModel.h; path = Src/Models/ReaderModel.h; sourceTree = SOURCE_ROOT; };
+		7681FD80146A965600CF8C27 /* ReaderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReaderModel.m; path = Src/Models/ReaderModel.m; sourceTree = SOURCE_ROOT; };
+		7681FD82146A966200CF8C27 /* ModelessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModelessViewController.h; path = Src/ViewControllers/ModelessViewController.h; sourceTree = SOURCE_ROOT; };
+		7681FD83146A966200CF8C27 /* ModelessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModelessViewController.m; path = Src/ViewControllers/ModelessViewController.m; sourceTree = SOURCE_ROOT; };
+		7681FD84146A966200CF8C27 /* SdtViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SdtViewController.h; path = Src/ViewControllers/SdtViewController.h; sourceTree = SOURCE_ROOT; };
+		7681FD85146A966200CF8C27 /* SdtViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SdtViewController.m; path = Src/ViewControllers/SdtViewController.m; sourceTree = SOURCE_ROOT; };
+		7681FD88146A971400CF8C27 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Src/main.m; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7681FD49146A915F00CF8C27 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7681FD51146A915F00CF8C27 /* UIKit.framework in Frameworks */,
+				7681FD53146A915F00CF8C27 /* Foundation.framework in Frameworks */,
+				7681FD55146A915F00CF8C27 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7681FD41146A915F00CF8C27 = {
+			isa = PBXGroup;
+			children = (
+				7681FD56146A915F00CF8C27 /* SdtReader */,
+				7681FD4F146A915F00CF8C27 /* Frameworks */,
+				7681FD4D146A915F00CF8C27 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7681FD4D146A915F00CF8C27 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7681FD4C146A915F00CF8C27 /* SdtReader.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7681FD4F146A915F00CF8C27 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7681FD50146A915F00CF8C27 /* UIKit.framework */,
+				7681FD52146A915F00CF8C27 /* Foundation.framework */,
+				7681FD54146A915F00CF8C27 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7681FD56146A915F00CF8C27 /* SdtReader */ = {
+			isa = PBXGroup;
+			children = (
+				7681FD7E146A964000CF8C27 /* Models */,
+				7681FD7A146A961C00CF8C27 /* Global */,
+				7681FD57146A915F00CF8C27 /* Supporting Files */,
+				7681FD6D146A933700CF8C27 /* Delegators */,
+				7681FD6C146A932700CF8C27 /* XIBs */,
+				7681FD6B146A931A00CF8C27 /* ViewControllers */,
+				7681FD6A146A931100CF8C27 /* Main */,
+			);
+			path = SdtReader;
+			sourceTree = "<group>";
+		};
+		7681FD57146A915F00CF8C27 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7681FD58146A915F00CF8C27 /* SdtReader-Info.plist */,
+				7681FD59146A915F00CF8C27 /* InfoPlist.strings */,
+				7681FD5C146A915F00CF8C27 /* SdtReader-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7681FD6A146A931100CF8C27 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				7681FD88146A971400CF8C27 /* main.m */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		7681FD6B146A931A00CF8C27 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7681FD82146A966200CF8C27 /* ModelessViewController.h */,
+				7681FD83146A966200CF8C27 /* ModelessViewController.m */,
+				7681FD84146A966200CF8C27 /* SdtViewController.h */,
+				7681FD85146A966200CF8C27 /* SdtViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		7681FD6C146A932700CF8C27 /* XIBs */ = {
+			isa = PBXGroup;
+			children = (
+				7681FD62146A915F00CF8C27 /* MainWindow.xib */,
+			);
+			name = XIBs;
+			sourceTree = "<group>";
+		};
+		7681FD6D146A933700CF8C27 /* Delegators */ = {
+			isa = PBXGroup;
+			children = (
+				7681FD76146A960D00CF8C27 /* ModalViewControllerDelegate.h */,
+				7681FD77146A960D00CF8C27 /* SdtReaderAppDelegate.h */,
+				7681FD78146A960D00CF8C27 /* SdtReaderAppDelegate.m */,
+			);
+			name = Delegators;
+			sourceTree = "<group>";
+		};
+		7681FD7A146A961C00CF8C27 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				7681FD7B146A962D00CF8C27 /* Common.h */,
+				7681FD7C146A962D00CF8C27 /* Common.m */,
+			);
+			name = Global;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		7681FD7E146A964000CF8C27 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7681FD7F146A965600CF8C27 /* ReaderModel.h */,
+				7681FD80146A965600CF8C27 /* ReaderModel.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7681FD4B146A915F00CF8C27 /* SdtReader */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7681FD67146A915F00CF8C27 /* Build configuration list for PBXNativeTarget "SdtReader" */;
+			buildPhases = (
+				7681FD48146A915F00CF8C27 /* Sources */,
+				7681FD49146A915F00CF8C27 /* Frameworks */,
+				7681FD4A146A915F00CF8C27 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SdtReader;
+			productName = SdtReader;
+			productReference = 7681FD4C146A915F00CF8C27 /* SdtReader.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7681FD43146A915F00CF8C27 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = seedotech;
+			};
+			buildConfigurationList = 7681FD46146A915F00CF8C27 /* Build configuration list for PBXProject "SdtReader" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7681FD41146A915F00CF8C27;
+			productRefGroup = 7681FD4D146A915F00CF8C27 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7681FD4B146A915F00CF8C27 /* SdtReader */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7681FD4A146A915F00CF8C27 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7681FD5B146A915F00CF8C27 /* InfoPlist.strings in Resources */,
+				7681FD64146A915F00CF8C27 /* MainWindow.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7681FD48146A915F00CF8C27 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7681FD79146A960D00CF8C27 /* SdtReaderAppDelegate.m in Sources */,
+				7681FD7D146A962D00CF8C27 /* Common.m in Sources */,
+				7681FD81146A965600CF8C27 /* ReaderModel.m in Sources */,
+				7681FD86146A966200CF8C27 /* ModelessViewController.m in Sources */,
+				7681FD87146A966200CF8C27 /* SdtViewController.m in Sources */,
+				7681FD89146A971400CF8C27 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		7681FD59146A915F00CF8C27 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7681FD5A146A915F00CF8C27 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		7681FD62146A915F00CF8C27 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7681FD63146A915F00CF8C27 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7681FD65146A915F00CF8C27 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		7681FD66146A915F00CF8C27 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		7681FD68146A915F00CF8C27 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SdtReader/SdtReader-Prefix.pch";
+				INFOPLIST_FILE = "SdtReader/SdtReader-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		7681FD69146A915F00CF8C27 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SdtReader/SdtReader-Prefix.pch";
+				INFOPLIST_FILE = "SdtReader/SdtReader-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7681FD46146A915F00CF8C27 /* Build configuration list for PBXProject "SdtReader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7681FD65146A915F00CF8C27 /* Debug */,
+				7681FD66146A915F00CF8C27 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7681FD67146A915F00CF8C27 /* Build configuration list for PBXNativeTarget "SdtReader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7681FD68146A915F00CF8C27 /* Debug */,
+				7681FD69146A915F00CF8C27 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7681FD43146A915F00CF8C27 /* Project object */;
+}
