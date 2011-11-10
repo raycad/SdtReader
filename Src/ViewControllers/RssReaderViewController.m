@@ -18,7 +18,7 @@
     if (self != nil) {        
         // Set up our navigation bar.
         self.title = RssReaderTitle;        
-        self.tabBarItem.image = [UIImage imageNamed:@"Newspaper_Feed_32x32.png"];        
+        self.tabBarItem.image = [UIImage imageNamed:@"Newspaper_Feed_48x48.png"];        
     }
     
     return self;

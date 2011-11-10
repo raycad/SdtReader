@@ -8,7 +8,6 @@
 
 #import "SdtViewController.h"
 
-
 @implementation SdtViewController
 
 @synthesize viewMode = m_viewMode;
