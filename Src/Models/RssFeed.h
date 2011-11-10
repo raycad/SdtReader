@@ -1,5 +1,5 @@
 //
-//  Feed.h
+//  RssFeed.h
 //  SdtReader
 //
 //  Created by raycad on 11/10/11.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface FeedPK : NSObject {
+@interface RssFeedPK : NSObject {
     NSString *m_title;    
 }
 
@@ -17,13 +17,13 @@
 -(id)initWithTitle:(NSString *)title;
 @end
 
-@interface Feed : NSObject {
+@interface RssFeed : NSObject {
     NSString    *m_title;
     NSString    *m_link;
     NSString    *m_website;
     NSString    *m_description;
     
-    FeedPK      *m_feedPK;
+    RssFeedPK   *m_rssFeedPK;
 }
 
 @property (nonatomic, retain) NSString *title;
@@ -31,8 +31,8 @@
 @property (nonatomic, retain) NSString *website;
 @property (nonatomic, retain) NSString *description;
 
-- (id)initWithFeedPK:(FeedPK *)feedPK;
-- (FeedPK *)feedPK;
+- (id)initWithRssFeedPK:(RssFeedPK *)rssFeedPK;
+- (RssFeedPK *)rssFeedPK;
 
 - (BOOL)isEqual:(id)object;
 @end

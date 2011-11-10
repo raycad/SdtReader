@@ -7,11 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ReaderModel.h"
 
 int main(int argc, char *argv[])
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    // Initialize the app model
+    ReaderModel *readerModel = [ReaderModel instance];
+    
     int retVal = UIApplicationMain(argc, argv, nil, nil);
+    
+    [readerModel release];
     [pool release];
     return retVal;
 }

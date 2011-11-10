@@ -1,5 +1,5 @@
 //
-//  Story.h
+//  RssStory.h
 //  SdtReader
 //
 //  Created by raycad on 11/10/11.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Story : NSObject {
+@interface RssStory : NSObject {
     NSString *m_title;
     NSString *m_description;
     NSString *m_link;

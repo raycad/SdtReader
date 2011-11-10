@@ -10,6 +10,8 @@
 
 @implementation ReaderModel
 
+@synthesize rssFeedModel = m_rssFeedModel;
+
 static ReaderModel *_instance = nil;
 
 + (ReaderModel *)instance
@@ -42,6 +44,12 @@ static ReaderModel *_instance = nil;
 	}
     
 	return self;
+}
+
+- (void) dealloc
+{
+    [m_rssFeedModel release];
+    [super dealloc];
 }
 
 @end

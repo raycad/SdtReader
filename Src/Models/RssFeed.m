@@ -1,14 +1,14 @@
 //
-//  Feed.m
+//  RssFeed.m
 //  SdtReader
 //
 //  Created by raycad on 11/10/11.
 //  Copyright 2011 seedotech. All rights reserved.
 //
 
-#import "Feed.h"
+#import "RssFeed.h"
 
-@implementation FeedPK
+@implementation RssFeedPK
 
 @synthesize title = m_title;
 
@@ -36,7 +36,7 @@
     if (!object || ![object isKindOfClass:[self class]])
         return NO;
     
-    NSString *title = [(FeedPK *)object title];
+    NSString *title = [(RssFeedPK *)object title];
     if (!title)
         return NO;
     
@@ -47,27 +47,27 @@
 }
 @end
 
-@implementation Feed
+@implementation RssFeed
 
 @synthesize title       = m_title;
 @synthesize link        = m_link;
 @synthesize website     = m_website;
 @synthesize description = m_description;
 
-- (id)initWithFeedPK:(FeedPK *)feedPK
+- (id)initWithRssFeedPK:(RssFeedPK *)rssFeedPK
 {
     if ((self = [super init])) {
         // Initialize parameters
-        [m_feedPK autorelease]; // Use this to avoid releasing itself
-        m_feedPK = [feedPK retain];
+        [m_rssFeedPK autorelease]; // Use this to avoid releasing itself
+        m_rssFeedPK = [rssFeedPK retain];
     }
     
     return self;
 }
 
-- (FeedPK *)feedPK
+- (RssFeedPK *)rssFeedPK
 {
-    return m_feedPK;
+    return m_rssFeedPK;
 }
 
 - (void)dealloc

@@ -1,14 +1,14 @@
 //
-//  Story.m
+//  RssStory.m
 //  SdtReader
 //
 //  Created by raycad on 11/10/11.
 //  Copyright 2011 seedotech. All rights reserved.
 //
 
-#import "Story.h"
+#import "RssStory.h"
 
-@implementation Story
+@implementation RssStory
 
 @synthesize title       = m_title;
 @synthesize description = m_description;

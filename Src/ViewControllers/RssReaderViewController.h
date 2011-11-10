@@ -8,9 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "SdtViewController.h"
+#import "ReaderModel.h"
+#import "RssFeedModel.h"
 
 @interface RssReaderViewController : SdtViewController {
-    
+    RssFeedModel    *m_rssFeedModel;
+    ReaderModel     *m_readerModel;
+    UISearchBar     *m_searchBar;
+    UITableView     *m_rssFeedTableView;
 }
 
+@property (nonatomic, retain) IBOutlet UISearchBar *searchBar;
+@property (nonatomic, retain) IBOutlet UITableView *rssFeedTableView;
+
+- (void) refreshData;
 @end
