@@ -113,7 +113,7 @@
     if ([rssFeedModel count] == 0)
         return nil;
 
-    return [RssFeedModel autorelease];
+    return [rssFeedModel autorelease];
 }
 
 - (void)clear

@@ -97,7 +97,7 @@
         [rssFeed release];
         
         // Set data model
-        m_readerModel.rssFeedModel = rssFeedModel;
+        [m_readerModel setRssFeedModel:rssFeedModel];
         
         [rssFeedModel release];
     }
@@ -149,11 +149,10 @@
 
 - (void)viewDidUnload
 {
-    [m_searchBar release];
     m_searchBar = nil;
-    [m_rssFeedTableView release];
     m_rssFeedTableView = nil;
     
+    [self setSearchBar:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -258,10 +257,62 @@
     }*/
 }
 
+- (void)presentCourseViewModally
+// Displays the options view so that the user can add a new number to the 
+// list of numbers to add up.
+{
+    /*CourseViewController * vc;
+    
+    vc = [[[CourseViewController alloc] init] autorelease];
+    assert(vc != nil);
+    
+    vc.delegate = self;
+    
+    [vc presentModallyOn:self];*/
+}
+
+- (void)didSave:(NSObject *)object
+{
+#pragma unused(object)
+    assert(object != nil);
+    
+    [self dismissModalViewControllerAnimated:YES];
+    
+    [self refreshData];
+}
+
+- (void)didCancel:(NSObject *)object
+// Called when the user taps Cancel in the options view.
+{
+#pragma unused(object)
+    assert(object != nil);
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)didUpdate:(NSObject *)object
+// Called when the user taps Cancel in the options view.
+{
+#pragma unused(object)
+    assert(object != nil);
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+    [self refreshData];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)addRssFeed
+{
+    [self presentCourseViewModally];  
+}
+
+- (void)editRssFeed
+{
+    [self presentCourseViewModally];  
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar

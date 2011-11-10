@@ -18,8 +18,9 @@
     UITableView     *m_rssFeedTableView;
 }
 
-@property (nonatomic, retain) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, retain) IBOutlet UITableView *rssFeedTableView;
+
+@property (nonatomic, retain) IBOutlet UISearchBar *searchBar;
 
 - (void) refreshData;
 @end
