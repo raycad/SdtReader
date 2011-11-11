@@ -21,8 +21,11 @@
     m_viewControllerMap = [[NSMutableDictionary alloc] init];
     m_tabBarController = [[UITabBarController alloc] init];
     
-    id sourceManagerViewController = [self getViewControllerByIdString:(id)RssReaderViewControllerIdString];
-    m_tabBarController.viewControllers = [NSArray arrayWithObjects:sourceManagerViewController, nil];    
+    id rssFeedViewController = [self getViewControllerByIdString:(id)RssReaderViewControllerIdString];    
+    UINavigationController *rssFeedNavigationController = [[UINavigationController alloc] init];
+    [rssFeedNavigationController pushViewController:rssFeedViewController animated:NO]; 
+    
+    m_tabBarController.viewControllers = [NSArray arrayWithObjects:rssFeedNavigationController, nil];    
     
     // Add sub view to the window
     [self.window addSubview:[self.tabBarController view]];
@@ -30,7 +33,8 @@
     // Override point for customization after application launch.
     [self.window makeKeyAndVisible];
     
-    [sourceManagerViewController release];
+    [rssFeedViewController release];
+    [rssFeedNavigationController release];
     
     return YES;
 }

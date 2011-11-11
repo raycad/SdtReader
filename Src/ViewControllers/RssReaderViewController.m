@@ -9,6 +9,7 @@
 #import "RssReaderViewController.h"
 #import "Common.h"
 #import "RssFeedViewCell.h"
+#import "RssStoryListViewController.h"
 
 @implementation RssReaderViewController
 @synthesize searchBar = m_searchBar;
@@ -21,11 +22,11 @@
     if (self != nil) {       
         // Initialize the reader model
         m_readerModel = [ReaderModel instance];
-        m_rssFeedModel = [[RssFeedModel alloc] init];
+        m_rssFeedModel = [[RssFeedModel alloc] init];     
         
         // Set up our navigation bar.
         self.title = RssReaderTitle;        
-        self.tabBarItem.image = [UIImage imageNamed:@"rss_grey.png"];        
+        self.tabBarItem.image = [UIImage imageNamed:@"rss_grey.png"];                
     }
     
     return self;
@@ -193,6 +194,9 @@
     m_rssFeedTableView.editing = YES;
     m_rssFeedTableView.allowsSelectionDuringEditing = YES;
     
+    // Hide the navigation bar
+    [self hideNavigationBar];
+    
     /*if (m_viewMode == CreateNewMode) {
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(editRssFeed)];
         
@@ -205,13 +209,41 @@
     [self refreshData];
 }
 
-- (IBAction)viewRssFeed:(id)sender {
+- (IBAction)viewRssFeed:(id)sender 
+{
+    NSIndexPath *indexPath = [m_rssFeedTableView indexPathForSelectedRow];
+    if (!indexPath) {
+        // Open a alert with an OK button
+        NSString *alertString = [NSString stringWithFormat:@"You must select an RSS Feed to view"];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:alertString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+        return;
+    }
+    
+    RssFeedViewCell *cell = (RssFeedViewCell *)[m_rssFeedTableView cellForRowAtIndexPath:indexPath];
+    if (!cell)
+        return;
+    
+    RssFeed *rssFeed = cell.rssFeed;
+    if (!rssFeed)
+        return;
+    
+    RssStoryListViewController *rssStoryListViewController = [[[RssStoryListViewController alloc] init] autorelease];
+    
+    rssStoryListViewController.rssFeed = rssFeed;
+    rssStoryListViewController.delegate = self;
+    
+    [[self navigationController] pushViewController:rssStoryListViewController animated:YES];
+    [self showNavigationBar];
 }
 
-- (IBAction)editRssFeed:(id)sender {
+- (IBAction)editRssFeed:(id)sender
+{
 }
 
-- (IBAction)addRssFeed:(id)sender {
+- (IBAction)addRssFeed:(id)sender 
+{
 }
 
 - (void)refreshData
@@ -241,7 +273,6 @@
     m_searchBar = nil;
     m_rssFeedTableView = nil;
     
-    [self setSearchBar:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -402,16 +433,6 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-- (void)addRssFeed
-{
-    [self presentCourseViewModally];  
-}
-
-- (void)editRssFeed
-{
-    [self presentCourseViewModally];  
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar

@@ -22,4 +22,6 @@ typedef enum {
 
 @property (nonatomic) ViewMode viewMode;
 
+- (void)hideNavigationBar;
+- (void)showNavigationBar;
 @end

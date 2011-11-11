@@ -52,6 +52,16 @@
     }
 }
 
+- (void)hideNavigationBar 
+{    
+    self.navigationController.navigationBarHidden = YES;
+}
+
+- (void)showNavigationBar 
+{    
+    self.navigationController.navigationBarHidden = NO;
+}
+
 - (void)dealloc
 {
     [super dealloc];
