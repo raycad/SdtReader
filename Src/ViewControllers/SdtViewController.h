@@ -10,9 +10,10 @@
 #import "ModelessViewController.h"
 
 typedef enum {
-    CreateNewMode   = 0, // Save/Cancel buttons
-    UpdateMode      = 1,
-    SelectMode      = 2
+    None            = 0,
+    CreateNewMode   = 1, // Save/Cancel buttons
+    UpdateMode      = 2,
+    SelectMode      = 3
 } ViewMode; 
 
 @interface SdtViewController : ModelessViewController {   

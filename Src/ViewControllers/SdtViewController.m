@@ -16,7 +16,7 @@
 {
     self = [super init];
     if (self != nil) {
-        m_viewMode = CreateNewMode;
+        m_viewMode = None;
     }
     
     return self;

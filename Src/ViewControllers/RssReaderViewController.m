@@ -25,7 +25,7 @@
         
         // Set up our navigation bar.
         self.title = RssReaderTitle;        
-        self.tabBarItem.image = [UIImage imageNamed:@"Newspaper_Feed_48x48.png"];        
+        self.tabBarItem.image = [UIImage imageNamed:@"rss_grey.png"];        
     }
     
     return self;
@@ -76,7 +76,87 @@
         [rssFeedPK release];
         [rssFeed release];  
         
-        title = [NSString stringWithFormat:@"CNN"];
+        title = [NSString stringWithFormat:@"BBC"];
+        rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
+        rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
+        link = @"http://rss.cnn.com/rss/cnn_topstories.rss";
+        website = @"cnn.com";
+        description = @"CNN";
+        rssFeed.title = title;
+        rssFeed.link = link;
+        rssFeed.website = website;
+        rssFeed.description = description;
+        if ([rssFeedModel addRssFeed:rssFeed]) {
+            NSLog(@"Added rss feed sucessfully");
+        }
+        [title release];
+        [link release];
+        [website release];
+        [description release];
+        [rssFeedPK release];
+        [rssFeed release];
+        
+        title = [NSString stringWithFormat:@"MSDN"];
+        rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
+        rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
+        link = @"http://rss.cnn.com/rss/cnn_topstories.rss";
+        website = @"cnn.com";
+        description = @"CNN";
+        rssFeed.title = title;
+        rssFeed.link = link;
+        rssFeed.website = website;
+        rssFeed.description = description;
+        if ([rssFeedModel addRssFeed:rssFeed]) {
+            NSLog(@"Added rss feed sucessfully");
+        }
+        [title release];
+        [link release];
+        [website release];
+        [description release];
+        [rssFeedPK release];
+        [rssFeed release];
+        
+        title = [NSString stringWithFormat:@"Sport"];
+        rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
+        rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
+        link = @"http://rss.cnn.com/rss/cnn_topstories.rss";
+        website = @"cnn.com";
+        description = @"CNN";
+        rssFeed.title = title;
+        rssFeed.link = link;
+        rssFeed.website = website;
+        rssFeed.description = description;
+        if ([rssFeedModel addRssFeed:rssFeed]) {
+            NSLog(@"Added rss feed sucessfully");
+        }
+        [title release];
+        [link release];
+        [website release];
+        [description release];
+        [rssFeedPK release];
+        [rssFeed release];
+        
+        title = [NSString stringWithFormat:@"Books"];
+        rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
+        rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
+        link = @"http://rss.cnn.com/rss/cnn_topstories.rss";
+        website = @"cnn.com";
+        description = @"CNN";
+        rssFeed.title = title;
+        rssFeed.link = link;
+        rssFeed.website = website;
+        rssFeed.description = description;
+        if ([rssFeedModel addRssFeed:rssFeed]) {
+            NSLog(@"Added rss feed sucessfully");
+        }
+        [title release];
+        [link release];
+        [website release];
+        [description release];
+        [rssFeedPK release];
+        [rssFeed release];
+        
+        title = [NSString stringWithFormat:@"Music"];
         rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
         rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
         link = @"http://rss.cnn.com/rss/cnn_topstories.rss";
@@ -113,16 +193,25 @@
     m_rssFeedTableView.editing = YES;
     m_rssFeedTableView.allowsSelectionDuringEditing = YES;
     
-    if (m_viewMode == CreateNewMode) {
+    /*if (m_viewMode == CreateNewMode) {
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(editRssFeed)];
         
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addRssFeed)];
-    }
+    }*/
     
     [self loadDataFromDB];
     
     // Reload data
     [self refreshData];
+}
+
+- (IBAction)viewRssFeed:(id)sender {
+}
+
+- (IBAction)editRssFeed:(id)sender {
+}
+
+- (IBAction)addRssFeed:(id)sender {
 }
 
 - (void)refreshData
@@ -183,8 +272,10 @@
 		cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
 	}
     
+    int row = indexPath.row;
+    
     // Set up the cell...
-    RssFeed *rssFeed = [m_rssFeedModel rssFeedAtIndex:indexPath.row];
+    RssFeed *rssFeed = [m_rssFeedModel rssFeedAtIndex:row];
     if (!rssFeed)
         return nil;
 	
@@ -195,9 +286,17 @@
     // Set cell selection is blue style
     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     
+    NSString *thumbnailFile;
+    if (row%3 == 0)
+        thumbnailFile = @"rss_yellow.png";
+    else if (row%3 == 1)
+        thumbnailFile = @"rss_green.png";
+    else
+        thumbnailFile = @"rss_blue.png";
+    
     // Set up the cell…
     cell.titleLabel.text = [rssFeed title];
-    cell.thumbnailImageView.image = [UIImage imageNamed:@"rss_feeds.jpg"];
+    cell.thumbnailImageView.image = [UIImage imageNamed:thumbnailFile];
     
     // Set data for cell
     cell.rssFeed = rssFeed;

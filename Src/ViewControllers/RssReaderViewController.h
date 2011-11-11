@@ -22,5 +22,8 @@
 
 @property (nonatomic, retain) IBOutlet UISearchBar *searchBar;
 
+- (IBAction)viewRssFeed:(id)sender;
+- (IBAction)editRssFeed:(id)sender;
+- (IBAction)addRssFeed:(id)sender;
 - (void) refreshData;
 @end

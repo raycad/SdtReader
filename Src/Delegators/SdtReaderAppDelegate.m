@@ -19,16 +19,10 @@
 {
     // Initialize view controller map
     m_viewControllerMap = [[NSMutableDictionary alloc] init];
-    
     m_tabBarController = [[UITabBarController alloc] init];
     
-    UINavigationController *sourceManagerNavigationController = [[UINavigationController alloc] init];
     id sourceManagerViewController = [self getViewControllerByIdString:(id)RssReaderViewControllerIdString];
-    if (sourceManagerViewController) {
-        [sourceManagerNavigationController pushViewController:sourceManagerViewController animated:NO]; 
-    }
-    
-    m_tabBarController.viewControllers = [NSArray arrayWithObjects:sourceManagerNavigationController, nil];    
+    m_tabBarController.viewControllers = [NSArray arrayWithObjects:sourceManagerViewController, nil];    
     
     // Add sub view to the window
     [self.window addSubview:[self.tabBarController view]];
@@ -37,7 +31,6 @@
     [self.window makeKeyAndVisible];
     
     [sourceManagerViewController release];
-    [sourceManagerNavigationController release];
     
     return YES;
 }
