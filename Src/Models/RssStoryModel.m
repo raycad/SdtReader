@@ -27,7 +27,7 @@
     return YES;
 }
 
-- (RssStory *)RssStoryAtIndex:(int)index
+- (RssStory *)rssStoryAtIndex:(int)index
 {
     return [m_rssStoryList objectAtIndex:index];
 }

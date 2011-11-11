@@ -77,10 +77,10 @@
         [rssFeedPK release];
         [rssFeed release];  
         
-        title = [NSString stringWithFormat:@"BBC"];
+        title = [NSString stringWithFormat:@"MSDN"];
         rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
         rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
-        link = @"http://rss.cnn.com/rss/cnn_topstories.rss";
+        link = @"http://feeds2.feedburner.com/TheMdnShow";
         website = @"cnn.com";
         description = @"CNN";
         rssFeed.title = title;
@@ -97,7 +97,7 @@
         [rssFeedPK release];
         [rssFeed release];
         
-        title = [NSString stringWithFormat:@"MSDN"];
+        title = [NSString stringWithFormat:@"Books"];
         rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
         rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
         link = @"http://rss.cnn.com/rss/cnn_topstories.rss";
@@ -137,7 +137,7 @@
         [rssFeedPK release];
         [rssFeed release];
         
-        title = [NSString stringWithFormat:@"Books"];
+        title = [NSString stringWithFormat:@"http://rss.cnn.com/rss/cnn_topstories.rss"];
         rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
         rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
         link = @"http://rss.cnn.com/rss/cnn_topstories.rss";
@@ -236,6 +236,9 @@
     
     [[self navigationController] pushViewController:rssStoryListViewController animated:YES];
     [self showNavigationBar];
+    
+    // Parse RSS Feeds
+    [rssStoryListViewController parseRssFeed];
 }
 
 - (IBAction)editRssFeed:(id)sender
@@ -304,6 +307,7 @@
 	}
     
     int row = indexPath.row;
+    //int total = [m_rssFeedModel count]; 
     
     // Set up the cell...
     RssFeed *rssFeed = [m_rssFeedModel rssFeedAtIndex:row];
@@ -327,6 +331,7 @@
     
     // Set up the cell…
     cell.titleLabel.text = [rssFeed title];
+    cell.indexLabel.text = [NSString stringWithFormat:@"%d", row+1];
     cell.thumbnailImageView.image = [UIImage imageNamed:thumbnailFile];
     
     // Set data for cell

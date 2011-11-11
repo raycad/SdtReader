@@ -14,6 +14,7 @@
 @synthesize description = m_description;
 @synthesize link        = m_link;
 @synthesize creator     = m_creator;
+@synthesize guid        = m_guid;
 @synthesize date        = m_date;
 
 - (void) dealloc
@@ -22,6 +23,7 @@
     [m_description release];
     [m_link release];
     [m_creator release];
+    [m_guid release];
     [m_date release];
     [super release];
 }

@@ -11,11 +11,13 @@
 
 @interface RssFeedViewCell : UITableViewCell {
     UILabel     *m_titleLabel;
+    UILabel     *m_indexLabel;
     UIImageView *m_thumbnailImageView;
     RssFeed     *m_rssFeed;
 }
 
 @property (nonatomic, retain) UILabel     *titleLabel;
+@property (nonatomic, retain) UILabel     *indexLabel;
 @property (nonatomic, retain) UIImageView *thumbnailImageView;
 @property (nonatomic, retain) RssFeed     *rssFeed;
 @end
