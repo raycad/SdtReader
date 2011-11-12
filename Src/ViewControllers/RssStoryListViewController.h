@@ -15,7 +15,6 @@
 @interface RssStoryListViewController : SdtViewController {    
     UITableView             *m_storyListTableView;
     RssFeed                 *m_rssFeed;
-    UITextView              *m_headlineTextView;
     UILabel                 *m_totalStoriesLabel;
     RssStoryModel           *m_rssStoryModel;
     
@@ -23,10 +22,8 @@
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *storyListTableView;
-@property (nonatomic, retain) IBOutlet UITextView *headlineTextView;
 @property (nonatomic, retain) IBOutlet UILabel *totalStoriesLabel;
 @property (nonatomic, retain) RssFeed *rssFeed;
-@property (retain, nonatomic) UIActivityIndicatorView *activityIndicator;
 
 - (void)parseRssFeed;
 @end

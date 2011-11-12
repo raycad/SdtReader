@@ -12,7 +12,6 @@
 
 @implementation RssStoryListViewController
 @synthesize storyListTableView          = m_storyListTableView;
-@synthesize headlineTextView            = m_headlineTextView;
 @synthesize totalStoriesLabel           = m_totalStoriesLabel;
 @synthesize rssFeed                     = m_rssFeed;
 
@@ -28,7 +27,6 @@
 - (void)dealloc
 {
     [m_storyListTableView release];
-    [m_headlineTextView release];
     [m_rssFeed release];
     //[m_rssStoryModel release];
     [m_totalStoriesLabel release];
@@ -53,13 +51,6 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backView)];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Show Story" style:UIBarButtonItemStylePlain target:self action:@selector(showStory)];
-    
-    // Set default parameters   
-    [m_headlineTextView.layer setBackgroundColor: [[UIColor whiteColor] CGColor]];
-    [m_headlineTextView.layer setBorderColor: [[UIColor grayColor] CGColor]];
-    [m_headlineTextView.layer setBorderWidth: 1.0];
-    [m_headlineTextView.layer setCornerRadius:10.0f];
-    [m_headlineTextView.layer setMasksToBounds:YES];
 }
 
 - (void)backView
@@ -79,7 +70,6 @@
 - (void)viewDidUnload
 {
     [self setStoryListTableView:nil];
-    [self setHeadlineTextView:nil];
     [self setTotalStoriesLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -173,8 +163,6 @@
         RssStory *rssStory = [m_rssStoryModel rssStoryAtIndex:indexPath.row];
         if (!rssStory)
             return;
-
-        m_headlineTextView.text = rssStory.description;
     }
 }
 
@@ -204,7 +192,7 @@
     [self.storyListTableView reloadData];
 
     // Update the total stories
-    m_totalStoriesLabel.text = [NSString stringWithFormat:@"%d stories", [m_rssStoryModel count]];
+    m_totalStoriesLabel.text = [NSString stringWithFormat:@"%d", [m_rssStoryModel count]];
 }
 
 -(void)processHasErrors
