@@ -14,6 +14,7 @@
 
 @interface RssStoryListViewController : SdtViewController {    
     UITableView             *m_storyListTableView;
+    UIActivityIndicatorView *m_activityIndicatorView;
     RssFeed                 *m_rssFeed;
     UILabel                 *m_totalStoriesLabel;
     RssStoryModel           *m_rssStoryModel;

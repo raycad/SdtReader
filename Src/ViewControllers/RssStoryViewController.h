@@ -11,9 +11,10 @@
 #import "RssStory.h"
 
 @interface RssStoryViewController : WebBrowserViewController {    
-    UIWebView   *m_webView;
+    UIWebView               *m_webView;
+    UIActivityIndicatorView *m_activityIndicatorView;
     
-    RssStory    *m_rssStory;
+    RssStory                *m_rssStory;
 }
 
 @property (nonatomic, retain) IBOutlet UIWebView *webView;

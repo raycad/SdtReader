@@ -9,3 +9,4 @@ extern const NSString *RssReaderViewControllerIdString;
 
 // Default global strings
 extern const NSString *RssReaderTitle;
+extern const NSString *RssStoryTitle;

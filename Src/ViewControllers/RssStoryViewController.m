@@ -7,6 +7,7 @@
 //
 
 #import "RssStoryViewController.h"
+#import "Common.h"
 
 @implementation RssStoryViewController
 
@@ -36,6 +37,7 @@
 {
     [m_webView release];
     [m_rssStory release];
+    [m_activityIndicatorView release];
     [super dealloc];
 }
 
@@ -46,8 +48,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    m_activityIndicatorView = [[UIActivityIndicatorView alloc]     initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    m_activityIndicatorView.center = self.view.center;
+    [self.view addSubview: m_activityIndicatorView];
+    
     //m_webView.userInteractionEnabled = NO;
-    self.navigationItem.leftBarButtonItem  = [[[UIBarButtonItem alloc] initWithTitle:@"Back View" style:UIBarButtonItemStylePlain target:self action:@selector(backViewAction:)] autorelease]; 
+    self.navigationItem.leftBarButtonItem  = [[[UIBarButtonItem alloc] initWithTitle:RssStoryTitle style:UIBarButtonItemStylePlain target:self action:@selector(backViewAction:)] autorelease]; 
     assert(self.navigationItem.leftBarButtonItem != nil);
     self.navigationItem.rightBarButtonItem  = [[[UIBarButtonItem alloc] initWithTitle:@"Back Page" style:UIBarButtonItemStylePlain target:self action:@selector(goBackPageAction:)] autorelease]; 
     assert(self.navigationItem.rightBarButtonItem != nil);
@@ -69,6 +75,26 @@
     // e.g. self.myOutlet = nil;
 }
 
+-(void)webViewDidStartLoad:(UIWebView *) portal 
+{
+    /*UIActivityIndicatorView *actInd = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    UIBarButtonItem *actItem = [[UIBarButtonItem alloc] initWithCustomView:actInd];
+    
+    self.navigationItem.rightBarButtonItem = actItem;
+    
+    [actInd startAnimating];
+    [actInd release];
+    [actItem release];*/
+    
+    [self showLoadingIndicator:YES];
+}
+
+-(void)webViewDidFinishLoad:(UIWebView *) portal
+{
+    //self.navigationItem.rightBarButtonItem = nil;
+    [self showLoadingIndicator:NO];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
@@ -87,5 +113,18 @@
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:storyURL];
     
     [m_webView loadRequest:request];
+}
+
+- (void)showLoadingIndicator:(BOOL)show
+{
+    if (show) {
+        self.title = @"Loading ..."; 
+        [m_activityIndicatorView startAnimating];
+    } else {
+        self.title = @"";
+        [m_activityIndicatorView stopAnimating];
+    }
+    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = show;
 }
 @end

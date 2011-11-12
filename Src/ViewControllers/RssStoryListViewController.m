@@ -35,6 +35,7 @@
     [m_totalStoriesLabel release];
     //[m_rssParser release];
     [m_searchBar release];
+    [m_activityIndicatorView release];
     [super dealloc];
 }
 
@@ -53,9 +54,13 @@
     m_rssStoryModel = [[RssStoryModel alloc] init];
     m_rssParser = [[RssParser alloc] init];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backView)];
+    /*self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backView)];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Show Story" style:UIBarButtonItemStylePlain target:self action:@selector(showStory)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Show Story" style:UIBarButtonItemStylePlain target:self action:@selector(showStory)];*/
+    
+    m_activityIndicatorView = [[UIActivityIndicatorView alloc]     initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    m_activityIndicatorView.center = self.view.center;
+    [self.view addSubview: m_activityIndicatorView];
 }
 
 - (void)backView
@@ -185,6 +190,7 @@
 {
 #pragma unused(object)
     assert(object != nil);
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -205,6 +211,8 @@
     if (!rssFeedLink || rssFeedLink == @"")
         return;
     
+    [m_activityIndicatorView startAnimating];
+    
     [m_filterRssStoryModel clear];        
     
     m_rssParser.rssFeedLink = rssFeedLink;
@@ -220,6 +228,8 @@
 	[m_rssStoryModel copyDataFrom:m_rssParser.rssStoryModel];    
 
     [self refreshData];    
+    
+    [m_activityIndicatorView stopAnimating];
 }
 
 -(void)processHasErrors
@@ -230,6 +240,8 @@
 	[alert show];	
 	[alert release];
 	//[self toggleToolBarButtons:YES];
+    
+    [m_activityIndicatorView stopAnimating];
 }
 
 - (void)refreshData
