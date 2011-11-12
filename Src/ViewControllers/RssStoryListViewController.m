@@ -14,6 +14,7 @@
 @synthesize storyListTableView          = m_storyListTableView;
 @synthesize totalStoriesLabel           = m_totalStoriesLabel;
 @synthesize rssFeed                     = m_rssFeed;
+@synthesize searchBar                   = m_searchBar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,8 +30,10 @@
     [m_storyListTableView release];
     [m_rssFeed release];
     //[m_rssStoryModel release];
+    [m_filterRssStoryModel release];
     [m_totalStoriesLabel release];
     //[m_rssParser release];
+    [m_searchBar release];
     [super dealloc];
 }
 
@@ -45,6 +48,7 @@
 {
     [super viewDidLoad];
     
+    m_filterRssStoryModel = [[RssStoryModel alloc] init];
     m_rssStoryModel = [[RssStoryModel alloc] init];
     m_rssParser = [[RssParser alloc] init];
     
@@ -71,6 +75,7 @@
 {
     [self setStoryListTableView:nil];
     [self setTotalStoriesLabel:nil];
+    [self setSearchBar:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -102,7 +107,7 @@
 {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return [m_rssStoryModel count];
+    return [m_filterRssStoryModel count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -118,7 +123,7 @@
     
     int row = indexPath.row;
     
-    RssStory *rssStory = [m_rssStoryModel rssStoryAtIndex:row];
+    RssStory *rssStory = [m_filterRssStoryModel rssStoryAtIndex:row];
     if (!rssStory)
         return nil;
 
@@ -160,7 +165,7 @@
         [[self navigationController] pushViewController:courseViewController animated:YES];
         [courseViewController release];*/
         
-        RssStory *rssStory = [m_rssStoryModel rssStoryAtIndex:indexPath.row];
+        RssStory *rssStory = [m_filterRssStoryModel rssStoryAtIndex:indexPath.row];
         if (!rssStory)
             return;
     }
@@ -175,7 +180,7 @@
     if (!rssFeedLink || rssFeedLink == @"")
         return;
     
-    [m_rssStoryModel clear];        
+    [m_filterRssStoryModel clear];        
     
     m_rssParser.rssFeedLink = rssFeedLink;
     m_rssParser.delegate = self;
@@ -189,10 +194,7 @@
 {
 	[m_rssStoryModel copyDataFrom:m_rssParser.rssStoryModel];    
 
-    [self.storyListTableView reloadData];
-
-    // Update the total stories
-    m_totalStoriesLabel.text = [NSString stringWithFormat:@"%d", [m_rssStoryModel count]];
+    [self refreshData];    
 }
 
 -(void)processHasErrors
@@ -204,4 +206,61 @@
 	[alert release];
 	//[self toggleToolBarButtons:YES];
 }
+
+- (void)refreshData
+{
+    NSString *searchText = m_searchBar.text;
+    if([searchText isEqualToString:@""] || (searchText == nil)){
+        [m_filterRssStoryModel copyDataFrom:m_rssStoryModel];        
+    } else {    
+        // Filter course by title
+        RssStoryModel *rssStoryModel = [m_rssStoryModel searchByTitle:searchText];
+        if (rssStoryModel == nil)
+            [m_filterRssStoryModel clear];
+        else {
+            [m_filterRssStoryModel copyDataFrom:rssStoryModel];
+            //[rssFeedModel release]; // Cause the crash
+        }
+    }
+    
+    // Update the total stories
+    m_totalStoriesLabel.text = [NSString stringWithFormat:@"%d", [m_filterRssStoryModel count]];
+    
+    [m_storyListTableView reloadData];
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    // only show the status bar’s cancel button while in edit mode
+    m_searchBar.showsCancelButton = YES;
+    m_searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
+    m_searchBar.showsCancelButton = NO;
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    if (searchBar != m_searchBar)
+        return;
+    
+    [self refreshData];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [m_searchBar resignFirstResponder];
+    m_searchBar.text = @"";
+    
+    [self refreshData];
+}
+
+// called when Search (in our case “Done”) button pressed
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+}
+
 @end

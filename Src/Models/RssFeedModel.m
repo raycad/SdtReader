@@ -104,10 +104,14 @@
     RssFeed *rssFeed = nil;
     for (int i = 0; i < [self count]; i++) {
         rssFeed = [self rssFeedAtIndex:i];
-        NSComparisonResult result = [rssFeed.title compare:searchText options:(NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch) range:NSMakeRange(0, [searchText length])];
+        NSRange range = [rssFeed.title rangeOfString:searchText options:NSCaseInsensitiveSearch];
+        if (range.location != NSNotFound) {
+            [rssFeedModel addRssFeed:rssFeed];
+        }  
+        /*NSComparisonResult result = [rssFeed.title compare:searchText options:(NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch) range:NSMakeRange(0, [searchText length])];
         if (result == NSOrderedSame) {
             [rssFeedModel addRssFeed:rssFeed];
-        }
+        }*/
     }
         
     if ([rssFeedModel count] == 0)

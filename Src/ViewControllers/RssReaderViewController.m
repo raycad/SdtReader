@@ -26,7 +26,7 @@
         
         // Set up our navigation bar.
         self.title = RssReaderTitle;        
-        self.tabBarItem.image = [UIImage imageNamed:@"rss_grey.png"];                
+        self.tabBarItem.image = [UIImage imageNamed:@"rss_story_grey.png"];             
     }
     
     return self;
@@ -402,15 +402,10 @@
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
-    @try{
-        [m_rssFeedModel copyDataFrom:m_readerModel.rssFeedModel];
-        
-        [m_rssFeedTableView reloadData];
-    }
-    @catch(NSException *e){
-    }
     [m_searchBar resignFirstResponder];
     m_searchBar.text = @"";
+    
+    [self refreshData];
 }
 
 // called when Search (in our case “Done”) button pressed

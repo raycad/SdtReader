@@ -17,13 +17,17 @@
     RssFeed                 *m_rssFeed;
     UILabel                 *m_totalStoriesLabel;
     RssStoryModel           *m_rssStoryModel;
+    RssStoryModel           *m_filterRssStoryModel;
     
     RssParser               *m_rssParser;
+    UISearchBar             *m_searchBar;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *storyListTableView;
 @property (nonatomic, retain) IBOutlet UILabel *totalStoriesLabel;
 @property (nonatomic, retain) RssFeed *rssFeed;
+@property (nonatomic, retain) IBOutlet UISearchBar *searchBar;
 
 - (void)parseRssFeed;
+- (void)refreshData;
 @end

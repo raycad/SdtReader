@@ -53,6 +53,29 @@
     return [m_rssStoryList count];
 }
 
+- (RssStoryModel *)searchByTitle:(NSString *)searchText
+{
+    RssStoryModel *rssStoryModel = [[RssStoryModel alloc] init];
+    RssStory *rssStory = nil;
+    for (int i = 0; i < [self count]; i++) {
+        rssStory = [self rssStoryAtIndex:i];
+        
+        NSRange range = [rssStory.title rangeOfString:searchText options:NSCaseInsensitiveSearch];
+        if (range.location != NSNotFound) {
+            [rssStoryModel addRssStory:rssStory];
+        }        
+        /*NSComparisonResult result = [rssStory.title compare:searchText options:(NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch) range:NSMakeRange(0, [searchText length])];
+        if (result == NSOrderedSame) {
+            [rssStoryModel addRssStory:rssStory];
+        }*/
+    }
+    
+    if ([rssStoryModel count] == 0)
+        return nil;
+    
+    return [rssStoryModel autorelease];
+}
+
 - (void)dealloc
 {
     [m_rssStoryList release];    

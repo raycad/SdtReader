@@ -19,6 +19,8 @@
 
 - (BOOL)copyDataFrom:(RssStoryModel *)other;
 
+- (RssStoryModel *)searchByTitle:(NSString *)searchText;
+
 - (void)clear;
 
 - (int)count;
