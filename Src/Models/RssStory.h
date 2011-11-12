@@ -25,4 +25,5 @@
 @property (nonatomic, copy)     NSString    *guidUrl;
 @property (nonatomic, retain)   NSDate      *pubDate;
 @property (nonatomic, copy)     NSString    *mediaUrl;
+
 @end

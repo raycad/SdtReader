@@ -18,14 +18,22 @@
 @synthesize pubDate     = m_pubDate;
 @synthesize mediaUrl    = m_mediaUrl;
 
+- (id)init
+{
+    if ((self = [super init])) {
+        // Initialize parameters        
+    }
+    return self;   
+}
+
 - (void) dealloc
 {
-    self.title = nil;
-	self.description = nil;
-	self.linkUrl = nil;
-	self.guidUrl = nil;
-	[self.pubDate release];
-	self.mediaUrl = nil;
-    [super release];
+    [m_title release];
+	[m_description release];
+	[m_linkUrl release];
+	[m_guidUrl release];
+	[m_pubDate release];
+	[m_mediaUrl release];
+    [super dealloc];
 }
 @end

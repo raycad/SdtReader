@@ -9,6 +9,7 @@
 #import "RssStoryListViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "RssStoryViewCell.h"
+#import "RssStoryViewController.h"
 
 @implementation RssStoryListViewController
 @synthesize storyListTableView          = m_storyListTableView;
@@ -153,21 +154,29 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (m_storyListTableView == tableView) {
-        /*CourseViewCell *cell = (CourseViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-        assert(cell != nil);
-        Course *course = cell.course;
-        assert(course != nil);
-        
-        courseViewController.course = course;
-        courseViewController.viewMode = UpdateMode;
-        courseViewController.delegate = self;
-        
-        [[self navigationController] pushViewController:courseViewController animated:YES];
-        [courseViewController release];*/
-        
         RssStory *rssStory = [m_filterRssStoryModel rssStoryAtIndex:indexPath.row];
         if (!rssStory)
             return;
+        
+        if ([rssStory.linkUrl isEqual:@""])
+            return;
+        
+        //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:rssStory.linkUrl]];
+        
+        /*RssStoryViewController *rssStoryViewController = [[RssStoryViewController alloc] init];
+        
+        rssStoryViewController.rssStory = rssStory;
+        rssStoryViewController.delegate = self;        
+        
+        [self.navigationController pushViewController:rssStoryViewController animated:YES];  
+        
+        [rssStoryViewController reload];
+        [rssStoryViewController release];*/
+        
+        RssStoryViewController *rssStoryViewController = [[[RssStoryViewController alloc] initWithRssStory:rssStory] autorelease];
+        assert(rssStoryViewController != nil);        
+        rssStoryViewController.delegate = self;  
+        [rssStoryViewController presentModallyOn:self];
     }
 }
 

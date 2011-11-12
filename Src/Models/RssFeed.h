@@ -26,10 +26,10 @@
     RssFeedPK   *m_rssFeedPK;
 }
 
-@property (nonatomic, retain) NSString *title;
-@property (nonatomic, retain) NSString *link;
-@property (nonatomic, retain) NSString *website;
-@property (nonatomic, retain) NSString *description;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *link;
+@property (nonatomic, copy) NSString *website;
+@property (nonatomic, copy) NSString *description;
 
 - (id)initWithRssFeedPK:(RssFeedPK *)rssFeedPK;
 - (RssFeedPK *)rssFeedPK;
