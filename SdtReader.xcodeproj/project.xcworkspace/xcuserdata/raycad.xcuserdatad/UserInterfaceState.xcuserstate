@@ -2476,7 +2476,7 @@
 				<integer>236</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/raycad/Projects/seedotech/SdtReader/Src/ViewControllers/RssStoryViewCell.m</string>
+		<string>file://localhost/Users/raycad/Projects/seedotech/SdtReader/Src/ViewControllers/RssStoryListViewController.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -2494,7 +2494,7 @@
 				<integer>238</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/raycad/Projects/seedotech/SdtReader/Src/ViewControllers/RssReaderViewController.m</string>
+		<string>file://localhost/Users/raycad/Projects/seedotech/SdtReader/Src/ViewControllers/RssStoryViewCell.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -2512,7 +2512,7 @@
 				<integer>240</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/raycad/Projects/seedotech/SdtReader/Src/ViewControllers/RssStoryListViewController.m</string>
+		<string>file://localhost/Users/raycad/Projects/seedotech/SdtReader/Src/ViewControllers/RssReaderViewController.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -7691,9 +7691,9 @@
 				</dict>
 			</array>
 		</dict>
-		<real>342768685.73692697</real>
-		<string>{874, 1243}</string>
-		<string>{1106, 0}</string>
+		<real>342769831.60239202</real>
+		<string>{3533, 945}</string>
+		<string>{4291, 0}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -7834,9 +7834,9 @@
 				</dict>
 			</array>
 		</dict>
-		<real>342769204.84352601</real>
-		<string>{1128, 1095}</string>
-		<string>{2444, 0}</string>
+		<real>342769701.21459597</real>
+		<string>{1405, 1363}</string>
+		<string>{2450, 0}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -10219,7 +10219,7 @@
 		<string>IDEActivityReportStringSegmentType</string>
 		<string>IDEActivityReportStringSegmentTimeStyle</string>
 		<string>IDEActivityReportStringSegmentDate</string>
-		<string>Today at 12:39 PM</string>
+		<string>Today at 12:50 PM</string>
 		<real>3</real>
 		<dict>
 			<key>$class</key>
@@ -10228,7 +10228,7 @@
 				<integer>824</integer>
 			</dict>
 			<key>NS.time</key>
-			<real>342769199.83954102</real>
+			<real>342769820.58784401</real>
 		</dict>
 		<dict>
 			<key>$classes</key>
@@ -10392,7 +10392,7 @@
 		<string>IDENavigatorArea</string>
 		<string>IDEWorkspaceTabControllerUtilityAreaSplitView</string>
 		<string>IDEWorkspaceTabControllerDesignAreaSplitView</string>
-		<string>RssStoryViewCell.m</string>
+		<string>RssStoryListViewController.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -10925,7 +10925,7 @@
 				<integer>887</integer>
 			</dict>
 		</dict>
-		<string>RssStoryViewCell.m</string>
+		<string>RssStoryListViewController.m</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -10974,7 +10974,7 @@
 			<key>documentURL</key>
 			<dict>
 				<key>CF$UID</key>
-				<integer>477</integer>
+				<integer>471</integer>
 			</dict>
 			<key>timestamp</key>
 			<dict>
@@ -11196,7 +11196,7 @@
 		<string>FileDataType</string>
 		<string>DocumentURL</string>
 		<string>DocumentExtensionIdentifier</string>
-		<string>-layoutSubviews</string>
+		<string>-tableView:cellForRowAtIndexPath:</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -11344,9 +11344,9 @@
 				</dict>
 			</array>
 		</dict>
-		<real>342769204.85885799</real>
-		<string>{1128, 1095}</string>
-		<string>{2444, 0}</string>
+		<real>342769831.60812098</real>
+		<string>{3533, 945}</string>
+		<string>{4291, 0}</string>
 		<string>public.objective-c-source</string>
 		<dict>
 			<key>$class</key>
@@ -11365,7 +11365,7 @@
 				<integer>928</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/raycad/Projects/seedotech/SdtReader/Src/ViewControllers/RssStoryViewCell.m</string>
+		<string>file://localhost/Users/raycad/Projects/seedotech/SdtReader/Src/ViewControllers/RssStoryListViewController.m</string>
 		<string>Xcode.IDEKit.EditorDocument.SourceCode</string>
 		<dict>
 			<key>$class</key>

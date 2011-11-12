@@ -38,7 +38,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    return 105;
 }
 
 #pragma mark - View lifecycle
@@ -136,7 +136,7 @@
     cell.editingAccessoryView = nil;
     cell.detailTextLabel.text = nil;
     // Set cell selection is blue style
-    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     
     NSString *thumbnailFile;
     if (row%3 == 0)

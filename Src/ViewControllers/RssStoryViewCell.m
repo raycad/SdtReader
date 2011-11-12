@@ -22,7 +22,7 @@
         // Initialization code
         m_titleLabel = [[UILabel alloc]init];
         m_titleLabel.textAlignment = UITextAlignmentLeft;
-        m_indexLabel.font = [UIFont fontWithMarkupDescription:@"font-family: Arial; font-size: 20px; font-weight: bold;"];
+        m_indexLabel.font = [UIFont fontWithMarkupDescription:@"font-family: Arial; font-size: 22px; font-weight: bold;"];
         
         m_descriptionLabel = [[UITextView alloc]init];
         m_descriptionLabel.textAlignment = UITextAlignmentLeft;
@@ -55,13 +55,13 @@
     CGFloat leftBoundsX = contentRect.origin.x;
     CGFloat rightBoundsX = contentRect.size.width;
     CGRect frame;
-    frame = CGRectMake(leftBoundsX+5, 5, 32, 32);
+    frame = CGRectMake(leftBoundsX+5, 2, 32, 32);
     m_thumbnailImageView.frame = frame;
     
-    frame = CGRectMake(leftBoundsX+42, 3, 250, 25);
+    frame = CGRectMake(leftBoundsX+42, 7, 250, 25);
     m_titleLabel.frame = frame;
     
-    frame = CGRectMake(leftBoundsX+36, 23, 250, 70);
+    frame = CGRectMake(leftBoundsX, 28, 285, 70);
     m_descriptionLabel.frame = frame;
     
     /*frame = CGRectMake(rightBoundsX-50, 18, 40, 20);
