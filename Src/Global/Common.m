@@ -10,4 +10,4 @@
 
 const NSString *RssReaderViewControllerIdString   = @"RssReaderViewControllerId";
 
-const NSString *RssReaderTitle     = @"RSS Reader";
+const NSString *RssReaderTitle     = @"RSS Feeds";

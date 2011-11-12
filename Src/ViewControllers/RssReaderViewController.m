@@ -81,8 +81,8 @@
         rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
         rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
         link = @"http://feeds2.feedburner.com/TheMdnShow";
-        website = @"cnn.com";
-        description = @"CNN";
+        website = @"msdn.com";
+        description = @"MSDN";
         rssFeed.title = title;
         rssFeed.link = link;
         rssFeed.website = website;
@@ -97,12 +97,12 @@
         [rssFeedPK release];
         [rssFeed release];
         
-        title = [NSString stringWithFormat:@"Books"];
+        title = [NSString stringWithFormat:@"BBC"];
         rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
         rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
-        link = @"http://rss.cnn.com/rss/cnn_topstories.rss";
-        website = @"cnn.com";
-        description = @"CNN";
+        link = @"http://newsrss.bbc.co.uk/rss/sportonline_world_edition/front_page/rss.xml";
+        website = @"bbc.com";
+        description = @"BBC";
         rssFeed.title = title;
         rssFeed.link = link;
         rssFeed.website = website;
@@ -115,70 +115,10 @@
         [website release];
         [description release];
         [rssFeedPK release];
-        [rssFeed release];
-        
-        title = [NSString stringWithFormat:@"Sport"];
-        rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
-        rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
-        link = @"http://rss.cnn.com/rss/cnn_topstories.rss";
-        website = @"cnn.com";
-        description = @"CNN";
-        rssFeed.title = title;
-        rssFeed.link = link;
-        rssFeed.website = website;
-        rssFeed.description = description;
-        if ([rssFeedModel addRssFeed:rssFeed]) {
-            NSLog(@"Added rss feed sucessfully");
-        }
-        [title release];
-        [link release];
-        [website release];
-        [description release];
-        [rssFeedPK release];
-        [rssFeed release];
-        
-        title = [NSString stringWithFormat:@"http://rss.cnn.com/rss/cnn_topstories.rss"];
-        rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
-        rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
-        link = @"http://rss.cnn.com/rss/cnn_topstories.rss";
-        website = @"cnn.com";
-        description = @"CNN";
-        rssFeed.title = title;
-        rssFeed.link = link;
-        rssFeed.website = website;
-        rssFeed.description = description;
-        if ([rssFeedModel addRssFeed:rssFeed]) {
-            NSLog(@"Added rss feed sucessfully");
-        }
-        [title release];
-        [link release];
-        [website release];
-        [description release];
-        [rssFeedPK release];
-        [rssFeed release];
-        
-        title = [NSString stringWithFormat:@"Music"];
-        rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
-        rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
-        link = @"http://rss.cnn.com/rss/cnn_topstories.rss";
-        website = @"cnn.com";
-        description = @"CNN";
-        rssFeed.title = title;
-        rssFeed.link = link;
-        rssFeed.website = website;
-        rssFeed.description = description;
-        if ([rssFeedModel addRssFeed:rssFeed]) {
-            NSLog(@"Added rss feed sucessfully");
-        }
-        [title release];
-        [link release];
-        [website release];
-        [description release];
-        [rssFeedPK release];
-        [rssFeed release];
-        
+        [rssFeed release];        
+                
         // Set data model
-        [m_readerModel setRssFeedModel:rssFeedModel];
+        m_readerModel.rssFeedModel = rssFeedModel;
         
         [rssFeedModel release];
     }
@@ -253,20 +193,20 @@
 {
     NSString *searchText = m_searchBar.text;
     if([searchText isEqualToString:@""] || (searchText == nil)){
-        [m_rssFeedModel copyDataFrom:m_readerModel.rssFeedModel];
-        
-        [m_rssFeedTableView reloadData];
-        return;
+        [m_rssFeedModel copyDataFrom:m_readerModel.rssFeedModel];        
+    } else {    
+        // Filter course by title
+        RssFeedModel *rssFeedModel = [m_readerModel.rssFeedModel searchByTitle:searchText];
+        if (rssFeedModel == nil)
+            [m_rssFeedModel clear];
+        else {
+            [m_rssFeedModel copyDataFrom:rssFeedModel];
+            //[rssFeedModel release]; // Cause the crash
+        }
     }
     
-    // Filter course by title
-    RssFeedModel *rssFeedModel = [m_readerModel.rssFeedModel searchByTitle:searchText];
-    if (rssFeedModel == nil)
-        [m_rssFeedModel clear];
-    else {
-        [m_rssFeedModel copyDataFrom:rssFeedModel];
-        //[rssFeedModel release]; // Cause the crash
-    }
+    NSString *title = [NSString stringWithFormat:@"%@ (%d)", RssReaderTitle, [m_rssFeedModel count]];
+    self.title = title;
     
     [m_rssFeedTableView reloadData];
 }

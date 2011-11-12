@@ -1,5 +1,5 @@
 //
-//  CourseModel.h
+//  RssStoryModel.h
 //  SdtReader
 //
 //  Created by raycad on 10/27/11.

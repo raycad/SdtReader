@@ -8,14 +8,12 @@
 
 #import "RssStoryListViewController.h"
 #import <QuartzCore/QuartzCore.h>
-#import "Parser.h"
 
 @implementation RssStoryListViewController
 @synthesize storyListTableView          = m_storyListTableView;
 @synthesize headlineTextView            = m_headlineTextView;
 @synthesize totalStoriesLabel           = m_totalStoriesLabel;
 @synthesize rssFeed                     = m_rssFeed;
-@synthesize activityIndicator           = m_activityIndicator;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,9 +29,9 @@
     [m_storyListTableView release];
     [m_headlineTextView release];
     [m_rssFeed release];
-    [m_rssStoryModel release];
+    //[m_rssStoryModel release];
     [m_totalStoriesLabel release];
-    [m_activityIndicator release];
+    //[m_rssParser release];
     [super dealloc];
 }
 
@@ -51,7 +49,8 @@
 {
     [super viewDidLoad];
     
-    m_rssStoryModel = nil;
+    m_rssStoryModel = [[RssStoryModel alloc] init];
+    m_rssParser = [[RssParser alloc] init];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backView)];
     
@@ -63,12 +62,6 @@
     [m_headlineTextView.layer setBorderWidth: 1.0];
     [m_headlineTextView.layer setCornerRadius:10.0f];
     [m_headlineTextView.layer setMasksToBounds:YES];
-    
-    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-	indicator.hidesWhenStopped = YES;
-	[indicator stopAnimating];
-	self.activityIndicator = indicator;
-	[indicator release];
 }
 
 - (void)backView
@@ -183,40 +176,33 @@
     if (!rssFeedLink || rssFeedLink == @"")
         return;
     
-    [m_rssStoryModel release];
-    m_rssStoryModel = [[RssStoryModel alloc] init];
+    [m_rssStoryModel clear];        
     
-    [m_activityIndicator startAnimating];
+    m_rssParser.rssFeedLink = rssFeedLink;
+    m_rssParser.delegate = self;
+    [m_rssParser startProcess];
     
-    Parser *rssParser = [[Parser alloc] init];
-    [rssParser parseRssFeed:rssFeedLink withDelegate:self];
-    
-    [rssParser release];
-}
+    [m_rssParser release];
+ }
 
-- (void)receivedItems:(NSArray *)items
+//Delegate method for blog parser will get fired when the process is completed
+- (void)processCompleted
 {
-    for (int i = 0; i < [items count]; i++) {
-        NSObject *item = [items objectAtIndex:i];
-        if (!item)
-            continue;
-        RssStory *rssStory = [[RssStory alloc] init];
-        NSString *tmp = nil;
-        tmp = [item objectForKey:@"title"];
-        rssStory.title = [tmp copy];
-        tmp = [item objectForKey:@"description"];
-        rssStory.description = [tmp copy];
-        
-        [m_rssStoryModel addRssStory:rssStory];
-        [rssStory release];
-    }
-    
-	[self.storyListTableView reloadData];
-    
+	[m_rssStoryModel copyDataFrom:m_rssParser.rssStoryModel];    
+
+    [self.storyListTableView reloadData];
+
     // Update the total stories
     m_totalStoriesLabel.text = [NSString stringWithFormat:@"%d stories", [m_rssStoryModel count]];
-    
-	[m_activityIndicator stopAnimating];
 }
 
+-(void)processHasErrors
+{
+	//Might be due to Internet
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Unable to download rss. Please check if you are connected to internet."
+												   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+	[alert show];	
+	[alert release];
+	//[self toggleToolBarButtons:YES];
+}
 @end

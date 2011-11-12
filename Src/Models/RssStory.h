@@ -9,18 +9,20 @@
 #import <Foundation/Foundation.h>
 
 @interface RssStory : NSObject {
-    NSString *m_title;
-    NSString *m_description;
-    NSString *m_link;
-    NSString *m_creator;
-    NSString *m_guid;
-    NSString *m_date;
+    NSString    *m_title;
+    NSString    *m_description;
+    NSString    *m_linkUrl;
+    NSString    *m_creator;
+    NSString    *m_guidUrl;
+    NSDate      *m_pubDate;
+    NSString    *m_mediaUrl;
 }
 
-@property (nonatomic, retain) NSString *title;
-@property (nonatomic, retain) NSString *description;
-@property (nonatomic, retain) NSString *link;
-@property (nonatomic, retain) NSString *creator;
-@property (nonatomic, retain) NSString *guid;
-@property (nonatomic, retain) NSString *date;
+@property (nonatomic, copy)     NSString    *title;
+@property (nonatomic, copy)     NSString    *description;
+@property (nonatomic, copy)     NSString    *linkUrl;
+@property (nonatomic, copy)     NSString    *creator;
+@property (nonatomic, copy)     NSString    *guidUrl;
+@property (nonatomic, retain)   NSDate      *pubDate;
+@property (nonatomic, copy)     NSString    *mediaUrl;
 @end

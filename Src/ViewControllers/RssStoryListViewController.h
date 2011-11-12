@@ -10,6 +10,7 @@
 #import "SdtViewController.h"
 #import "RssFeed.h"
 #import "RssStoryModel.h"
+#import "RssParser.h"
 
 @interface RssStoryListViewController : SdtViewController {    
     UITableView             *m_storyListTableView;
@@ -17,7 +18,8 @@
     UITextView              *m_headlineTextView;
     UILabel                 *m_totalStoriesLabel;
     RssStoryModel           *m_rssStoryModel;
-    UIActivityIndicatorView *m_activityIndicator;
+    
+    RssParser               *m_rssParser;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *storyListTableView;
