@@ -46,6 +46,10 @@
 		768510C2146ADD1200072A6E /* rss_feed_add.png in Resources */ = {isa = PBXBuildFile; fileRef = 768510BA146ADD1200072A6E /* rss_feed_add.png */; };
 		7685593B146E77FD0058DE3F /* WebBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7685593A146E77FD0058DE3F /* WebBrowserViewController.m */; };
 		7688C60C146BB7BA00A571F5 /* RssFeedViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7688C60B146BB7BA00A571F5 /* RssFeedViewCell.m */; };
+		7688F51D146EC283008F80A5 /* rate.png in Resources */ = {isa = PBXBuildFile; fileRef = 7688F51B146EC283008F80A5 /* rate.png */; };
+		7688F51E146EC283008F80A5 /* unrate.png in Resources */ = {isa = PBXBuildFile; fileRef = 7688F51C146EC283008F80A5 /* unrate.png */; };
+		7688F523146EC328008F80A5 /* RssFeedDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7688F521146EC327008F80A5 /* RssFeedDetailViewController.m */; };
+		7688F526146EC359008F80A5 /* RssFeedDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7688F525146EC359008F80A5 /* RssFeedDetailViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,6 +111,11 @@
 		7685593A146E77FD0058DE3F /* WebBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebBrowserViewController.m; path = Src/ViewControllers/WebBrowserViewController.m; sourceTree = SOURCE_ROOT; };
 		7688C60A146BB7BA00A571F5 /* RssFeedViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RssFeedViewCell.h; path = Src/ViewControllers/RssFeedViewCell.h; sourceTree = SOURCE_ROOT; };
 		7688C60B146BB7BA00A571F5 /* RssFeedViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RssFeedViewCell.m; path = Src/ViewControllers/RssFeedViewCell.m; sourceTree = SOURCE_ROOT; };
+		7688F51B146EC283008F80A5 /* rate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rate.png; path = Images/rate.png; sourceTree = SOURCE_ROOT; };
+		7688F51C146EC283008F80A5 /* unrate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = unrate.png; path = Images/unrate.png; sourceTree = SOURCE_ROOT; };
+		7688F520146EC327008F80A5 /* RssFeedDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RssFeedDetailViewController.h; path = Src/ViewControllers/RssFeedDetailViewController.h; sourceTree = SOURCE_ROOT; };
+		7688F521146EC327008F80A5 /* RssFeedDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RssFeedDetailViewController.m; path = Src/ViewControllers/RssFeedDetailViewController.m; sourceTree = SOURCE_ROOT; };
+		7688F525146EC359008F80A5 /* RssFeedDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RssFeedDetailViewController.xib; path = XIBs/RssFeedDetailViewController.xib; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +211,8 @@
 				761334F1146D00DB00EFFF88 /* RssStoryListViewController.m */,
 				76822D47146E506000698D1B /* RssStoryViewController.h */,
 				76822D48146E506000698D1B /* RssStoryViewController.m */,
+				7688F520146EC327008F80A5 /* RssFeedDetailViewController.h */,
+				7688F521146EC327008F80A5 /* RssFeedDetailViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -209,6 +220,7 @@
 		7681FD6C146A932700CF8C27 /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
+				7688F525146EC359008F80A5 /* RssFeedDetailViewController.xib */,
 				76822D4C146E508F00698D1B /* RssStoryViewController.xib */,
 				761334F5146D011200EFFF88 /* RssStoryListViewController.xib */,
 				768510AD146AD81B00072A6E /* RssReaderViewController.xib */,
@@ -258,6 +270,8 @@
 		768510B2146ADCFE00072A6E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7688F51B146EC283008F80A5 /* rate.png */,
+				7688F51C146EC283008F80A5 /* unrate.png */,
 				76822D3F146E374900698D1B /* rss_story_blue.png */,
 				76822D40146E374900698D1B /* rss_story_green.png */,
 				76822D41146E374900698D1B /* rss_story_grey.png */,
@@ -345,6 +359,9 @@
 				76822D45146E374900698D1B /* rss_story_grey.png in Resources */,
 				76822D46146E374900698D1B /* rss_story_yellow.png in Resources */,
 				76822D4D146E508F00698D1B /* RssStoryViewController.xib in Resources */,
+				7688F51D146EC283008F80A5 /* rate.png in Resources */,
+				7688F51E146EC283008F80A5 /* unrate.png in Resources */,
+				7688F526146EC359008F80A5 /* RssFeedDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,6 +389,7 @@
 				76822D3E146E319100698D1B /* RssStoryViewCell.m in Sources */,
 				76822D4A146E506000698D1B /* RssStoryViewController.m in Sources */,
 				7685593B146E77FD0058DE3F /* WebBrowserViewController.m in Sources */,
+				7688F523146EC328008F80A5 /* RssFeedDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,6 +10,7 @@
 #import "Common.h"
 #import "RssFeedViewCell.h"
 #import "RssStoryListViewController.h"
+#import "RssFeedDetailViewController.h"
 
 @implementation RssReaderViewController
 @synthesize searchBar = m_searchBar;
@@ -183,10 +184,39 @@
 
 - (IBAction)editRssFeed:(id)sender
 {
+    NSIndexPath *indexPath = [m_rssFeedTableView indexPathForSelectedRow];
+    if (!indexPath) {
+        // Open a alert with an OK button
+        NSString *alertString = [NSString stringWithFormat:@"You must select an RSS Feed to view"];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:alertString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+        return;
+    }
+    
+    RssFeedViewCell *cell = (RssFeedViewCell *)[m_rssFeedTableView cellForRowAtIndexPath:indexPath];
+    if (!cell)
+        return;
+    
+    RssFeed *rssFeed = cell.rssFeed;
+    if (!rssFeed)
+        return;    
+    
+    RssFeedDetailViewController *rssFeedDetailViewController = [[[RssFeedDetailViewController alloc] init] autorelease];
+    assert(rssFeedDetailViewController != nil);        
+    rssFeedDetailViewController.delegate = self;  
+    rssFeedDetailViewController.rssFeed = rssFeed;
+    rssFeedDetailViewController.viewMode = UpdateMode;
+    [rssFeedDetailViewController presentModallyOn:self];
 }
 
 - (IBAction)addRssFeed:(id)sender 
 {
+    RssFeedDetailViewController *rssFeedDetailViewController = [[[RssFeedDetailViewController alloc] init] autorelease];
+    assert(rssFeedDetailViewController != nil);        
+    rssFeedDetailViewController.delegate = self;  
+    rssFeedDetailViewController.viewMode = CreateNewMode;
+    [rssFeedDetailViewController presentModallyOn:self];
 }
 
 - (void)refreshData
