@@ -8,6 +8,7 @@
 
 #import "RssStoryListViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "RssStoryViewCell.h"
 
 @implementation RssStoryListViewController
 @synthesize storyListTableView          = m_storyListTableView;
@@ -35,12 +36,9 @@
     [super dealloc];
 }
 
-- (void)didReceiveMemoryWarning
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
+    return 100;
 }
 
 #pragma mark - View lifecycle
@@ -121,10 +119,12 @@
 {
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    RssStoryViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-		cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
- 	}
+		cell = [[[RssStoryViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+        // Show row with the AccessoryDisclosureIndicator
+		cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+	}
     
     int row = indexPath.row;
     
@@ -138,8 +138,19 @@
     // Set cell selection is blue style
     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     
+    NSString *thumbnailFile;
+    if (row%3 == 0)
+        thumbnailFile = @"rss_story_yellow.png";
+    else if (row%3 == 1)
+        thumbnailFile = @"rss_story_green.png";
+    else
+        thumbnailFile = @"rss_story_blue.png";    
+        
     // Set data for cell
-    cell.text = rssStory.title;
+    cell.rssStory = rssStory;
+    cell.titleLabel.text = rssStory.title;
+    cell.descriptionLabel.text = rssStory.description;
+    cell.thumbnailImageView.image = [UIImage imageNamed:thumbnailFile];
     
     return cell;
 }

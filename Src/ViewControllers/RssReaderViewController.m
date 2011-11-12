@@ -175,7 +175,7 @@
     rssStoryListViewController.delegate = self;
     
     [[self navigationController] pushViewController:rssStoryListViewController animated:YES];
-    [self showNavigationBar];
+    //[self showNavigationBar];
     
     // Parse RSS Feeds
     [rssStoryListViewController parseRssFeed];
