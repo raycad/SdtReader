@@ -44,6 +44,7 @@
 		768510AE146AD81B00072A6E /* RssReaderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 768510AD146AD81B00072A6E /* RssReaderViewController.xib */; };
 		768510B1146ADAB700072A6E /* RssReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 768510B0146ADAB700072A6E /* RssReaderViewController.m */; };
 		768510C2146ADD1200072A6E /* rss_feed_add.png in Resources */ = {isa = PBXBuildFile; fileRef = 768510BA146ADD1200072A6E /* rss_feed_add.png */; };
+		7685593B146E77FD0058DE3F /* WebBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7685593A146E77FD0058DE3F /* WebBrowserViewController.m */; };
 		7688C60C146BB7BA00A571F5 /* RssFeedViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7688C60B146BB7BA00A571F5 /* RssFeedViewCell.m */; };
 /* End PBXBuildFile section */
 
@@ -102,6 +103,8 @@
 		768510AF146ADAB700072A6E /* RssReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RssReaderViewController.h; path = Src/ViewControllers/RssReaderViewController.h; sourceTree = SOURCE_ROOT; };
 		768510B0146ADAB700072A6E /* RssReaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RssReaderViewController.m; path = Src/ViewControllers/RssReaderViewController.m; sourceTree = SOURCE_ROOT; };
 		768510BA146ADD1200072A6E /* rss_feed_add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rss_feed_add.png; path = Images/rss_feed_add.png; sourceTree = SOURCE_ROOT; };
+		76855939146E77FD0058DE3F /* WebBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebBrowserViewController.h; path = Src/ViewControllers/WebBrowserViewController.h; sourceTree = SOURCE_ROOT; };
+		7685593A146E77FD0058DE3F /* WebBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebBrowserViewController.m; path = Src/ViewControllers/WebBrowserViewController.m; sourceTree = SOURCE_ROOT; };
 		7688C60A146BB7BA00A571F5 /* RssFeedViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RssFeedViewCell.h; path = Src/ViewControllers/RssFeedViewCell.h; sourceTree = SOURCE_ROOT; };
 		7688C60B146BB7BA00A571F5 /* RssFeedViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RssFeedViewCell.m; path = Src/ViewControllers/RssFeedViewCell.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -183,6 +186,8 @@
 		7681FD6B146A931A00CF8C27 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				76855939146E77FD0058DE3F /* WebBrowserViewController.h */,
+				7685593A146E77FD0058DE3F /* WebBrowserViewController.m */,
 				76822D3C146E319100698D1B /* RssStoryViewCell.h */,
 				76822D3D146E319100698D1B /* RssStoryViewCell.m */,
 				7688C60A146BB7BA00A571F5 /* RssFeedViewCell.h */,
@@ -366,6 +371,7 @@
 				7683B330146D6D900023A557 /* RssParser.m in Sources */,
 				76822D3E146E319100698D1B /* RssStoryViewCell.m in Sources */,
 				76822D4A146E506000698D1B /* RssStoryViewController.m in Sources */,
+				7685593B146E77FD0058DE3F /* WebBrowserViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

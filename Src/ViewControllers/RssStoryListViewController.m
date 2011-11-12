@@ -180,6 +180,22 @@
     }
 }
 
+- (void)didBackView:(NSObject *)object
+// Called when the user taps Cancel in the options view.
+{
+#pragma unused(object)
+    assert(object != nil);
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)goBackPageAction:(NSObject *)object
+// Called when the user taps Cancel in the options view.
+{
+#pragma unused(object)
+    assert(object != nil);
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 - (void)parseRssFeed
 {
     if (!m_rssFeed)

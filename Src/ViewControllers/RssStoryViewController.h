@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SdtViewController.h"
+#import "WebBrowserViewController.h"
 #import "RssStory.h"
 
-@interface RssStoryViewController : SdtViewController {    
+@interface RssStoryViewController : WebBrowserViewController {    
     UIWebView   *m_webView;
     
     RssStory    *m_rssStory;

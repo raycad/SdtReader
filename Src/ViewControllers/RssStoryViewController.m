@@ -47,6 +47,10 @@
     // Do any additional setup after loading the view from its nib.
     
     //m_webView.userInteractionEnabled = NO;
+    self.navigationItem.leftBarButtonItem  = [[[UIBarButtonItem alloc] initWithTitle:@"Back View" style:UIBarButtonItemStylePlain target:self action:@selector(backViewAction:)] autorelease]; 
+    assert(self.navigationItem.leftBarButtonItem != nil);
+    self.navigationItem.rightBarButtonItem  = [[[UIBarButtonItem alloc] initWithTitle:@"Back Page" style:UIBarButtonItemStylePlain target:self action:@selector(goBackPageAction::)] autorelease]; 
+    assert(self.navigationItem.rightBarButtonItem != nil);
     
     [self reload];
 }
