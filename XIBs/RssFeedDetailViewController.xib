@@ -74,7 +74,7 @@
 					<object class="IBUILabel" id="1055130991">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{14, 339}, {71, 21}}</string>
+						<string key="NSFrame">{{14, 337}, {38.0625, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="885597355"/>
@@ -244,7 +244,7 @@
 					<object class="IBUIButton" id="761412450">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{155, 330}, {40, 40}}</string>
+						<string key="NSFrame">{{111, 325}, {48, 48}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="469613813"/>
@@ -269,15 +269,15 @@
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MC41AA</bytes>
 						</object>
-						<object class="NSCustomResource" key="IBUINormalImage" id="736276830">
+						<object class="NSCustomResource" key="IBUINormalImage" id="928914467">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">unrate.png</string>
+							<string key="NSResourceName">star-gold48.png</string>
 						</object>
 					</object>
 					<object class="IBUIButton" id="469613813">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{191, 330}, {40, 40}}</string>
+						<string key="NSFrame">{{162, 325}, {48, 48}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="900154767"/>
@@ -292,12 +292,15 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="414781722"/>
-						<reference key="IBUINormalImage" ref="736276830"/>
+						<object class="NSCustomResource" key="IBUINormalImage" id="149203506">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">star-white48.png</string>
+						</object>
 					</object>
 					<object class="IBUIButton" id="900154767">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{228, 330}, {40, 40}}</string>
+						<string key="NSFrame">{{212, 325}, {48, 48}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="102096435"/>
@@ -312,12 +315,12 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="414781722"/>
-						<reference key="IBUINormalImage" ref="736276830"/>
+						<reference key="IBUINormalBackgroundImage" ref="149203506"/>
 					</object>
 					<object class="IBUIButton" id="102096435">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{264, 330}, {40, 40}}</string>
+						<string key="NSFrame">{{263, 325}, {48, 48}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
@@ -332,12 +335,12 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="414781722"/>
-						<reference key="IBUINormalImage" ref="736276830"/>
+						<reference key="IBUINormalBackgroundImage" ref="149203506"/>
 					</object>
 					<object class="IBUIButton" id="885597355">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{112, 330}, {40, 40}}</string>
+						<string key="NSFrame">{{61, 325}, {48, 48}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="761412450"/>
@@ -352,10 +355,7 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="414781722"/>
-						<object class="NSCustomResource" key="IBUINormalImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">rate.png</string>
-						</object>
+						<reference key="IBUINormalImage" ref="928914467"/>
 					</object>
 				</object>
 				<string key="NSFrame">{{0, 20}, {320, 460}}</string>
@@ -555,10 +555,10 @@
 							<reference ref="645481928"/>
 							<reference ref="1069663407"/>
 							<reference ref="761412450"/>
-							<reference ref="469613813"/>
 							<reference ref="900154767"/>
 							<reference ref="102096435"/>
 							<reference ref="885597355"/>
+							<reference ref="469613813"/>
 							<reference ref="1055130991"/>
 						</object>
 						<reference key="parent" ref="0"/>
@@ -880,13 +880,13 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>rate.png</string>
-				<string>unrate.png</string>
+				<string>star-gold48.png</string>
+				<string>star-white48.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>{128, 128}</string>
-				<string>{128, 128}</string>
+				<string>{48, 48}</string>
+				<string>{48, 48}</string>
 			</object>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">301</string>

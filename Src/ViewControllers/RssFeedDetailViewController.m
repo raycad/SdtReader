@@ -96,8 +96,8 @@
     if (rate < 1 || rate > 5)
         return;
     
-    UIImage *rateImage = [UIImage imageNamed:@"rate.png"];
-    UIImage *unRateImage = [UIImage imageNamed:@"unrate.png"];
+    UIImage *rateImage = [UIImage imageNamed:@"star-gold48.png"];
+    UIImage *unRateImage = [UIImage imageNamed:@"star-white48.png"];
     
     m_rate1Button.imageView.image = rateImage;
     m_rate2Button.imageView.image = rateImage;

@@ -144,6 +144,11 @@
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addRssFeed)];
     }*/
     
+    UITabBarItem *tbi = [self tabBarItem];
+    //[tbi setTitle:@"abc"];
+    UIImage *i = [UIImage imageNamed:@"star-white32.png"];
+    [tbi setImage:i];
+    
     [self loadDataFromDB];
     
     // Reload data
