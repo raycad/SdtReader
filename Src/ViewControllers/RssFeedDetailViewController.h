@@ -11,16 +11,14 @@
 #import "RssFeed.h"
 
 @interface RssFeedDetailViewController : SdtViewController {
-    RssFeed     *m_rssFeed;
-    UITextField *m_titleTextField;
-    UITextField *m_linkTextField;
-    UITextField *m_websiteTextField;
-    UIButton    *m_rate1Button;
-    UIButton    *m_rate2Button;
-    UIButton    *m_rate3Button;
-    UIButton    *m_rate4Button;
-    UIButton    *m_rate5Button;
-    UITextView  *m_descriptionTextView;
+    RssFeed         *m_rssFeed;
+    UITextField     *m_titleTextField;
+    UITextField     *m_linkTextField;
+    UITextField     *m_websiteTextField;
+    UITextView      *m_descriptionTextView;
+    
+    NSMutableArray  *m_rateButtons;
+    UILabel         *m_rateLabel;
 }
 
 @property (nonatomic, retain) RssFeed *rssFeed;
@@ -29,15 +27,8 @@
 @property (nonatomic, retain) IBOutlet UITextField *linkTextField;
 @property (nonatomic, retain) IBOutlet UITextField *websiteTextField;
 @property (nonatomic, retain) IBOutlet UITextView *descriptionTextView;
-@property (nonatomic, retain) IBOutlet UIButton *rate1Button;
-@property (nonatomic, retain) IBOutlet UIButton *rate2Button;
-@property (nonatomic, retain) IBOutlet UIButton *rate3Button;
-@property (nonatomic, retain) IBOutlet UIButton *rate4Button;
-@property (nonatomic, retain) IBOutlet UIButton *rate5Button;
-- (IBAction)rate1Clicked:(id)sender;
-- (IBAction)rate2Clicked:(id)sender;
-- (IBAction)rate3Clicked:(id)sender;
-- (IBAction)rate4Clicked:(id)sender;
-- (IBAction)rate5Clicked:(id)sender;
+@property (nonatomic, retain) IBOutlet UILabel *rateLabel;
 
+- (void)createRateButtons;
+- (void)releaseRateButtons;
 @end
