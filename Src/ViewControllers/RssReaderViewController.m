@@ -68,6 +68,7 @@
         rssFeed.link = link;
         rssFeed.website = website;
         rssFeed.description = description;
+        rssFeed.rate = 4;
         if ([rssFeedModel addRssFeed:rssFeed]) {
             NSLog(@"Added rss feed sucessfully");
         }
@@ -88,6 +89,7 @@
         rssFeed.link = link;
         rssFeed.website = website;
         rssFeed.description = description;
+        rssFeed.rate = 0;
         if ([rssFeedModel addRssFeed:rssFeed]) {
             NSLog(@"Added rss feed sucessfully");
         }
@@ -108,6 +110,7 @@
         rssFeed.link = link;
         rssFeed.website = website;
         rssFeed.description = description;
+        rssFeed.rate = 2;
         if ([rssFeedModel addRssFeed:rssFeed]) {
             NSLog(@"Added rss feed sucessfully");
         }
@@ -317,11 +320,12 @@
     // Set up the cell…
     cell.titleLabel.text = [rssFeed title];
     cell.indexLabel.text = [NSString stringWithFormat:@"%d", row+1];
-    cell.thumbnailImageView.image = [UIImage imageNamed:thumbnailFile];
+    cell.thumbnailImageView.image = [UIImage imageNamed:thumbnailFile];    
     
     // Set data for cell
     cell.rssFeed = rssFeed;
     
+    [cell setRateValue:rssFeed.rate];
     return cell;
 }
 

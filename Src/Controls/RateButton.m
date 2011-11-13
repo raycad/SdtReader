@@ -22,6 +22,20 @@
     return self;
 }
 
+- (void)setRateSize:(RateSize)rateSize
+{    
+    if (rateSize == Size32) {
+        m_rateImageName = @"star-gold32.png";
+        m_unrateImageName = @"star-white32.png";
+    } else if (rateSize == Size48) {
+        m_rateImageName = @"star-gold48.png";
+        m_unrateImageName = @"star-white48.png";
+    } else {
+        m_rateImageName = @"star-gold16.png";
+        m_unrateImageName = @"star-white16.png";
+    }
+}
+
 - (void)setState:(RateState)rateState
 {
     if (rateState == m_rateState)
@@ -31,11 +45,11 @@
     UIImage *rateButtonImage = nil;
     switch (m_rateState) {
         case Rating:
-            rateButtonImage = [UIImage imageNamed:@"star-gold48.png"];
+            rateButtonImage = [UIImage imageNamed:m_rateImageName];
             break;
             
         case UnRating:
-            rateButtonImage = [UIImage imageNamed:@"star-white48.png"];
+            rateButtonImage = [UIImage imageNamed:m_unrateImageName];
             
         default:
             break;
@@ -52,5 +66,7 @@
 
 - (void)dealloc
 {
+    [m_rateImageName release];
+    [m_unrateImageName release];
 }
 @end

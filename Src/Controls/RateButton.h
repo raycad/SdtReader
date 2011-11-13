@@ -14,13 +14,24 @@ typedef enum {
     UnRating    = 2
 } RateState; 
 
+typedef enum {
+    Size16      = 0,
+    Size32      = 1, 
+    Size48      = 2
+} RateSize;
+
 @interface RateButton : UIButton {
     int         m_data;
     
     RateState   m_rateState;
+    
+    NSString    *m_rateImageName;
+    NSString    *m_unrateImageName;
 }
 
 @property int data;
+
+- (void)setRateSize:(RateSize)rateSize;
 
 - (void)setState:(RateState)rateState;
 - (RateState)rateState;

@@ -132,6 +132,7 @@
         rateButton.frame = frame;
         //[rateButton setTitle:(NSString *)@"Rate" forState:(UIControlState)UIControlStateNormal];
         [rateButton addTarget:self action:@selector(rateButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [rateButton setRateSize:Size48];
         [rateButton setState:UnRating];
         
         rateButton.data = i;
@@ -221,7 +222,7 @@
     m_rateValue = rateValue;
 }
 
--(void)rateButtonClicked:(id)sender
+- (void)rateButtonClicked:(id)sender
 {
     if (!sender || ![sender isKindOfClass:[RateButton class]])
         return;

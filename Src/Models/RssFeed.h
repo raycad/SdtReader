@@ -22,7 +22,7 @@
     NSString    *m_link;
     NSString    *m_website;
     NSString    *m_description;
-    int         m_rate;
+    int         m_rate; // From 0 to 4
     
     RssFeedPK   *m_rssFeedPK;
 }
