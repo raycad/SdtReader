@@ -98,12 +98,12 @@
         [website release];
         [description release];
         [rssFeedPK release];
-        [rssFeed release];
+        [rssFeed release];http:
         
-        title = [NSString stringWithFormat:@"BBC"];
+        title = [NSString stringWithFormat:@"BBC Top Stories"];
         rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
         rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
-        link = @"http://newsrss.bbc.co.uk/rss/sportonline_world_edition/front_page/rss.xml";
+        link = @"http://feeds.bbci.co.uk/news/rss.xml";
         website = @"bbc.com";
         description = @"BBC";
         rssFeed.title = title;
@@ -119,8 +119,71 @@
         [website release];
         [description release];
         [rssFeedPK release];
+        [rssFeed release]; 
+        
+        title = [NSString stringWithFormat:@"BBC"];
+        rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
+        rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
+        link = @"http://newsrss.bbc.co.uk/rss/sportonline_world_edition/front_page/rss.xml";
+        website = @"bbc.com";
+        description = @"BBC";
+        rssFeed.title = title;
+        rssFeed.link = link;
+        rssFeed.website = website;
+        rssFeed.description = description;
+        rssFeed.rate = -1;
+        if ([rssFeedModel addRssFeed:rssFeed]) {
+            NSLog(@"Added rss feed sucessfully");
+        }
+        [title release];
+        [link release];
+        [website release];
+        [description release];
+        [rssFeedPK release];
         [rssFeed release];        
                 
+        title = [NSString stringWithFormat:@"BBC Education"];
+        rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
+        rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
+        link = @"http://feeds.bbci.co.uk/news/education/rss.xml";
+        website = @"bbc.com";
+        description = @"BBC";
+        rssFeed.title = title;
+        rssFeed.link = link;
+        rssFeed.website = website;
+        rssFeed.description = description;
+        rssFeed.rate = 2;
+        if ([rssFeedModel addRssFeed:rssFeed]) {
+            NSLog(@"Added rss feed sucessfully");
+        }
+        [title release];
+        [link release];
+        [website release];
+        [description release];
+        [rssFeedPK release];
+        [rssFeed release]; 
+        
+        title = [NSString stringWithFormat:@"BBC Politics"];
+        rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
+        rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
+        link = @"http://feeds.bbci.co.uk/news/politics/rss.xml";
+        website = @"bbc.com";
+        description = @"BBC";
+        rssFeed.title = title;
+        rssFeed.link = link;
+        rssFeed.website = website;
+        rssFeed.description = description;
+        rssFeed.rate = 4;
+        if ([rssFeedModel addRssFeed:rssFeed]) {
+            NSLog(@"Added rss feed sucessfully");
+        }
+        [title release];
+        [link release];
+        [website release];
+        [description release];
+        [rssFeedPK release];
+        [rssFeed release]; 
+        
         // Set data model
         m_readerModel.rssFeedModel = rssFeedModel;
         
@@ -307,7 +370,7 @@
     cell.editingAccessoryView = nil;
     cell.detailTextLabel.text = nil;
     // Set cell selection is blue style
-    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     
     NSString *thumbnailFile;
     if (row%3 == 0)

@@ -28,7 +28,7 @@
         m_indexLabel.textAlignment = UITextAlignmentRight;
         //m_indexLabel.font = [UIFont systemFontOfSize:10];
         m_indexLabel.font = [UIFont fontWithMarkupDescription:@"font-family: Arial; font-size: 15px; font-weight: bold; font-style : italic;"];
-        m_indexLabel.textColor = [UIColor grayColor];
+        m_indexLabel.textColor = [UIColor blueColor];
         
         m_thumbnailImageView = [[UIImageView alloc]init];
         
