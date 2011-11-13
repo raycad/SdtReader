@@ -53,6 +53,7 @@
 @synthesize link        = m_link;
 @synthesize website     = m_website;
 @synthesize description = m_description;
+@synthesize rate        = m_rate;
 
 - (id)initWithRssFeedPK:(RssFeedPK *)rssFeedPK
 {
@@ -60,6 +61,7 @@
         // Initialize parameters
         [m_rssFeedPK autorelease]; // Use this to avoid releasing itself
         m_rssFeedPK = [rssFeedPK retain];
+        m_rate = -1;
     }
     
     return self;

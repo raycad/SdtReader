@@ -16,6 +16,7 @@
 		761334EF146CE9C700EFFF88 /* view.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 761334EC146CE9C700EFFF88 /* view.jpg */; };
 		761334F3146D00DB00EFFF88 /* RssStoryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 761334F1146D00DB00EFFF88 /* RssStoryListViewController.m */; };
 		761334F6146D011200EFFF88 /* RssStoryListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 761334F5146D011200EFFF88 /* RssStoryListViewController.xib */; };
+		7681AFAC146FA95400BC179C /* RateButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7681AFAB146FA95400BC179C /* RateButton.m */; };
 		7681FD51146A915F00CF8C27 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7681FD50146A915F00CF8C27 /* UIKit.framework */; };
 		7681FD53146A915F00CF8C27 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7681FD52146A915F00CF8C27 /* Foundation.framework */; };
 		7681FD55146A915F00CF8C27 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7681FD54146A915F00CF8C27 /* CoreGraphics.framework */; };
@@ -68,6 +69,8 @@
 		761334F0146D00DA00EFFF88 /* RssStoryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RssStoryListViewController.h; path = Src/ViewControllers/RssStoryListViewController.h; sourceTree = SOURCE_ROOT; };
 		761334F1146D00DB00EFFF88 /* RssStoryListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RssStoryListViewController.m; path = Src/ViewControllers/RssStoryListViewController.m; sourceTree = SOURCE_ROOT; };
 		761334F5146D011200EFFF88 /* RssStoryListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RssStoryListViewController.xib; path = XIBs/RssStoryListViewController.xib; sourceTree = SOURCE_ROOT; };
+		7681AFAA146FA95400BC179C /* RateButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RateButton.h; path = Src/Controls/RateButton.h; sourceTree = SOURCE_ROOT; };
+		7681AFAB146FA95400BC179C /* RateButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RateButton.m; path = Src/Controls/RateButton.m; sourceTree = SOURCE_ROOT; };
 		7681FD4C146A915F00CF8C27 /* SdtReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SdtReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7681FD50146A915F00CF8C27 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7681FD52146A915F00CF8C27 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -142,6 +145,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7681AFA8146FA8EC00BC179C /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				7681AFAA146FA95400BC179C /* RateButton.h */,
+				7681AFAB146FA95400BC179C /* RateButton.m */,
+			);
+			name = Controls;
+			sourceTree = "<group>";
+		};
 		7681FD41146A915F00CF8C27 = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +184,7 @@
 		7681FD56146A915F00CF8C27 /* SdtReader */ = {
 			isa = PBXGroup;
 			children = (
+				7681AFA8146FA8EC00BC179C /* Controls */,
 				768510B2146ADCFE00072A6E /* Images */,
 				7681FD7E146A964000CF8C27 /* Models */,
 				7681FD7A146A961C00CF8C27 /* Global */,
@@ -410,6 +423,7 @@
 				76822D4A146E506000698D1B /* RssStoryViewController.m in Sources */,
 				7685593B146E77FD0058DE3F /* WebBrowserViewController.m in Sources */,
 				7688F523146EC328008F80A5 /* RssFeedDetailViewController.m in Sources */,
+				7681AFAC146FA95400BC179C /* RateButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

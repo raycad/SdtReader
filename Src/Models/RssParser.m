@@ -137,7 +137,6 @@
 	}
 }
 
-
 - (void)parserDidEndDocument:(NSXMLParser *)parser 
 {
 	[(id)[self delegate] performSelectorOnMainThread:@selector(processCompleted)

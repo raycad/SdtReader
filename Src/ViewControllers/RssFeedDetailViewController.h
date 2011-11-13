@@ -19,6 +19,8 @@
     
     NSMutableArray  *m_rateButtons;
     UILabel         *m_rateLabel;
+    
+    int             m_rateValue;
 }
 
 @property (nonatomic, retain) RssFeed *rssFeed;
@@ -29,6 +31,7 @@
 @property (nonatomic, retain) IBOutlet UITextView *descriptionTextView;
 @property (nonatomic, retain) IBOutlet UILabel *rateLabel;
 
+- (void)setRateValue:(int)rateValue;
 - (void)createRateButtons;
 - (void)releaseRateButtons;
 @end

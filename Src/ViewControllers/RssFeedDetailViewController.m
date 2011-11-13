@@ -8,6 +8,7 @@
 
 #import "RssFeedDetailViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "RateButton.h"
 
 @implementation RssFeedDetailViewController
 
@@ -63,6 +64,17 @@
     [m_descriptionTextView.layer setMasksToBounds:YES];
     
     [self createRateButtons];
+    m_rateValue = -1;
+    
+    if (m_rssFeed) {
+        // Set data
+        m_titleTextField.text       = m_rssFeed.title;
+        m_linkTextField.text        = m_rssFeed.link;
+        m_websiteTextField.text     = m_rssFeed.website;
+        m_descriptionTextView.text  = m_rssFeed.description;
+        
+        [self setRateValue:m_rssFeed.rate];
+    }
 }
 
 - (void)viewDidUnload
@@ -114,12 +126,13 @@
     // Create a new dynamic buttons
     for (int i = 0; i < 5; i++) {
         CGRect frame = CGRectMake(x, y, 48, 48);
-        UIButton *rateButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
+        RateButton *rateButton = [[RateButton buttonWithType:UIButtonTypeCustom] retain];
         rateButton.frame = frame;
         //[rateButton setTitle:(NSString *)@"Rate" forState:(UIControlState)UIControlStateNormal];
         [rateButton addTarget:self action:@selector(rateButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-        UIImage *rateButtonImage = [UIImage imageNamed:@"star-gold48.png"];
-        [rateButton setBackgroundImage:rateButtonImage forState:UIControlStateNormal];
+        [rateButton setState:UnRating];
+        
+        rateButton.data = i;
         
         [self.view addSubview:rateButton];
         [m_rateButtons addObject:rateButton];
@@ -128,9 +141,93 @@
     }
 }
 
+- (void)setRateValue:(int)rateValue
+{
+    int rateButtonCount = [m_rateButtons count];
+    
+    if (rateValue < 0 || rateValue >= rateButtonCount) {
+        RateButton *rateButton = nil;
+        for (int i = 0; i < rateButtonCount; i++) {
+            rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
+            if (!rateButton)
+                continue;
+            [rateButton setState:UnRating];
+        }
+    
+        return;
+    }
+    
+    if (m_rateValue == rateValue && m_rateValue == 0) {
+        RateButton *rateButton = (RateButton *)[m_rateButtons objectAtIndex:0];
+        if (!rateButton)
+            return;
+        RateState rateState = [rateButton rateState];
+        if (rateState == Rating) {
+            // Rating = 0
+            m_rateValue = -1;
+            
+            for (int i = 0; i < rateButtonCount; i++) {
+                rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
+                if (!rateButton)
+                    continue;
+                [rateButton setState:UnRating];
+            }
+            
+            return;
+        }        
+    }
+    
+    if (m_rateValue == rateValue && m_rateValue == rateButtonCount-1) {
+        RateButton *rateButton = (RateButton *)[m_rateButtons objectAtIndex:(rateButtonCount-1)];
+        if (!rateButton)
+            return;
+        RateState rateState = [rateButton rateState];
+        if (rateState == Rating) {
+            // Rating = 0
+            m_rateValue = -1;
+            
+            for (int i = 0; i < rateButtonCount; i++) {
+                rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
+                if (!rateButton)
+                    continue;
+                [rateButton setState:UnRating];
+            }
+            
+            return;
+        }        
+    }
+    
+    if (m_rateValue == rateValue)
+        return;
+    
+    int i = 0;
+    RateButton *rateButton = nil;
+    for (i = 0; i <= rateValue; i++) {
+        rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
+        if (!rateButton)
+            continue;
+        [rateButton setState:Rating];
+    }
+    
+    for (i = rateValue+1; i < rateButtonCount; i++) {
+        rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
+        if (!rateButton)
+            continue;
+        [rateButton setState:UnRating];
+    }
+    
+    m_rateValue = rateValue;
+}
+
 -(void)rateButtonClicked:(id)sender
 {
-    NSLog(@"new button clicked!!!");
+    if (!sender || ![sender isKindOfClass:[RateButton class]])
+        return;
+    
+    int rateValue = ((RateButton *)sender).data;
+    [self setRateValue:rateValue];
+    
+    NSLog(@"new button clicked!!! %d", rateValue);
 }
 
 - (void)setRate:(int)rate

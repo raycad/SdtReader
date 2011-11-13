@@ -22,6 +22,7 @@
     NSString    *m_link;
     NSString    *m_website;
     NSString    *m_description;
+    int         m_rate;
     
     RssFeedPK   *m_rssFeedPK;
 }
@@ -30,6 +31,7 @@
 @property (nonatomic, copy) NSString *link;
 @property (nonatomic, copy) NSString *website;
 @property (nonatomic, copy) NSString *description;
+@property int rate;
 
 - (id)initWithRssFeedPK:(RssFeedPK *)rssFeedPK;
 - (RssFeedPK *)rssFeedPK;
