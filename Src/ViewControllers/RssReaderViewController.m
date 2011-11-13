@@ -396,43 +396,7 @@
 #pragma unused(object)
     assert(object != nil);
     
-    RssFeedDetailViewController *rssFeedDetailViewController = (RssFeedDetailViewController *)object;
-    
-    NSString *title = [rssFeedDetailViewController.titleTextField text];
-    
-    if ([title isEqualToString:@""]) {
-        // Open a alert with an OK button
-        NSString *alertString = [NSString stringWithFormat:@"Title must not be empty"];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:alertString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-        [alert release];
-        
-        return;
-    }
-    
-    NSString *link = [rssFeedDetailViewController.linkTextField text];
-    NSString *website = [rssFeedDetailViewController.websiteTextField text];
-    NSString *description = [rssFeedDetailViewController.descriptionTextView text];
-    
-    RssFeedPK *rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
-    RssFeed *rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
-    rssFeed.title = title;
-    rssFeed.link = link;
-    rssFeed.description = description;
-    rssFeed.website = website;
-    
-    RssFeedModel *rssFeedModel = m_readerModel.rssFeedModel;
-    
-    if (![rssFeedModel addRssFeed:rssFeed]) {
-        // Open a alert with an OK button
-        NSString *alertString = [NSString stringWithFormat:@"This RSS Feed is existing"];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:alertString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-        [alert release];
-        
-        return;
-    }
-    
+    /*RssFeedDetailViewController *rssFeedDetailViewController = (RssFeedDetailViewController *)object;*/      
     [self dismissModalViewControllerAnimated:YES];
     
     [self refreshData];

@@ -9,6 +9,8 @@
 #import "RssFeedDetailViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "RateButton.h"
+#import "RssFeedModel.h"
+#import "ReaderModel.h"
 
 @implementation RssFeedDetailViewController
 
@@ -253,4 +255,81 @@
     [txtView resignFirstResponder];
     return NO;
 }
+
+- (void)saveAction:(id)sender
+{
+#pragma unused(sender)
+    NSString *title = [self.titleTextField text];
+    
+    if ([title isEqualToString:@""]) {
+        // Open a alert with an OK button
+        NSString *alertString = [NSString stringWithFormat:@"Title must not be empty"];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:alertString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+        
+        return;
+    }
+    
+    NSString *link = [self.linkTextField text];
+    NSString *website = [self.websiteTextField text];
+    NSString *description = [self.descriptionTextView text];
+    
+    ReaderModel *readerModel = [ReaderModel instance];
+    RssFeedPK *rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
+    
+    if (self.viewMode == CreateNewMode) {        
+        RssFeed *rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
+        rssFeed.title = title;
+        rssFeed.link = link;
+        rssFeed.description = description;
+        rssFeed.website = website;
+        rssFeed.rate = m_rateValue;
+        
+        RssFeedModel *rssFeedModel = readerModel.rssFeedModel;
+        
+        if (![rssFeedModel addRssFeed:rssFeed]) {
+            // Open a alert with an OK button
+            NSString *alertString = [NSString stringWithFormat:@"This RSS Feed is existing"];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:alertString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+            [alert release];
+            
+            return;
+        }
+    } else if (self.viewMode == UpdateMode) {
+        if (!m_rssFeed)
+            return;
+        
+        RssFeedModel *rssFeedModel = readerModel.rssFeedModel;
+        
+        // Update RSS Feed
+        RssFeedPK *currentRssFeedPK = [m_rssFeed rssFeedPK];
+        
+        if ((![rssFeedPK isEqual:currentRssFeedPK]) && [rssFeedModel getRssFeedByPK:rssFeedPK] != nil) {
+            // Open a alert with an OK button
+            NSString *alertString = [NSString stringWithFormat:@"The RSS Feed is existing. Please enter another title name"];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:alertString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+            [alert release];
+            
+            return;
+        }
+        
+        m_rssFeed.title = title;
+        m_rssFeed.link = link;
+        m_rssFeed.description = description;
+        m_rssFeed.website = website;
+        m_rssFeed.rate = m_rateValue;
+        
+        // Reset coursePK
+        [m_rssFeed rssFeedPK].title = title;
+    }
+    
+    // Tell the delegate about the update.    
+    if ((self.delegate != nil) && [self.delegate respondsToSelector:@selector(didUpdate:)] ) {
+        [self.delegate didSave:self];
+    }
+}
+
 @end

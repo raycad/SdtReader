@@ -39,7 +39,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    if (m_viewMode == CreateNewMode) {        
+    if ((m_viewMode == CreateNewMode) || (m_viewMode == UpdateMode)) {        
         // Set up the Save & Cancel buttons on the right & left of the navigation bar.    
         self.navigationItem.leftBarButtonItem  = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelAction:)] autorelease];
         assert(self.navigationItem.leftBarButtonItem != nil);
@@ -47,9 +47,7 @@
         assert(self.navigationItem.rightBarButtonItem != nil);         
     } else if (m_viewMode == SelectMode) {
         // Do something
-    } else if (m_viewMode == UpdateMode) {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(updateAction:)];
-    }
+    } 
 }
 
 - (void)hideNavigationBar 
