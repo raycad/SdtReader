@@ -1,5 +1,5 @@
 //
-//  RssReaderViewController.h
+//  RssFeedViewController.h
 //  SdtReader
 //
 //  Created by raycad on 11/9/11.
@@ -11,7 +11,7 @@
 #import "ReaderModel.h"
 #import "RssFeedModel.h"
 
-@interface RssReaderViewController : SdtViewController {
+@interface RssFeedViewController : SdtViewController {
     RssFeedModel    *m_rssFeedModel;
     ReaderModel     *m_readerModel;
     UISearchBar     *m_searchBar;

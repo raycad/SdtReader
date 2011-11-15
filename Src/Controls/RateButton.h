@@ -16,8 +16,9 @@ typedef enum {
 
 typedef enum {
     Size16      = 0,
-    Size32      = 1, 
-    Size48      = 2
+    Size24      = 1,
+    Size32      = 2, 
+    Size48      = 3
 } RateSize;
 
 @interface RateButton : UIButton {

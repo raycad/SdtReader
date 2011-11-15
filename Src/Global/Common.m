@@ -8,7 +8,7 @@
 
 #import "Common.h"
 
-const NSString *RssReaderViewControllerIdString   = @"RssReaderViewControllerId";
+const NSString *RssFeedViewControllerIdString   = @"RssFeedViewControllerId";
 
 const NSString *RssReaderTitle      = @"RSS Feeds";
 const NSString *RssStoryTitle       = @"RSS Story";

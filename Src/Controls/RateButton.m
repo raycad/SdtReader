@@ -24,7 +24,10 @@
 
 - (void)setRateSize:(RateSize)rateSize
 {    
-    if (rateSize == Size32) {
+    if (rateSize == Size24) {
+        m_rateImageName = @"star-gold24.png";
+        m_unrateImageName = @"star-white24.png";
+    } else if (rateSize == Size32) {
         m_rateImageName = @"star-gold32.png";
         m_unrateImageName = @"star-white32.png";
     } else if (rateSize == Size48) {

@@ -53,6 +53,7 @@
 @synthesize link        = m_link;
 @synthesize website     = m_website;
 @synthesize description = m_description;
+@synthesize category    = m_category;
 @synthesize rate        = m_rate;
 
 - (id)initWithRssFeedPK:(RssFeedPK *)rssFeedPK
@@ -78,6 +79,7 @@
     [m_link release];
     [m_website release];
     [m_description release];
+    [m_category release];
     [super dealloc];
 }
 @end

@@ -1,18 +1,18 @@
 //
-//  RssReaderViewController.m
+//  RssFeedViewController.m
 //  SdtReader
 //
 //  Created by raycad on 11/9/11.
 //  Copyright 2011 seedotech. All rights reserved.
 //
 
-#import "RssReaderViewController.h"
+#import "RssFeedViewController.h"
 #import "Common.h"
 #import "RssFeedViewCell.h"
 #import "RssStoryListViewController.h"
 #import "RssFeedDetailViewController.h"
 
-@implementation RssReaderViewController
+@implementation RssFeedViewController
 @synthesize searchBar = m_searchBar;
 @synthesize rssFeedTableView = m_rssFeedTableView;
 
@@ -35,7 +35,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 50;
+    return 67;
 }
 
 - (void)dealloc
@@ -54,20 +54,23 @@
         NSString    *title;
         NSString    *link;
         NSString    *website;
-        NSString    *description;        
+        NSString    *description;   
+        NSString    *category;
         RssFeedPK   *rssFeedPK;
         RssFeed     *rssFeed;
         
-        title = [NSString stringWithFormat:@"CNN - Top Stories"];
+        title = [NSString stringWithFormat:@"CNN - Top Stories (gg)"];
         rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
         rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
         link = @"http://rss.cnn.com/rss/cnn_topstories.rss";
         website = @"cnn.com";
         description = @"CNN";
+        category = @"Entertainment";
         rssFeed.title = title;
         rssFeed.link = link;
         rssFeed.website = website;
         rssFeed.description = description;
+        rssFeed.category = category;
         rssFeed.rate = 4;
         if ([rssFeedModel addRssFeed:rssFeed]) {
             NSLog(@"Added rss feed sucessfully");
@@ -76,6 +79,7 @@
         [link release];
         [website release];
         [description release];
+        [category release];
         [rssFeedPK release];
         [rssFeed release];  
         
@@ -85,10 +89,12 @@
         link = @"http://feeds2.feedburner.com/TheMdnShow";
         website = @"msdn.com";
         description = @"MSDN";
+        category = @"Education";
         rssFeed.title = title;
         rssFeed.link = link;
         rssFeed.website = website;
         rssFeed.description = description;
+        rssFeed.category = category;
         rssFeed.rate = 0;
         if ([rssFeedModel addRssFeed:rssFeed]) {
             NSLog(@"Added rss feed sucessfully");
@@ -97,6 +103,7 @@
         [link release];
         [website release];
         [description release];
+        [category release];
         [rssFeedPK release];
         [rssFeed release];http:
         
@@ -106,10 +113,12 @@
         link = @"http://feeds.bbci.co.uk/news/rss.xml";
         website = @"bbc.com";
         description = @"BBC";
+        category = @"Entertainment";
         rssFeed.title = title;
         rssFeed.link = link;
         rssFeed.website = website;
         rssFeed.description = description;
+        rssFeed.category = category;
         rssFeed.rate = 2;
         if ([rssFeedModel addRssFeed:rssFeed]) {
             NSLog(@"Added rss feed sucessfully");
@@ -118,6 +127,7 @@
         [link release];
         [website release];
         [description release];
+        [category release];
         [rssFeedPK release];
         [rssFeed release]; 
         
@@ -127,10 +137,12 @@
         link = @"http://newsrss.bbc.co.uk/rss/sportonline_world_edition/front_page/rss.xml";
         website = @"bbc.com";
         description = @"BBC";
+        category = @"Travel";
         rssFeed.title = title;
         rssFeed.link = link;
         rssFeed.website = website;
         rssFeed.description = description;
+        rssFeed.category = category;
         rssFeed.rate = -1;
         if ([rssFeedModel addRssFeed:rssFeed]) {
             NSLog(@"Added rss feed sucessfully");
@@ -139,6 +151,7 @@
         [link release];
         [website release];
         [description release];
+        [category release];
         [rssFeedPK release];
         [rssFeed release];        
                 
@@ -148,10 +161,12 @@
         link = @"http://feeds.bbci.co.uk/news/education/rss.xml";
         website = @"bbc.com";
         description = @"BBC";
+        category = @"Education";
         rssFeed.title = title;
         rssFeed.link = link;
         rssFeed.website = website;
         rssFeed.description = description;
+        rssFeed.category = category;
         rssFeed.rate = 2;
         if ([rssFeedModel addRssFeed:rssFeed]) {
             NSLog(@"Added rss feed sucessfully");
@@ -160,6 +175,7 @@
         [link release];
         [website release];
         [description release];
+        [category release];
         [rssFeedPK release];
         [rssFeed release]; 
         
@@ -169,10 +185,12 @@
         link = @"http://feeds.bbci.co.uk/news/politics/rss.xml";
         website = @"bbc.com";
         description = @"BBC";
+        category = @"Politics";
         rssFeed.title = title;
         rssFeed.link = link;
         rssFeed.website = website;
         rssFeed.description = description;
+        rssFeed.category = category;
         rssFeed.rate = 4;
         if ([rssFeedModel addRssFeed:rssFeed]) {
             NSLog(@"Added rss feed sucessfully");
@@ -181,6 +199,7 @@
         [link release];
         [website release];
         [description release];
+        [category release];
         [rssFeedPK release];
         [rssFeed release]; 
         
@@ -219,6 +238,20 @@
     
     // Reload data
     [self refreshData];
+}
+
+- (void)didRateButtonClicked:(NSObject *)object
+{
+    NSIndexPath *selectedIndexPath = [m_rssFeedTableView indexPathForSelectedRow];    
+    NSIndexPath *indexPath = [m_rssFeedTableView indexPathForCell:(UITableViewCell *)object];
+    
+    if (indexPath != selectedIndexPath)
+        return;
+    
+    // Reset selection to avoid break draw rate buttons
+    [m_rssFeedTableView deselectRowAtIndexPath:selectedIndexPath animated:NO];
+    
+    [m_rssFeedTableView selectRowAtIndexPath:selectedIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
 }
 
 - (IBAction)viewRssFeed:(id)sender 
@@ -372,6 +405,8 @@
     // Set cell selection is blue style
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     
+    cell.delegate = self;
+    
     NSString *thumbnailFile;
     if (row%3 == 0)
         thumbnailFile = @"rss_yellow.png";
@@ -381,8 +416,9 @@
         thumbnailFile = @"rss_blue.png";
     
     // Set up the cell…
-    cell.titleLabel.text = [rssFeed title];
-    cell.indexLabel.text = [NSString stringWithFormat:@"%d", row+1];
+    cell.titleLabel.text = rssFeed.title;
+    //cell.indexLabel.text = [NSString stringWithFormat:@"%d", row+1];
+    cell.categoryLabel.text = rssFeed.category; /*[NSString stringWithFormat:@"Category: %@", rssFeed.category];*/
     cell.thumbnailImageView.image = [UIImage imageNamed:thumbnailFile];    
     
     // Set data for cell

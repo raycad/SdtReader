@@ -7,7 +7,7 @@
 //
 
 #import "SdtReaderAppDelegate.h"
-#import "RssReaderViewController.h"
+#import "RssFeedViewController.h"
 #import "Common.h"
 
 @implementation SdtReaderAppDelegate
@@ -21,7 +21,7 @@
     m_viewControllerMap = [[NSMutableDictionary alloc] init];
     m_tabBarController = [[UITabBarController alloc] init];
     
-    id rssFeedViewController = [self getViewControllerByIdString:(id)RssReaderViewControllerIdString];    
+    id rssFeedViewController = [self getViewControllerByIdString:(id)RssFeedViewControllerIdString];    
     UINavigationController *rssFeedNavigationController = [[UINavigationController alloc] init];
     [rssFeedNavigationController pushViewController:rssFeedViewController animated:NO]; 
     
@@ -42,8 +42,8 @@
 - (id)createViewControllerByIdString:(NSString *)viewControllerIdString
 {
     id viewController = nil;
-    if (viewControllerIdString == RssReaderViewControllerIdString) {
-        viewController = [[RssReaderViewController alloc] init];
+    if (viewControllerIdString == RssFeedViewControllerIdString) {
+        viewController = [[RssFeedViewController alloc] init];
     } else
         return nil;
     
