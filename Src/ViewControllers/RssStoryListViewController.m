@@ -156,6 +156,20 @@
     return cell;
 }
 
+// Customize the background color of the rows
+/*- (void)tableView: (UITableView*)tableView willDisplayCell: (UITableViewCell*)cell 
+forRowAtIndexPath: (NSIndexPath*)indexPath
+{
+    RssStoryViewCell *rssStoryCell = (RssStoryViewCell *)cell;
+    rssStoryCell.backgroundColor = indexPath.row % 2 
+    ? [UIColor colorWithRed: 0.3 green: 0.3 blue: 0.3 alpha: 0.3] 
+    : [UIColor whiteColor];
+    rssStoryCell.thumbnailImageView.backgroundColor = [UIColor clearColor];
+    rssStoryCell.titleLabel.backgroundColor = [UIColor clearColor];
+    rssStoryCell.indexLabel.backgroundColor = [UIColor clearColor];
+    rssStoryCell.descriptionLabel.backgroundColor = [UIColor clearColor];
+}*/
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (m_storyListTableView == tableView) {

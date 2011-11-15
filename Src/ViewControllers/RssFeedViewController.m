@@ -428,6 +428,18 @@
     return cell;
 }
 
+// Customize the background color of the rows
+- (void)tableView: (UITableView*)tableView willDisplayCell: (UITableViewCell*)cell 
+forRowAtIndexPath: (NSIndexPath*)indexPath
+{
+    cell.backgroundColor = indexPath.row % 2 
+    ? [UIColor colorWithRed: 0.3 green: 0.3 blue: 0.3 alpha: 0.3] 
+    : [UIColor whiteColor];
+    for (UIView* view in cell.contentView.subviews) {
+        view.backgroundColor = [UIColor clearColor];
+    }
+}
+
 //This defines for each row its editing style, i.e. whether it shows a remove sign (Red circle with subtract sign) or 
 //and add sign (Green circle with addition sign). I have hard coded the first row (the one that says "New Item") to display the add sign and all others to display the subtract sign. 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {

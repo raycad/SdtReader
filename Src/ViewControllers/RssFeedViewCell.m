@@ -36,7 +36,7 @@
         m_categoryLabel.textAlignment = UITextAlignmentLeft;
         //m_indexLabel.font = [UIFont systemFontOfSize:10];
         m_categoryLabel.font = [UIFont fontWithMarkupDescription:@"font-family: Arial; font-size: 13px; font-weight: bold; font-style : italic;"];
-        m_categoryLabel.textColor = [UIColor brownColor];
+        m_categoryLabel.textColor = [UIColor blueColor];
         
         m_thumbnailImageView = [[UIImageView alloc]init];
         
