@@ -63,13 +63,13 @@
     frame = CGRectMake(leftBoundsX+7, 13, 38, 38);
     m_thumbnailImageView.frame = frame;
     
-    frame = CGRectMake(leftBoundsX+52, 1, 250, 25);
+    frame = CGRectMake(leftBoundsX+52, 1, contentRect.size.width - 80, 25);
     m_titleLabel.frame = frame;
     
     /*frame = CGRectMake(rightBoundsX-50, 18, 40, 20);
     m_indexLabel.frame = frame;*/
     
-    frame = CGRectMake(leftBoundsX+52, 23, 250, 20);
+    frame = CGRectMake(leftBoundsX+52, 23, contentRect.size.width - 80, 20);
     m_categoryLabel.frame = frame;
 }
 
@@ -113,10 +113,6 @@
     
     int rateValue = ((RateButton *)sender).data;
     [self setRateValue:rateValue];
-    
-    if (m_rssFeed) {
-        m_rssFeed.rate = rateValue;
-    }
     
     if ((self.delegate != nil) && [self.delegate respondsToSelector:@selector(didRateButtonClicked:)]) {
         [self.delegate didRateButtonClicked:self];
@@ -189,6 +185,11 @@
         if (!rateButton)
             continue;
         [rateButton setState:UnRating];
+    }    
+    
+    // Update data
+    if (m_rssFeed) {
+        m_rssFeed.rate = m_rateValue;
     }    
 }
 

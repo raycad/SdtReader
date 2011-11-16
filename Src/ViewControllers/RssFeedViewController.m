@@ -745,12 +745,12 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
         [m_rateLabel setHidden:NO];
         [self showRateButtons:YES];
         [m_searchBar setHidden:YES];
-        m_searchModeLabel.titleLabel.text = @"By Rate";
+        [m_searchModeLabel setTitle:@"By Rate" forState:UIControlStateNormal];
     } else if (m_searchMode == SearchByTitle) {
         [m_rateLabel setHidden:YES];
         [self showRateButtons:NO];
         [m_searchBar setHidden:NO];
-        m_searchModeLabel.titleLabel.text = @"By Title";
+        [m_searchModeLabel setTitle:@"By Title" forState:UIControlStateNormal];
     }
 }
 

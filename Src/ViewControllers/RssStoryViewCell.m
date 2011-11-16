@@ -58,10 +58,10 @@
     frame = CGRectMake(leftBoundsX+5, 2, 32, 32);
     m_thumbnailImageView.frame = frame;
     
-    frame = CGRectMake(leftBoundsX+42, 2, 250, 28);
+    frame = CGRectMake(leftBoundsX+42, 2, contentRect.size.width - 50, 28);
     m_titleLabel.frame = frame;
     
-    frame = CGRectMake(leftBoundsX, 28, 285, 70);
+    frame = CGRectMake(leftBoundsX, 28, contentRect.size.width - 6, 70);
     m_descriptionLabel.frame = frame;
     
     /*frame = CGRectMake(rightBoundsX-50, 18, 40, 20);

@@ -124,7 +124,7 @@
     if (cell == nil) {
 		cell = [[[RssStoryViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
         // Show row with the AccessoryDisclosureIndicator
-		cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+		//cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
 	}
     
     int row = indexPath.row;
