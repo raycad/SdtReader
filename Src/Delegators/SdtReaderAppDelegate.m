@@ -8,6 +8,7 @@
 
 #import "SdtReaderAppDelegate.h"
 #import "RssFeedViewController.h"
+#import "RssCategoryViewController.h"
 #import "Common.h"
 
 @implementation SdtReaderAppDelegate
@@ -21,11 +22,17 @@
     m_viewControllerMap = [[NSMutableDictionary alloc] init];
     m_tabBarController = [[UITabBarController alloc] init];
     
-    id rssFeedViewController = [self getViewControllerByIdString:(id)RssFeedViewControllerIdString];    
+    // Rss Feeds
+    id rssFeedViewController = [self getViewControllerByIdString:(id)RssFeedListViewControllerIdString];    
     UINavigationController *rssFeedNavigationController = [[UINavigationController alloc] init];
     [rssFeedNavigationController pushViewController:rssFeedViewController animated:NO]; 
     
-    m_tabBarController.viewControllers = [NSArray arrayWithObjects:rssFeedNavigationController, nil];    
+    // Rss Category
+    id rssCategoryViewController = [self getViewControllerByIdString:(id)RssCategoryListViewControllerIdString];    
+    UINavigationController *rssCategoryNavigationController = [[UINavigationController alloc] init];
+    [rssCategoryNavigationController pushViewController:rssCategoryViewController animated:NO];
+    
+    m_tabBarController.viewControllers = [NSArray arrayWithObjects:rssFeedNavigationController, rssCategoryNavigationController, nil];    
     
     // Add sub view to the window
     [self.window addSubview:[self.tabBarController view]];
@@ -42,8 +49,10 @@
 - (id)createViewControllerByIdString:(NSString *)viewControllerIdString
 {
     id viewController = nil;
-    if (viewControllerIdString == RssFeedViewControllerIdString) {
+    if (viewControllerIdString == RssFeedListViewControllerIdString) {
         viewController = [[RssFeedViewController alloc] init];
+    } else if (viewControllerIdString == RssCategoryListViewControllerIdString) {
+        viewController = [[RssCategoryViewController alloc] init];
     } else
         return nil;
     

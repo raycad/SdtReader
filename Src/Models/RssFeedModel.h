@@ -14,7 +14,7 @@
 }
 
 - (BOOL)addRssFeed:(RssFeed *)rssFeed;
-- (RssFeed *)getRssFeedByPK:(RssFeedPK *)RssFeedPK;
+- (RssFeed *)getRssFeedByPK:(RssFeedPK *)rssFeedPK;
 
 - (BOOL)removeRssFeedByPK:(RssFeedPK *)rssFeedPK;
 - (BOOL)removeRssFeedByIndex:(int)index;

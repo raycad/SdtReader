@@ -8,13 +8,17 @@
 
 #import <Foundation/Foundation.h>
 #import "RssFeedModel.h"
+#import "RssCategoryModel.h"
 
 @interface ReaderModel : NSObject {
-    RssFeedModel *m_rssFeedModel; 
+    RssFeedModel        *m_rssFeedModel; 
+    RssCategoryModel    *m_rssCategoryModel;
 }
 
 // Declare the singleton
 + (ReaderModel *)instance;
 
-@property (nonatomic, retain) RssFeedModel *rssFeedModel;
+@property (nonatomic, retain) RssFeedModel      *rssFeedModel;
+@property (nonatomic, retain) RssCategoryModel  *rssCategoryModel;
+
 @end

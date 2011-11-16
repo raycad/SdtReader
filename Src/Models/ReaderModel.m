@@ -11,6 +11,7 @@
 @implementation ReaderModel
 
 @synthesize rssFeedModel = m_rssFeedModel;
+@synthesize rssCategoryModel = m_rssCategoryModel;
 
 static ReaderModel *_instance = nil;
 

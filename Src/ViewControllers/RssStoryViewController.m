@@ -52,6 +52,8 @@
     m_activityIndicatorView.center = self.view.center;
     [self.view addSubview: m_activityIndicatorView];
     
+    m_webView.contentMode = UIViewContentModeScaleAspectFit;
+    
     //m_webView.userInteractionEnabled = NO;
     self.navigationItem.leftBarButtonItem  = [[[UIBarButtonItem alloc] initWithTitle:RssStoryTitle style:UIBarButtonItemStylePlain target:self action:@selector(backViewAction:)] autorelease]; 
     assert(self.navigationItem.leftBarButtonItem != nil);

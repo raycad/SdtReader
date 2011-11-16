@@ -61,6 +61,11 @@
 		7688C60C146BB7BA00A571F5 /* RssFeedViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7688C60B146BB7BA00A571F5 /* RssFeedViewCell.m */; };
 		7688F523146EC328008F80A5 /* RssFeedDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7688F521146EC327008F80A5 /* RssFeedDetailViewController.m */; };
 		7688F526146EC359008F80A5 /* RssFeedDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7688F525146EC359008F80A5 /* RssFeedDetailViewController.xib */; };
+		7689A84A1474074E00499608 /* RssCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 7689A8471474074E00499608 /* RssCategory.m */; };
+		7689A84B1474074E00499608 /* RssCategoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7689A8491474074E00499608 /* RssCategoryModel.m */; };
+		7689A84F1474075F00499608 /* RssCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7689A84E1474075F00499608 /* RssCategoryViewController.m */; };
+		7689A8511474076A00499608 /* RssCategoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7689A8501474076A00499608 /* RssCategoryViewController.xib */; };
+		7689A85414740D1300499608 /* SdtSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7689A85314740D1300499608 /* SdtSearchViewController.m */; };
 		769169981473A6DF00043FA9 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 769169971473A6DF00043FA9 /* search.png */; };
 		7691E00F1472BC6500592C43 /* star-gold24.png in Resources */ = {isa = PBXBuildFile; fileRef = 7691DFF01472BC6500592C43 /* star-gold24.png */; };
 		7691E0101472BC6500592C43 /* star-white24.png in Resources */ = {isa = PBXBuildFile; fileRef = 7691DFF11472BC6500592C43 /* star-white24.png */; };
@@ -142,6 +147,15 @@
 		7688F520146EC327008F80A5 /* RssFeedDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RssFeedDetailViewController.h; path = Src/ViewControllers/RssFeedDetailViewController.h; sourceTree = SOURCE_ROOT; };
 		7688F521146EC327008F80A5 /* RssFeedDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RssFeedDetailViewController.m; path = Src/ViewControllers/RssFeedDetailViewController.m; sourceTree = SOURCE_ROOT; };
 		7688F525146EC359008F80A5 /* RssFeedDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RssFeedDetailViewController.xib; path = XIBs/RssFeedDetailViewController.xib; sourceTree = SOURCE_ROOT; };
+		7689A8461474074E00499608 /* RssCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RssCategory.h; path = Src/Models/RssCategory.h; sourceTree = SOURCE_ROOT; };
+		7689A8471474074E00499608 /* RssCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RssCategory.m; path = Src/Models/RssCategory.m; sourceTree = SOURCE_ROOT; };
+		7689A8481474074E00499608 /* RssCategoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RssCategoryModel.h; path = Src/Models/RssCategoryModel.h; sourceTree = SOURCE_ROOT; };
+		7689A8491474074E00499608 /* RssCategoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RssCategoryModel.m; path = Src/Models/RssCategoryModel.m; sourceTree = SOURCE_ROOT; };
+		7689A84D1474075F00499608 /* RssCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RssCategoryViewController.h; path = Src/ViewControllers/RssCategoryViewController.h; sourceTree = SOURCE_ROOT; };
+		7689A84E1474075F00499608 /* RssCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RssCategoryViewController.m; path = Src/ViewControllers/RssCategoryViewController.m; sourceTree = SOURCE_ROOT; };
+		7689A8501474076A00499608 /* RssCategoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RssCategoryViewController.xib; path = XIBs/RssCategoryViewController.xib; sourceTree = SOURCE_ROOT; };
+		7689A85214740D1300499608 /* SdtSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SdtSearchViewController.h; path = Src/ViewControllers/SdtSearchViewController.h; sourceTree = SOURCE_ROOT; };
+		7689A85314740D1300499608 /* SdtSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SdtSearchViewController.m; path = Src/ViewControllers/SdtSearchViewController.m; sourceTree = SOURCE_ROOT; };
 		769169971473A6DF00043FA9 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = search.png; path = Images/search.png; sourceTree = SOURCE_ROOT; };
 		7691DFF01472BC6500592C43 /* star-gold24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-gold24.png"; path = "Images/star-gold24.png"; sourceTree = SOURCE_ROOT; };
 		7691DFF11472BC6500592C43 /* star-white24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-white24.png"; path = "Images/star-white24.png"; sourceTree = SOURCE_ROOT; };
@@ -234,6 +248,10 @@
 		7681FD6B146A931A00CF8C27 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7689A85214740D1300499608 /* SdtSearchViewController.h */,
+				7689A85314740D1300499608 /* SdtSearchViewController.m */,
+				7689A84D1474075F00499608 /* RssCategoryViewController.h */,
+				7689A84E1474075F00499608 /* RssCategoryViewController.m */,
 				76855939146E77FD0058DE3F /* WebBrowserViewController.h */,
 				7685593A146E77FD0058DE3F /* WebBrowserViewController.m */,
 				76822D3C146E319100698D1B /* RssStoryViewCell.h */,
@@ -259,6 +277,7 @@
 		7681FD6C146A932700CF8C27 /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
+				7689A8501474076A00499608 /* RssCategoryViewController.xib */,
 				7688F525146EC359008F80A5 /* RssFeedDetailViewController.xib */,
 				76822D4C146E508F00698D1B /* RssStoryViewController.xib */,
 				761334F5146D011200EFFF88 /* RssStoryListViewController.xib */,
@@ -290,6 +309,10 @@
 		7681FD7E146A964000CF8C27 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7689A8461474074E00499608 /* RssCategory.h */,
+				7689A8471474074E00499608 /* RssCategory.m */,
+				7689A8481474074E00499608 /* RssCategoryModel.h */,
+				7689A8491474074E00499608 /* RssCategoryModel.m */,
 				7683B32E146D6D900023A557 /* RssParser.h */,
 				7683B32F146D6D900023A557 /* RssParser.m */,
 				76841522146B8CAE009F399B /* RssStoryModel.h */,
@@ -427,6 +450,7 @@
 				7691E00F1472BC6500592C43 /* star-gold24.png in Resources */,
 				7691E0101472BC6500592C43 /* star-white24.png in Resources */,
 				769169981473A6DF00043FA9 /* search.png in Resources */,
+				7689A8511474076A00499608 /* RssCategoryViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +480,10 @@
 				7685593B146E77FD0058DE3F /* WebBrowserViewController.m in Sources */,
 				7688F523146EC328008F80A5 /* RssFeedDetailViewController.m in Sources */,
 				7681AFAC146FA95400BC179C /* RateButton.m in Sources */,
+				7689A84A1474074E00499608 /* RssCategory.m in Sources */,
+				7689A84B1474074E00499608 /* RssCategoryModel.m in Sources */,
+				7689A84F1474075F00499608 /* RssCategoryViewController.m in Sources */,
+				7689A85414740D1300499608 /* SdtSearchViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
