@@ -61,6 +61,8 @@
 		7688C60C146BB7BA00A571F5 /* RssFeedViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7688C60B146BB7BA00A571F5 /* RssFeedViewCell.m */; };
 		7688F523146EC328008F80A5 /* RssFeedDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7688F521146EC327008F80A5 /* RssFeedDetailViewController.m */; };
 		7688F526146EC359008F80A5 /* RssFeedDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7688F525146EC359008F80A5 /* RssFeedDetailViewController.xib */; };
+		76916995147393A800043FA9 /* switch_mode.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 76916994147393A800043FA9 /* switch_mode.jpg */; };
+		769169981473A6DF00043FA9 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 769169971473A6DF00043FA9 /* search.png */; };
 		7691E00F1472BC6500592C43 /* star-gold24.png in Resources */ = {isa = PBXBuildFile; fileRef = 7691DFF01472BC6500592C43 /* star-gold24.png */; };
 		7691E0101472BC6500592C43 /* star-white24.png in Resources */ = {isa = PBXBuildFile; fileRef = 7691DFF11472BC6500592C43 /* star-white24.png */; };
 /* End PBXBuildFile section */
@@ -141,6 +143,8 @@
 		7688F520146EC327008F80A5 /* RssFeedDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RssFeedDetailViewController.h; path = Src/ViewControllers/RssFeedDetailViewController.h; sourceTree = SOURCE_ROOT; };
 		7688F521146EC327008F80A5 /* RssFeedDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RssFeedDetailViewController.m; path = Src/ViewControllers/RssFeedDetailViewController.m; sourceTree = SOURCE_ROOT; };
 		7688F525146EC359008F80A5 /* RssFeedDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RssFeedDetailViewController.xib; path = XIBs/RssFeedDetailViewController.xib; sourceTree = SOURCE_ROOT; };
+		76916994147393A800043FA9 /* switch_mode.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = switch_mode.jpg; path = Images/switch_mode.jpg; sourceTree = SOURCE_ROOT; };
+		769169971473A6DF00043FA9 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = search.png; path = Images/search.png; sourceTree = SOURCE_ROOT; };
 		7691DFF01472BC6500592C43 /* star-gold24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-gold24.png"; path = "Images/star-gold24.png"; sourceTree = SOURCE_ROOT; };
 		7691DFF11472BC6500592C43 /* star-white24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-white24.png"; path = "Images/star-white24.png"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -307,6 +311,8 @@
 		768510B2146ADCFE00072A6E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				769169971473A6DF00043FA9 /* search.png */,
+				76916994147393A800043FA9 /* switch_mode.jpg */,
 				7691DFF01472BC6500592C43 /* star-gold24.png */,
 				7691DFF11472BC6500592C43 /* star-white24.png */,
 				7681AFBD146FD6DF00BC179C /* star-blue16.png */,
@@ -423,6 +429,8 @@
 				7681AFBE146FD6E000BC179C /* star-blue16.png in Resources */,
 				7691E00F1472BC6500592C43 /* star-gold24.png in Resources */,
 				7691E0101472BC6500592C43 /* star-white24.png in Resources */,
+				76916995147393A800043FA9 /* switch_mode.jpg in Resources */,
+				769169981473A6DF00043FA9 /* search.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

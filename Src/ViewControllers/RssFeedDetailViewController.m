@@ -149,14 +149,11 @@
     int rateButtonCount = [m_rateButtons count];
     
     if (rateValue < 0 || rateValue >= rateButtonCount) {
-        RateButton *rateButton = nil;
-        for (int i = 0; i < rateButtonCount; i++) {
-            rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
-            if (!rateButton)
-                continue;
-            [rateButton setState:UnRating];
-        }
+        rateValue = -1;
+    }
     
+    if ((m_rateValue == rateValue) && (m_rateValue != 0) && (m_rateValue != rateButtonCount-1)) {
+        // Nothing changes
         return;
     }
     
@@ -168,19 +165,8 @@
         if (rateState == Rating) {
             // Rating = 0
             m_rateValue = -1;
-            
-            for (int i = 0; i < rateButtonCount; i++) {
-                rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
-                if (!rateButton)
-                    continue;
-                [rateButton setState:UnRating];
-            }
-            
-            return;
         }        
-    }
-    
-    if (m_rateValue == rateValue && m_rateValue == rateButtonCount-1) {
+    } else if (m_rateValue == rateValue && m_rateValue == rateButtonCount-1) {
         RateButton *rateButton = (RateButton *)[m_rateButtons objectAtIndex:(rateButtonCount-1)];
         if (!rateButton)
             return;
@@ -188,38 +174,25 @@
         if (rateState == Rating) {
             // Rating = 0
             m_rateValue = -1;
-            
-            for (int i = 0; i < rateButtonCount; i++) {
-                rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
-                if (!rateButton)
-                    continue;
-                [rateButton setState:UnRating];
-            }
-            
-            return;
         }        
-    }
-    
-    if (m_rateValue == rateValue)
-        return;
+    } else
+        m_rateValue = rateValue;
     
     int i = 0;
     RateButton *rateButton = nil;
-    for (i = 0; i <= rateValue; i++) {
+    for (i = 0; i <= m_rateValue; i++) {
         rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
         if (!rateButton)
             continue;
         [rateButton setState:Rating];
     }
     
-    for (i = rateValue+1; i < rateButtonCount; i++) {
+    for (i = m_rateValue+1; i < rateButtonCount; i++) {
         rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
         if (!rateButton)
             continue;
         [rateButton setState:UnRating];
     }
-    
-    m_rateValue = rateValue;
 }
 
 - (void)rateButtonClicked:(id)sender
@@ -231,15 +204,6 @@
     [self setRateValue:rateValue];
     
     NSLog(@"new button clicked!!! %d", rateValue);
-}
-
-- (void)setRate:(int)rate
-{
-    if (rate < 1 || rate > 5)
-        return;
-    
-    UIImage *rateImage = [UIImage imageNamed:@"star-gold48.png"];
-    UIImage *unRateImage = [UIImage imageNamed:@"star-white48.png"];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

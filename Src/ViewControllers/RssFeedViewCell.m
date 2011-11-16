@@ -146,14 +146,11 @@
     int rateButtonCount = [m_rateButtons count];
     
     if (rateValue < 0 || rateValue >= rateButtonCount) {
-        RateButton *rateButton = nil;
-        for (int i = 0; i < rateButtonCount; i++) {
-            rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
-            if (!rateButton)
-                continue;
-            [rateButton setState:UnRating];
-        }
-        
+        rateValue = -1;
+    }
+    
+    if ((m_rateValue == rateValue) && (m_rateValue != 0) && (m_rateValue != rateButtonCount-1)) {
+        // Nothing changes
         return;
     }
     
@@ -165,19 +162,8 @@
         if (rateState == Rating) {
             // Rating = 0
             m_rateValue = -1;
-            
-            for (int i = 0; i < rateButtonCount; i++) {
-                rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
-                if (!rateButton)
-                    continue;
-                [rateButton setState:UnRating];
-            }
-            
-            return;
         }        
-    }
-    
-    if (m_rateValue == rateValue && m_rateValue == rateButtonCount-1) {
+    } else if (m_rateValue == rateValue && m_rateValue == rateButtonCount-1) {
         RateButton *rateButton = (RateButton *)[m_rateButtons objectAtIndex:(rateButtonCount-1)];
         if (!rateButton)
             return;
@@ -185,38 +171,25 @@
         if (rateState == Rating) {
             // Rating = 0
             m_rateValue = -1;
-            
-            for (int i = 0; i < rateButtonCount; i++) {
-                rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
-                if (!rateButton)
-                    continue;
-                [rateButton setState:UnRating];
-            }
-            
-            return;
-        }        
-    }
-    
-    if (m_rateValue == rateValue)
-        return;
+         }        
+    } else
+        m_rateValue = rateValue;
     
     int i = 0;
     RateButton *rateButton = nil;
-    for (i = 0; i <= rateValue; i++) {
+    for (i = 0; i <= m_rateValue; i++) {
         rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
         if (!rateButton)
             continue;
         [rateButton setState:Rating];
     }
     
-    for (i = rateValue+1; i < rateButtonCount; i++) {
+    for (i = m_rateValue+1; i < rateButtonCount; i++) {
         rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
         if (!rateButton)
             continue;
         [rateButton setState:UnRating];
-    }
-    
-    m_rateValue = rateValue;
+    }    
 }
 
 /*- (void)setRateValue:(int)rateValue
@@ -254,7 +227,32 @@
 
 - (void)updateData
 {
+    if (!m_rssFeed)
+        return;
     
+    int rateButtonCount = [m_rateButtons count];
+    m_rateValue = m_rssFeed.rate;
+    
+    // Update rate buttons
+    int i = 0;
+    RateButton *rateButton = nil;
+    for (i = 0; i <= m_rateValue; i++) {
+        rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
+        if (!rateButton)
+            continue;
+        [rateButton setState:Rating];
+    }
+    
+    for (i = m_rateValue+1; i < rateButtonCount; i++) {
+        rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
+        if (!rateButton)
+            continue;
+        [rateButton setState:UnRating];
+    }    
+    
+    // Update data
+    self.titleLabel.text = m_rssFeed.title;
+    self.categoryLabel.text = m_rssFeed.category; 
 }
 
 - (void)dealloc

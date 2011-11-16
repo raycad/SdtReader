@@ -16,6 +16,12 @@
 @implementation RssFeedViewController
 @synthesize searchBar = m_searchBar;
 @synthesize searchModeButton = m_searchModeButton;
+@synthesize viewSelectionModeButton = m_viewSelectionModeButton;
+@synthesize rateLabel = m_rateLabel;
+@synthesize searchModeLabel = m_searchModeLabel;
+@synthesize editSelectionModeButton = m_editSelectionModeButton;
+@synthesize viewSelectionModeLabel = m_viewSelectionModeLabel;
+@synthesize editSelectionModeLabel = m_editSelectionModeLabel;
 @synthesize rssFeedTableView = m_rssFeedTableView;
 
 - (id)init
@@ -33,6 +39,7 @@
         
         m_rateValue = -1;
         m_searchMode = SearchByTitle;
+        m_selectionMode = ViewSelectionMode;
     }
     
     return self;
@@ -50,6 +57,12 @@
     [m_searchBar release];
     [m_rssFeedTableView release];
     [m_searchModeButton release];
+    [m_viewSelectionModeButton release];
+    [m_editSelectionModeButton release];
+    [m_viewSelectionModeLabel release];
+    [m_editSelectionModeLabel release];
+    [m_rateLabel release];
+    [m_searchModeLabel release];
     [super dealloc];
 }
 
@@ -245,6 +258,9 @@
     
     // Reload data
     [self refreshData];
+    
+    [self updateSearchMode];
+    [self updateSelectionMode];
 }
 
 - (void)didRateButtonClicked:(NSObject *)object
@@ -265,23 +281,16 @@
     }
 }
 
-- (IBAction)viewRssFeed:(id)sender 
+- (void)viewRssFeedAtCell:(UITableViewCell *)cell
 {
-    NSIndexPath *indexPath = [m_rssFeedTableView indexPathForSelectedRow];
-    if (!indexPath) {
-        // Open a alert with an OK button
-        NSString *alertString = [NSString stringWithFormat:@"You must select an RSS Feed to view"];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:alertString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-        [alert release];
-        return;
-    }
-    
-    RssFeedViewCell *cell = (RssFeedViewCell *)[m_rssFeedTableView cellForRowAtIndexPath:indexPath];
     if (!cell)
         return;
     
-    RssFeed *rssFeed = cell.rssFeed;
+    RssFeedViewCell *rssFeedViewCell = (RssFeedViewCell *)cell;
+    if (!rssFeedViewCell)
+        return;
+    
+    RssFeed *rssFeed = rssFeedViewCell.rssFeed;
     if (!rssFeed)
         return;
     
@@ -307,23 +316,16 @@
     [rssStoryListViewController parseRssFeed];
 }
 
-- (IBAction)editRssFeed:(id)sender
+- (void)editRssFeedAtCell:(UITableViewCell *)cell
 {
-    NSIndexPath *indexPath = [m_rssFeedTableView indexPathForSelectedRow];
-    if (!indexPath) {
-        // Open a alert with an OK button
-        NSString *alertString = [NSString stringWithFormat:@"You must select an RSS Feed to view"];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:alertString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-        [alert release];
-        return;
-    }
-    
-    RssFeedViewCell *cell = (RssFeedViewCell *)[m_rssFeedTableView cellForRowAtIndexPath:indexPath];
     if (!cell)
         return;
     
-    RssFeed *rssFeed = cell.rssFeed;
+    RssFeedViewCell *rssFeedViewCell = (RssFeedViewCell *)cell;
+    if (!rssFeedViewCell)
+        return;
+    
+    RssFeed *rssFeed = rssFeedViewCell.rssFeed;
     if (!rssFeed)
         return;    
     
@@ -333,6 +335,20 @@
     rssFeedDetailViewController.rssFeed = rssFeed;
     rssFeedDetailViewController.viewMode = UpdateMode;
     [rssFeedDetailViewController presentModallyOn:self];
+}
+
+- (IBAction)viewRssFeed:(id)sender 
+{
+    m_selectionMode = EditSelectionMode;
+    
+    [self updateSelectionMode];
+}
+
+- (IBAction)editRssFeed:(id)sender
+{
+    m_selectionMode = ViewSelectionMode;
+    
+    [self updateSelectionMode];
 }
 
 - (IBAction)addRssFeed:(id)sender 
@@ -383,6 +399,12 @@
     m_rssFeedTableView = nil;
     
     [self setSearchModeButton:nil];
+    [self setViewSelectionModeButton:nil];
+    [self setEditSelectionModeButton:nil];
+    [self setViewSelectionModeLabel:nil];
+    [self setEditSelectionModeLabel:nil];
+    [self setRateLabel:nil];
+    [self setSearchModeLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -426,7 +448,7 @@
     cell.editingAccessoryView = nil;
     cell.detailTextLabel.text = nil;
     // Set cell selection is blue style
-    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     cell.delegate = self;
     
@@ -438,16 +460,14 @@
     else
         thumbnailFile = @"rss_blue.png";
     
-    // Set up the cell…
-    cell.titleLabel.text = rssFeed.title;
-    //cell.indexLabel.text = [NSString stringWithFormat:@"%d", row+1];
-    cell.categoryLabel.text = rssFeed.category; /*[NSString stringWithFormat:@"Category: %@", rssFeed.category];*/
-    cell.thumbnailImageView.image = [UIImage imageNamed:thumbnailFile];  
+    cell.thumbnailImageView.image = [UIImage imageNamed:thumbnailFile]; 
     
     // Set data for cell
     cell.rssFeed = rssFeed;
     
-    [cell setRateValue:rssFeed.rate];
+    // Update data
+    [cell updateData];    
+        
     return cell;
 }
 
@@ -497,22 +517,13 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*if (m_rssFeedTableView == tableView && (m_viewMode != SelectMode)) {
-        // Navigation logic may go here. Create and push another view controller.
-        CourseViewController *courseViewController = [[CourseViewController alloc] init];
-        
-        CourseViewCell *cell = (CourseViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-        assert(cell != nil);
-        Course *course = cell.course;
-        assert(course != nil);
-        
-        courseViewController.course = course;
-        courseViewController.viewMode = UpdateMode;
-        courseViewController.delegate = self;
-        
-        [[self navigationController] pushViewController:courseViewController animated:YES];
-        [courseViewController release];
-    }*/
+    UITableViewCell *cell = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    assert(cell != nil);
+    
+    if (m_selectionMode == ViewSelectionMode)
+        [self viewRssFeedAtCell:cell];
+    else if (m_selectionMode == EditSelectionMode)
+        [self editRssFeedAtCell:cell];    
 }
 
 - (void)presentCourseViewModally
@@ -620,10 +631,10 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     
     m_rateButtons = [[NSMutableArray alloc] init];
     
-    CGRect baseBound = [m_searchModeButton bounds];
-    CGRect leftBound = [m_searchModeButton convertRect:baseBound toView:self.view];
+    CGRect baseBound = [m_rateLabel bounds];
+    CGRect leftBound = [m_rateLabel convertRect:baseBound toView:self.view];
     
-    double x = leftBound.origin.x + leftBound.size.width + 15;
+    double x = leftBound.origin.x + m_rateLabel.bounds.size.width + 15;
     double y = leftBound.origin.y;
     
     // Create a new dynamic buttons
@@ -650,14 +661,11 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     int rateButtonCount = [m_rateButtons count];
     
     if (rateValue < 0 || rateValue >= rateButtonCount) {
-        RateButton *rateButton = nil;
-        for (int i = 0; i < rateButtonCount; i++) {
-            rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
-            if (!rateButton)
-                continue;
-            [rateButton setState:UnRating];
-        }
-        
+        rateValue = -1;
+    }
+    
+    if ((m_rateValue == rateValue) && (m_rateValue != 0) && (m_rateValue != rateButtonCount-1)) {
+        // Nothing changes
         return;
     }
     
@@ -669,19 +677,8 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
         if (rateState == Rating) {
             // Rating = 0
             m_rateValue = -1;
-            
-            for (int i = 0; i < rateButtonCount; i++) {
-                rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
-                if (!rateButton)
-                    continue;
-                [rateButton setState:UnRating];
-            }
-            
-            return;
         }        
-    }
-    
-    if (m_rateValue == rateValue && m_rateValue == rateButtonCount-1) {
+    } else if (m_rateValue == rateValue && m_rateValue == rateButtonCount-1) {
         RateButton *rateButton = (RateButton *)[m_rateButtons objectAtIndex:(rateButtonCount-1)];
         if (!rateButton)
             return;
@@ -689,38 +686,25 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
         if (rateState == Rating) {
             // Rating = 0
             m_rateValue = -1;
-            
-            for (int i = 0; i < rateButtonCount; i++) {
-                rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
-                if (!rateButton)
-                    continue;
-                [rateButton setState:UnRating];
-            }
-            
-            return;
         }        
-    }
-    
-    if (m_rateValue == rateValue)
-        return;
+    } else
+        m_rateValue = rateValue;
     
     int i = 0;
     RateButton *rateButton = nil;
-    for (i = 0; i <= rateValue; i++) {
+    for (i = 0; i <= m_rateValue; i++) {
         rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
         if (!rateButton)
             continue;
         [rateButton setState:Rating];
     }
     
-    for (i = rateValue+1; i < rateButtonCount; i++) {
+    for (i = m_rateValue+1; i < rateButtonCount; i++) {
         rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
         if (!rateButton)
             continue;
         [rateButton setState:UnRating];
-    }
-    
-    m_rateValue = rateValue;
+    } 
 }
 
 - (void)rateButtonClicked:(id)sender
@@ -739,6 +723,11 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
 
 - (void)showRateButtons:(BOOL)show
 {
+    if (!m_rateButtons) {
+        m_rateButtons = [[NSMutableArray alloc] init];
+        [self createRateButtons];
+    }
+    
     int rateButtonCount = [m_rateButtons count];
     
     RateButton *rateButton = nil;
@@ -750,29 +739,53 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     }        
 }
 
+- (void)updateSearchMode
+{
+    if (m_searchMode == SearchByRate) {
+        [m_rateLabel setHidden:NO];
+        [self showRateButtons:YES];
+        [m_searchBar setHidden:YES];
+        m_searchModeLabel.titleLabel.text = @"By Rate";
+    } else if (m_searchMode == SearchByTitle) {
+        [m_rateLabel setHidden:YES];
+        [self showRateButtons:NO];
+        [m_searchBar setHidden:NO];
+        m_searchModeLabel.titleLabel.text = @"By Title";
+    }
+}
+
+- (void)updateSelectionMode
+{
+    if (m_selectionMode == ViewSelectionMode) {
+        [m_viewSelectionModeLabel setHidden:NO];
+        [m_viewSelectionModeButton setHidden:NO];
+        
+        [m_editSelectionModeLabel setHidden:YES];
+        [m_editSelectionModeButton setHidden:YES];
+    } else if (m_selectionMode == EditSelectionMode) {
+        [m_viewSelectionModeLabel setHidden:YES];
+        [m_viewSelectionModeButton setHidden:YES];
+        
+        [m_editSelectionModeLabel setHidden:NO];
+        [m_editSelectionModeButton setHidden:NO];
+    }
+}
+
 - (IBAction)switchSearchMode:(id)sender 
 {
     if (m_searchMode == SearchByTitle) {
         // Dismiss keyboard
         [m_searchBar resignFirstResponder];
         // Change search mode to Rate
-        m_searchMode = SearchByRate;
-        if (!m_rateButtons) {
-            m_rateButtons = [[NSMutableArray alloc] init];
-            [self createRateButtons];
-        }
-        
-        [self showRateButtons:YES];
-        [m_searchBar setHidden:YES];
+        m_searchMode = SearchByRate;   
+        m_searchModeButton.titleLabel.text = @"Rate";
     } else {
         // Change search mode to Title
         m_searchMode = SearchByTitle;
-        if (m_rateButtons) {
-            [self showRateButtons:NO];
-        }
-        [m_searchBar setHidden:NO];
+        m_searchModeButton.titleLabel.text = @"Title";
     }
     
+    [self updateSearchMode];
     [self refreshData];
 }
 @end
