@@ -22,12 +22,12 @@ typedef enum {
     ReaderModel     *m_readerModel;
     UISearchBar     *m_searchBar;
     UITableView     *m_rssFeedTableView;
-    UIButton        *m_searchModeButton;
     
     SearchMode      m_searchMode;
     NSMutableArray  *m_rateButtons;
     
     int             m_rateValue;
+    UIButton *searchModeButton;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *rssFeedTableView;
@@ -39,6 +39,7 @@ typedef enum {
 - (IBAction)editRssFeed:(id)sender;
 - (IBAction)addRssFeed:(id)sender;
 - (IBAction)switchSearchMode:(id)sender;
+
 - (void) refreshData;
 
 - (void)setRateValue:(int)rateValue;

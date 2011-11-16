@@ -233,6 +233,15 @@
     NSLog(@"new button clicked!!! %d", rateValue);
 }
 
+- (void)setRate:(int)rate
+{
+    if (rate < 1 || rate > 5)
+        return;
+    
+    UIImage *rateImage = [UIImage imageNamed:@"star-gold48.png"];
+    UIImage *unRateImage = [UIImage imageNamed:@"star-white48.png"];
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
