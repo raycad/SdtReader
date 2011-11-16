@@ -11,9 +11,11 @@
 #import "RssFeedViewCell.h"
 #import "RssStoryListViewController.h"
 #import "RssFeedDetailViewController.h"
+#import "RateButton.h"
 
 @implementation RssFeedViewController
 @synthesize searchBar = m_searchBar;
+@synthesize searchModeButton = m_searchModeButton;
 @synthesize rssFeedTableView = m_rssFeedTableView;
 
 - (id)init
@@ -27,7 +29,10 @@
         
         // Set up our navigation bar.
         self.title = RssReaderTitle;        
-        self.tabBarItem.image = [UIImage imageNamed:@"rss_story_grey.png"];             
+        self.tabBarItem.image = [UIImage imageNamed:@"rss_story_grey.png"]; 
+        
+        m_searchMode = Title;
+        m_rateValue = -1;
     }
     
     return self;
@@ -40,9 +45,11 @@
 
 - (void)dealloc
 {
+    [self releaseRateButtons];
     [m_rssFeedModel release];
     [m_searchBar release];
     [m_rssFeedTableView release];
+    [m_searchModeButton release];
     [super dealloc];
 }
 
@@ -360,6 +367,8 @@
     m_searchBar = nil;
     m_rssFeedTableView = nil;
     
+    [self setSearchMode:nil];
+    [self setSearchModeButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -575,4 +584,175 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     [searchBar resignFirstResponder];
 }
 
+- (void)releaseRateButtons
+{
+    if (m_rateButtons) {
+        for (int i = 0; i < [m_rateButtons count]; i++) {
+            id rateButton = [m_rateButtons objectAtIndex:i];
+            if (rateButton) {
+                [rateButton release];
+                rateButton = nil;
+            }
+        }        
+    }
+    
+    [m_rateButtons removeAllObjects];
+    [m_rateButtons release];
+}
+
+- (void)createRateButtons
+{
+    [self releaseRateButtons];
+    
+    m_rateButtons = [[NSMutableArray alloc] init];
+    
+    CGRect baseBound = [m_searchModeButton bounds];
+    CGRect leftBound = [m_searchModeButton convertRect:baseBound toView:self.view];
+    
+    double x = leftBound.origin.x + leftBound.size.width + 5;
+    double y = leftBound.origin.y - 12;
+    
+    // Create a new dynamic buttons
+    for (int i = 0; i < 5; i++) {
+        CGRect frame = CGRectMake(x, y, 48, 48);
+        RateButton *rateButton = [[RateButton buttonWithType:UIButtonTypeCustom] retain];
+        rateButton.frame = frame;
+        //[rateButton setTitle:(NSString *)@"Rate" forState:(UIControlState)UIControlStateNormal];
+        [rateButton addTarget:self action:@selector(rateButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [rateButton setRateSize:Size48];
+        [rateButton setState:UnRating];
+        
+        rateButton.data = i;
+        
+        [self.view addSubview:rateButton];
+        [m_rateButtons addObject:rateButton];
+        
+        x += 50;
+    }
+}
+
+- (void)setRateValue:(int)rateValue
+{
+    int rateButtonCount = [m_rateButtons count];
+    
+    if (rateValue < 0 || rateValue >= rateButtonCount) {
+        RateButton *rateButton = nil;
+        for (int i = 0; i < rateButtonCount; i++) {
+            rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
+            if (!rateButton)
+                continue;
+            [rateButton setState:UnRating];
+        }
+        
+        return;
+    }
+    
+    if (m_rateValue == rateValue && m_rateValue == 0) {
+        RateButton *rateButton = (RateButton *)[m_rateButtons objectAtIndex:0];
+        if (!rateButton)
+            return;
+        RateState rateState = [rateButton rateState];
+        if (rateState == Rating) {
+            // Rating = 0
+            m_rateValue = -1;
+            
+            for (int i = 0; i < rateButtonCount; i++) {
+                rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
+                if (!rateButton)
+                    continue;
+                [rateButton setState:UnRating];
+            }
+            
+            return;
+        }        
+    }
+    
+    if (m_rateValue == rateValue && m_rateValue == rateButtonCount-1) {
+        RateButton *rateButton = (RateButton *)[m_rateButtons objectAtIndex:(rateButtonCount-1)];
+        if (!rateButton)
+            return;
+        RateState rateState = [rateButton rateState];
+        if (rateState == Rating) {
+            // Rating = 0
+            m_rateValue = -1;
+            
+            for (int i = 0; i < rateButtonCount; i++) {
+                rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
+                if (!rateButton)
+                    continue;
+                [rateButton setState:UnRating];
+            }
+            
+            return;
+        }        
+    }
+    
+    if (m_rateValue == rateValue)
+        return;
+    
+    int i = 0;
+    RateButton *rateButton = nil;
+    for (i = 0; i <= rateValue; i++) {
+        rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
+        if (!rateButton)
+            continue;
+        [rateButton setState:Rating];
+    }
+    
+    for (i = rateValue+1; i < rateButtonCount; i++) {
+        rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
+        if (!rateButton)
+            continue;
+        [rateButton setState:UnRating];
+    }
+    
+    m_rateValue = rateValue;
+}
+
+- (void)rateButtonClicked:(id)sender
+{
+    if (!sender || ![sender isKindOfClass:[RateButton class]])
+        return;
+    
+    int rateValue = ((RateButton *)sender).data;
+    [self setRateValue:rateValue];
+    
+    NSLog(@"new button clicked!!! %d", rateValue);
+}
+
+- (void)showRateButtons:(BOOL)show
+{
+    int rateButtonCount = [m_rateButtons count];
+    
+    RateButton *rateButton = nil;
+    for (int i = 0; i < rateButtonCount; i++) {
+        rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
+        if (!rateButton)
+            continue;
+        [rateButton setHidden:!show];
+    }        
+}
+
+- (IBAction)switchSearchMode:(id)sender 
+{
+    if (m_searchMode == Title) {
+        // Change mode
+        m_searchMode = Rate;
+        if (!m_rateButtons) {
+            m_rateButtons = [[NSMutableArray alloc] init];
+            [self createRateButtons];
+        }
+        
+        showRateButtons(YES);
+        [m_searchBar setHidden:YES];
+    } else {
+        m_searchMode = Title;
+        if (m_rateButtons) {
+            showRateButtons(NO);
+        }
+        [m_searchBar setHidden:NO];
+    }
+    
+    [self refreshData];
+}
 @end
