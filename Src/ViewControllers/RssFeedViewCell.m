@@ -60,7 +60,7 @@
     CGFloat leftBoundsX = contentRect.origin.x;
     CGFloat rightBoundsX = contentRect.size.width;
     CGRect frame;
-    frame = CGRectMake(leftBoundsX+8, 13, 38, 38);
+    frame = CGRectMake(leftBoundsX+7, 13, 38, 38);
     m_thumbnailImageView.frame = frame;
     
     frame = CGRectMake(leftBoundsX+52, 1, 250, 25);
@@ -251,6 +251,11 @@
         [rateButton setState:UnRating];
     }
 }*/
+
+- (void)updateData
+{
+    
+}
 
 - (void)dealloc
 {

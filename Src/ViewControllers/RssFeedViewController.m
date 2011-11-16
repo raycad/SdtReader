@@ -11,10 +11,11 @@
 #import "RssFeedViewCell.h"
 #import "RssStoryListViewController.h"
 #import "RssFeedDetailViewController.h"
+#import "RateButton.h"
 
 @implementation RssFeedViewController
 @synthesize searchBar = m_searchBar;
-@synthesize searchModeButton;
+@synthesize searchModeButton = m_searchModeButton;
 @synthesize rssFeedTableView = m_rssFeedTableView;
 
 - (id)init
@@ -28,7 +29,10 @@
         
         // Set up our navigation bar.
         self.title = RssReaderTitle;        
-        self.tabBarItem.image = [UIImage imageNamed:@"rss_story_grey.png"];             
+        self.tabBarItem.image = [UIImage imageNamed:@"rss_story_grey.png"]; 
+        
+        m_rateValue = -1;
+        m_searchMode = SearchByTitle;
     }
     
     return self;
@@ -41,10 +45,11 @@
 
 - (void)dealloc
 {
+    [self releaseRateButtons];
     [m_rssFeedModel release];
     [m_searchBar release];
     [m_rssFeedTableView release];
-    [searchModeButton release];
+    [m_searchModeButton release];
     [super dealloc];
 }
 
@@ -244,16 +249,20 @@
 
 - (void)didRateButtonClicked:(NSObject *)object
 {
-    NSIndexPath *selectedIndexPath = [m_rssFeedTableView indexPathForSelectedRow];    
-    NSIndexPath *indexPath = [m_rssFeedTableView indexPathForCell:(UITableViewCell *)object];
-    
-    if (indexPath != selectedIndexPath)
-        return;
-    
-    // Reset selection to avoid break draw rate buttons
-    [m_rssFeedTableView deselectRowAtIndexPath:selectedIndexPath animated:NO];
-    
-    [m_rssFeedTableView selectRowAtIndexPath:selectedIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+    if (m_searchMode != SearchByRate) {
+        NSIndexPath *selectedIndexPath = [m_rssFeedTableView indexPathForSelectedRow];    
+        NSIndexPath *indexPath = [m_rssFeedTableView indexPathForCell:(UITableViewCell *)object];
+        
+        if (indexPath != selectedIndexPath)
+            return;
+        
+        // Reset selection to avoid break draw rate buttons
+        [m_rssFeedTableView deselectRowAtIndexPath:selectedIndexPath animated:NO];
+        
+        [m_rssFeedTableView selectRowAtIndexPath:selectedIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+    } else {
+        [self refreshData];
+    }
 }
 
 - (IBAction)viewRssFeed:(id)sender 
@@ -335,17 +344,25 @@
     [rssFeedDetailViewController presentModallyOn:self];
 }
 
-- (IBAction)switchSearchMode:(id)sender {
-}
-
 - (void)refreshData
 {
-    NSString *searchText = m_searchBar.text;
-    if([searchText isEqualToString:@""] || (searchText == nil)){
-        [m_rssFeedModel copyDataFrom:m_readerModel.rssFeedModel];        
-    } else {    
-        // Filter course by title
-        RssFeedModel *rssFeedModel = [m_readerModel.rssFeedModel searchByTitle:searchText];
+    if (m_searchMode == SearchByTitle) {
+        NSString *searchText = m_searchBar.text;
+        if([searchText isEqualToString:@""] || (searchText == nil)){
+            [m_rssFeedModel copyDataFrom:m_readerModel.rssFeedModel];        
+        } else {    
+            // Filter course by title
+            RssFeedModel *rssFeedModel = [m_readerModel.rssFeedModel searchByTitle:searchText];
+            if (rssFeedModel == nil)
+                [m_rssFeedModel clear];
+            else {
+                [m_rssFeedModel copyDataFrom:rssFeedModel];
+                //[rssFeedModel release]; // Cause the crash
+            }
+        }
+    } else if (m_searchMode == SearchByRate) {
+        // Filter course by rate
+        RssFeedModel *rssFeedModel = [m_readerModel.rssFeedModel searchByRate:m_rateValue];
         if (rssFeedModel == nil)
             [m_rssFeedModel clear];
         else {
@@ -354,8 +371,8 @@
         }
     }
     
-    NSString *title = [NSString stringWithFormat:@"%@ (%d)", RssReaderTitle, [m_rssFeedModel count]];
-    self.title = title;
+    /*NSString *title = [NSString stringWithFormat:@"%@ (%d)", RssReaderTitle, [m_rssFeedModel count]];
+    self.title = title;*/
     
     [m_rssFeedTableView reloadData];
 }
@@ -425,7 +442,7 @@
     cell.titleLabel.text = rssFeed.title;
     //cell.indexLabel.text = [NSString stringWithFormat:@"%d", row+1];
     cell.categoryLabel.text = rssFeed.category; /*[NSString stringWithFormat:@"Category: %@", rssFeed.category];*/
-    cell.thumbnailImageView.image = [UIImage imageNamed:thumbnailFile];    
+    cell.thumbnailImageView.image = [UIImage imageNamed:thumbnailFile];  
     
     // Set data for cell
     cell.rssFeed = rssFeed;
@@ -581,4 +598,181 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     [searchBar resignFirstResponder];
 }
 
+- (void)releaseRateButtons
+{
+    if (m_rateButtons) {
+        for (int i = 0; i < [m_rateButtons count]; i++) {
+            id rateButton = [m_rateButtons objectAtIndex:i];
+            if (rateButton) {
+                [rateButton release];
+                rateButton = nil;
+            }
+        }        
+    }
+    
+    [m_rateButtons removeAllObjects];
+    [m_rateButtons release];
+}
+
+- (void)createRateButtons
+{
+    [self releaseRateButtons];
+    
+    m_rateButtons = [[NSMutableArray alloc] init];
+    
+    CGRect baseBound = [m_searchModeButton bounds];
+    CGRect leftBound = [m_searchModeButton convertRect:baseBound toView:self.view];
+    
+    double x = leftBound.origin.x + leftBound.size.width + 15;
+    double y = leftBound.origin.y;
+    
+    // Create a new dynamic buttons
+    for (int i = 0; i < 5; i++) {
+        CGRect frame = CGRectMake(x, y, 40, 40);
+        RateButton *rateButton = [[RateButton buttonWithType:UIButtonTypeCustom] retain];
+        rateButton.frame = frame;
+        //[rateButton setTitle:(NSString *)@"Rate" forState:(UIControlState)UIControlStateNormal];
+        [rateButton addTarget:self action:@selector(rateButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [rateButton setRateSize:Size48];
+        [rateButton setState:UnRating];
+        
+        rateButton.data = i;
+        
+        [self.view addSubview:rateButton];
+        [m_rateButtons addObject:rateButton];
+        
+        x += 45;
+    }
+}
+
+- (void)setRateValue:(int)rateValue
+{
+    int rateButtonCount = [m_rateButtons count];
+    
+    if (rateValue < 0 || rateValue >= rateButtonCount) {
+        RateButton *rateButton = nil;
+        for (int i = 0; i < rateButtonCount; i++) {
+            rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
+            if (!rateButton)
+                continue;
+            [rateButton setState:UnRating];
+        }
+        
+        return;
+    }
+    
+    if (m_rateValue == rateValue && m_rateValue == 0) {
+        RateButton *rateButton = (RateButton *)[m_rateButtons objectAtIndex:0];
+        if (!rateButton)
+            return;
+        RateState rateState = [rateButton rateState];
+        if (rateState == Rating) {
+            // Rating = 0
+            m_rateValue = -1;
+            
+            for (int i = 0; i < rateButtonCount; i++) {
+                rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
+                if (!rateButton)
+                    continue;
+                [rateButton setState:UnRating];
+            }
+            
+            return;
+        }        
+    }
+    
+    if (m_rateValue == rateValue && m_rateValue == rateButtonCount-1) {
+        RateButton *rateButton = (RateButton *)[m_rateButtons objectAtIndex:(rateButtonCount-1)];
+        if (!rateButton)
+            return;
+        RateState rateState = [rateButton rateState];
+        if (rateState == Rating) {
+            // Rating = 0
+            m_rateValue = -1;
+            
+            for (int i = 0; i < rateButtonCount; i++) {
+                rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
+                if (!rateButton)
+                    continue;
+                [rateButton setState:UnRating];
+            }
+            
+            return;
+        }        
+    }
+    
+    if (m_rateValue == rateValue)
+        return;
+    
+    int i = 0;
+    RateButton *rateButton = nil;
+    for (i = 0; i <= rateValue; i++) {
+        rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
+        if (!rateButton)
+            continue;
+        [rateButton setState:Rating];
+    }
+    
+    for (i = rateValue+1; i < rateButtonCount; i++) {
+        rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
+        if (!rateButton)
+            continue;
+        [rateButton setState:UnRating];
+    }
+    
+    m_rateValue = rateValue;
+}
+
+- (void)rateButtonClicked:(id)sender
+{
+    if (!sender || ![sender isKindOfClass:[RateButton class]])
+        return;
+    
+    int rateValue = ((RateButton *)sender).data;
+    [self setRateValue:rateValue];
+    
+    // Refresh data
+    [self refreshData];
+    
+    NSLog(@"new button clicked!!! %d", rateValue);
+}
+
+- (void)showRateButtons:(BOOL)show
+{
+    int rateButtonCount = [m_rateButtons count];
+    
+    RateButton *rateButton = nil;
+    for (int i = 0; i < rateButtonCount; i++) {
+        rateButton = (RateButton *)[m_rateButtons objectAtIndex:i];
+        if (!rateButton)
+            continue;
+        [rateButton setHidden:!show];
+    }        
+}
+
+- (IBAction)switchSearchMode:(id)sender 
+{
+    if (m_searchMode == SearchByTitle) {
+        // Dismiss keyboard
+        [m_searchBar resignFirstResponder];
+        // Change search mode to Rate
+        m_searchMode = SearchByRate;
+        if (!m_rateButtons) {
+            m_rateButtons = [[NSMutableArray alloc] init];
+            [self createRateButtons];
+        }
+        
+        [self showRateButtons:YES];
+        [m_searchBar setHidden:YES];
+    } else {
+        // Change search mode to Title
+        m_searchMode = SearchByTitle;
+        if (m_rateButtons) {
+            [self showRateButtons:NO];
+        }
+        [m_searchBar setHidden:NO];
+    }
+    
+    [self refreshData];
+}
 @end

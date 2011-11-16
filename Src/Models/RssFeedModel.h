@@ -25,6 +25,7 @@
 - (BOOL)copyDataFrom:(RssFeedModel *)other;
 
 - (RssFeedModel *)searchByTitle:(NSString *)searchText;
+- (RssFeedModel *)searchByRate:(int)rate;
 
 - (void)clear;
 

@@ -12,9 +12,9 @@
 #import "RssFeedModel.h"
 
 typedef enum {
-    Title       = 0,
-    Rate        = 1, 
-    Category    = 2
+    SearchByTitle       = 0,
+    SearchByRate        = 1, 
+    SearchByCategory    = 2
 } SearchMode; 
 
 @interface RssFeedViewController : SdtViewController {
@@ -27,7 +27,7 @@ typedef enum {
     NSMutableArray  *m_rateButtons;
     
     int             m_rateValue;
-    UIButton *searchModeButton;
+    UIButton        *m_searchModeButton;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *rssFeedTableView;

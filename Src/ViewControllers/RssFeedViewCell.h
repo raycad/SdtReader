@@ -35,6 +35,8 @@
 - (void)setRateValue:(int)rateValue;
 - (void)createRateButtons;
 - (void)releaseRateButtons;
+
+- (void)updateData;
 @end
 
 @protocol RssFeedViewCellDelegate <NSObject>

@@ -120,6 +120,23 @@
     return [rssFeedModel autorelease];
 }
 
+- (RssFeedModel *)searchByRate:(int)rate
+{
+    RssFeedModel *rssFeedModel = [[RssFeedModel alloc] init];
+    RssFeed *rssFeed = nil;
+    for (int i = 0; i < [self count]; i++) {
+        rssFeed = [self rssFeedAtIndex:i];
+        if (rate == rssFeed.rate) {
+            [rssFeedModel addRssFeed:rssFeed];
+        }  
+    }
+    
+    if ([rssFeedModel count] == 0)
+        return nil;
+    
+    return [rssFeedModel autorelease];
+}
+
 - (void)clear
 {
     [m_rssFeedList removeAllObjects];
