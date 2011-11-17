@@ -84,6 +84,13 @@
 
 - (RssCategory *)rssCategoryAtIndex:(int)index
 {
+    int counter = [m_rssCategoryList count];
+    if (index < 0)
+        return nil;
+    
+    if (index >= counter)
+        return nil;
+    
     return [m_rssCategoryList objectAtIndex:index];
 }
 

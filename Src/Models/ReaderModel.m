@@ -58,15 +58,117 @@ static ReaderModel *_instance = nil;
     [super dealloc];
 }
 
-- (void)setDefaultRssFeeds
+- (void)setDefaultRssCategories
 {
     NSString    *title;
-    NSString    *link;
-    NSString    *website;
     NSString    *description;   
-    NSString    *category;
-    RssFeedPK   *rssFeedPK;
-    RssFeed     *rssFeed;
+    RssCategoryPK   *rssCategoryPK;
+    RssCategory     *rssCategory;
+    
+    title = [NSString stringWithFormat:@"Politics"];
+    rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
+    rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
+    description = @"";
+    rssCategory.title = title;
+    rssCategory.description = description;
+    if ([self addRssCategory:rssCategory]) {
+        NSLog(@"Added rss category sucessfully");
+    }
+    [title release];
+    [description release];
+    [rssCategoryPK release];
+    [rssCategory release];  
+    
+    title = [NSString stringWithFormat:@"Technology"];
+    rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
+    rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
+    description = @"";
+    rssCategory.title = title;
+    rssCategory.description = description;
+    if ([self addRssCategory:rssCategory]) {
+        NSLog(@"Added rss category sucessfully");
+    }
+    [title release];
+    [description release];
+    [rssCategoryPK release];
+    [rssCategory release];
+    
+    title = [NSString stringWithFormat:@"Education"];
+    rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
+    rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
+    description = @"";
+    rssCategory.title = title;
+    rssCategory.description = description;
+    if ([self addRssCategory:rssCategory]) {
+        NSLog(@"Added rss category sucessfully");
+    }
+    [title release];
+    [description release];
+    [rssCategoryPK release];
+    [rssCategory release];
+    
+    title = [NSString stringWithFormat:@"Music"];
+    rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
+    rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
+    description = @"";
+    rssCategory.title = title;
+    rssCategory.description = description;
+    if ([self addRssCategory:rssCategory]) {
+        NSLog(@"Added rss category sucessfully");
+    }
+    [title release];
+    [description release];
+    [rssCategoryPK release];
+    [rssCategory release];
+    
+    title = [NSString stringWithFormat:@"Games"];
+    rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
+    rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
+    description = @"";
+    rssCategory.title = title;
+    rssCategory.description = description;
+    if ([self addRssCategory:rssCategory]) {
+        NSLog(@"Added rss category sucessfully");
+    }
+    [title release];
+    [description release];
+    [rssCategoryPK release];
+    [rssCategory release];
+    
+    title = [NSString stringWithFormat:@"Sport"];
+    rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
+    rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
+    description = @"";
+    rssCategory.title = title;
+    rssCategory.description = description;
+    if ([self addRssCategory:rssCategory]) {
+        NSLog(@"Added rss category sucessfully");
+    }
+    [title release];
+    [description release];
+    [rssCategoryPK release];
+    [rssCategory release];
+}
+
+- (void)loadRssCategoriesFromDB
+{
+    if (m_rssCategoryModel)
+        [m_rssCategoryModel clear];
+    else 
+        m_rssCategoryModel = [[RssCategoryModel alloc] init];
+    
+    // test
+    [self setDefaultRssCategories];
+}
+
+- (void)setDefaultRssFeeds
+{
+    NSString        *title;
+    NSString        *link;
+    NSString        *website;
+    NSString        *description;   
+    RssFeedPK       *rssFeedPK;
+    RssFeed         *rssFeed;
     
     title = [NSString stringWithFormat:@"CNN - Top Stories (gg)"];
     rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
@@ -74,12 +176,11 @@ static ReaderModel *_instance = nil;
     link = @"http://rss.cnn.com/rss/cnn_topstories.rss";
     website = @"cnn.com";
     description = @"CNN";
-    category = @"Entertainment";
     rssFeed.title = title;
     rssFeed.link = link;
     rssFeed.website = website;
     rssFeed.description = description;
-    rssFeed.category = category;
+    rssFeed.category = [m_rssCategoryModel rssCategoryAtIndex:0];
     rssFeed.rate = 4;
     if ([self addRssFeed:rssFeed]) {
         NSLog(@"Added rss feed sucessfully");
@@ -88,7 +189,6 @@ static ReaderModel *_instance = nil;
     [link release];
     [website release];
     [description release];
-    [category release];
     [rssFeedPK release];
     [rssFeed release];  
     
@@ -98,12 +198,11 @@ static ReaderModel *_instance = nil;
     link = @"http://feeds2.feedburner.com/TheMdnShow";
     website = @"msdn.com";
     description = @"MSDN";
-    category = @"Education";
     rssFeed.title = title;
     rssFeed.link = link;
     rssFeed.website = website;
     rssFeed.description = description;
-    rssFeed.category = category;
+    rssFeed.category = [m_rssCategoryModel rssCategoryAtIndex:1];
     rssFeed.rate = 0;
     if ([self addRssFeed:rssFeed]) {
         NSLog(@"Added rss feed sucessfully");
@@ -112,7 +211,6 @@ static ReaderModel *_instance = nil;
     [link release];
     [website release];
     [description release];
-    [category release];
     [rssFeedPK release];
     [rssFeed release];http:
     
@@ -122,12 +220,11 @@ static ReaderModel *_instance = nil;
     link = @"http://feeds.bbci.co.uk/news/rss.xml";
     website = @"bbc.com";
     description = @"BBC";
-    category = @"Entertainment";
     rssFeed.title = title;
     rssFeed.link = link;
     rssFeed.website = website;
     rssFeed.description = description;
-    rssFeed.category = category;
+    rssFeed.category = [m_rssCategoryModel rssCategoryAtIndex:2];
     rssFeed.rate = 2;
     if ([self addRssFeed:rssFeed]) {
         NSLog(@"Added rss feed sucessfully");
@@ -136,7 +233,6 @@ static ReaderModel *_instance = nil;
     [link release];
     [website release];
     [description release];
-    [category release];
     [rssFeedPK release];
     [rssFeed release]; 
     
@@ -146,12 +242,11 @@ static ReaderModel *_instance = nil;
     link = @"http://newsrss.bbc.co.uk/rss/sportonline_world_edition/front_page/rss.xml";
     website = @"bbc.com";
     description = @"BBC";
-    category = @"Travel";
     rssFeed.title = title;
     rssFeed.link = link;
     rssFeed.website = website;
     rssFeed.description = description;
-    rssFeed.category = category;
+    rssFeed.category = [m_rssCategoryModel rssCategoryAtIndex:3];
     rssFeed.rate = -1;
     if ([self addRssFeed:rssFeed]) {
         NSLog(@"Added rss feed sucessfully");
@@ -160,7 +255,6 @@ static ReaderModel *_instance = nil;
     [link release];
     [website release];
     [description release];
-    [category release];
     [rssFeedPK release];
     [rssFeed release];        
     
@@ -170,12 +264,11 @@ static ReaderModel *_instance = nil;
     link = @"http://feeds.bbci.co.uk/news/education/rss.xml";
     website = @"bbc.com";
     description = @"BBC";
-    category = @"Education";
     rssFeed.title = title;
     rssFeed.link = link;
     rssFeed.website = website;
     rssFeed.description = description;
-    rssFeed.category = category;
+    rssFeed.category = [m_rssCategoryModel rssCategoryAtIndex:4];
     rssFeed.rate = 2;
     if ([self addRssFeed:rssFeed]) {
         NSLog(@"Added rss feed sucessfully");
@@ -184,7 +277,6 @@ static ReaderModel *_instance = nil;
     [link release];
     [website release];
     [description release];
-    [category release];
     [rssFeedPK release];
     [rssFeed release]; 
     
@@ -194,12 +286,11 @@ static ReaderModel *_instance = nil;
     link = @"http://feeds.bbci.co.uk/news/politics/rss.xml";
     website = @"bbc.com";
     description = @"BBC";
-    category = @"Politics";
+    rssFeed.category = [m_rssCategoryModel rssCategoryAtIndex:5];
     rssFeed.title = title;
     rssFeed.link = link;
     rssFeed.website = website;
     rssFeed.description = description;
-    rssFeed.category = category;
     rssFeed.rate = 4;
     if ([self addRssFeed:rssFeed]) {
         NSLog(@"Added rss feed sucessfully");
@@ -208,7 +299,6 @@ static ReaderModel *_instance = nil;
     [link release];
     [website release];
     [description release];
-    [category release];
     [rssFeedPK release];
     [rssFeed release]; 
 }
@@ -222,22 +312,6 @@ static ReaderModel *_instance = nil;
     
     // test
     [self setDefaultRssFeeds];
-}
-
-- (void)setDefaultRssCategories
-{
-    
-}
-
-- (void)loadRssCategoriesFromDB
-{
-    if (m_rssCategoryModel)
-        [m_rssCategoryModel clear];
-    else 
-        m_rssCategoryModel = [[RssCategoryModel alloc] init];
-    
-    // test
-    [self setDefaultRssCategories];
 }
 
 - (BOOL)initialize

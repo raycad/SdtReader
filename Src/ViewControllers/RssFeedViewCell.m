@@ -253,7 +253,7 @@
     
     // Update data
     self.titleLabel.text = m_rssFeed.title;
-    self.categoryLabel.text = m_rssFeed.category; 
+    self.categoryLabel.text = m_rssFeed.category.title; 
 }
 
 - (void)dealloc

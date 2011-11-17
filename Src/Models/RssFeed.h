@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RssCategory.h"
 
 @interface RssFeedPK : NSObject {
     NSString *m_title;    
@@ -22,7 +23,7 @@
     NSString    *m_link;
     NSString    *m_website;
     NSString    *m_description;
-    NSString    *m_category;
+    RssCategory *m_category;
     int         m_rate; // From 0 to 4
     
     RssFeedPK   *m_rssFeedPK;
@@ -32,7 +33,7 @@
 @property (nonatomic, copy) NSString *link;
 @property (nonatomic, copy) NSString *website;
 @property (nonatomic, copy) NSString *description;
-@property (nonatomic, copy) NSString *category;
+@property (nonatomic, retain) RssCategory *category;
 @property int rate;
 
 - (id)initWithRssFeedPK:(RssFeedPK *)rssFeedPK;

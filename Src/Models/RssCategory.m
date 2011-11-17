@@ -49,8 +49,9 @@
 
 @implementation RssCategory
 
-@synthesize title       = m_title;
-@synthesize description = m_description;
+@synthesize title           = m_title;
+@synthesize description     = m_description;
+@synthesize rssFeedCount    = m_rssFeedCount;
 
 - (id)initWithRssCategoryPK:(RssCategoryPK *)rssCategoryPK
 {

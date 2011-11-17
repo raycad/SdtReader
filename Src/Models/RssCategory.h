@@ -18,15 +18,18 @@
 @end
 
 @interface RssCategory : NSObject {
-    NSString    *m_title;
-    NSString    *m_description;
+    NSString        *m_title;
+    NSString        *m_description;
 
     RssCategoryPK   *m_rssCategoryPK;
+    
+    int             m_rssFeedCount; // The number os feeds it has
 }
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *description;
 @property int rate;
+@property int rssFeedCount;
 
 - (id)initWithRssCategoryPK:(RssCategoryPK *)rssCategoryPK;
 - (RssCategoryPK *)rssCategoryPK;

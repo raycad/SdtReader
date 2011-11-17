@@ -122,12 +122,12 @@
     CGRect baseBound = [m_rateLabel bounds];
     CGRect leftBound = [m_rateLabel convertRect:baseBound toView:self.view];
     
-    double x = leftBound.origin.x + leftBound.size.width + 5;
-    double y = leftBound.origin.y - 12;
+    double x = leftBound.origin.x + leftBound.size.width + 19;
+    double y = leftBound.origin.y - 10;
     
     // Create a new dynamic buttons
     for (int i = 0; i < 5; i++) {
-        CGRect frame = CGRectMake(x, y, 48, 48);
+        CGRect frame = CGRectMake(x, y, 42, 42);
         RateButton *rateButton = [[RateButton buttonWithType:UIButtonTypeCustom] retain];
         rateButton.frame = frame;
         //[rateButton setTitle:(NSString *)@"Rate" forState:(UIControlState)UIControlStateNormal];
@@ -140,7 +140,7 @@
         [self.view addSubview:rateButton];
         [m_rateButtons addObject:rateButton];
         
-        x += 50;
+        x += 48;
     }
 }
 
