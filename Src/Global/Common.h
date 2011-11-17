@@ -12,3 +12,7 @@ extern const NSString *RssCategoryListViewControllerIdString;
 extern const NSString *RssFeedTitle;
 extern const NSString *RssCategoryTitle;
 extern const NSString *RssStoryTitle;
+
+// Icon strings
+extern const NSString *RssFeedTabBarIcon;
+extern const NSString *RssCategoryTabBarIcon;

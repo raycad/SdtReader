@@ -16,6 +16,8 @@
 		761334EF146CE9C700EFFF88 /* view.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 761334EC146CE9C700EFFF88 /* view.jpg */; };
 		761334F3146D00DB00EFFF88 /* RssStoryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 761334F1146D00DB00EFFF88 /* RssStoryListViewController.m */; };
 		761334F6146D011200EFFF88 /* RssStoryListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 761334F5146D011200EFFF88 /* RssStoryListViewController.xib */; };
+		7621AD721474E517004A55C1 /* category32.png in Resources */ = {isa = PBXBuildFile; fileRef = 7621AD701474E517004A55C1 /* category32.png */; };
+		7621AD751474EA0B004A55C1 /* back_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7621AD741474EA0B004A55C1 /* back_icon.png */; };
 		7681AFAC146FA95400BC179C /* RateButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7681AFAB146FA95400BC179C /* RateButton.m */; };
 		7681AFB6146FD58100BC179C /* star-black16.png in Resources */ = {isa = PBXBuildFile; fileRef = 7681AFB5146FD58100BC179C /* star-black16.png */; };
 		7681AFBA146FD63000BC179C /* star-green16.png in Resources */ = {isa = PBXBuildFile; fileRef = 7681AFB7146FD63000BC179C /* star-green16.png */; };
@@ -82,6 +84,8 @@
 		761334F0146D00DA00EFFF88 /* RssStoryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RssStoryListViewController.h; path = Src/ViewControllers/RssStoryListViewController.h; sourceTree = SOURCE_ROOT; };
 		761334F1146D00DB00EFFF88 /* RssStoryListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RssStoryListViewController.m; path = Src/ViewControllers/RssStoryListViewController.m; sourceTree = SOURCE_ROOT; };
 		761334F5146D011200EFFF88 /* RssStoryListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RssStoryListViewController.xib; path = XIBs/RssStoryListViewController.xib; sourceTree = SOURCE_ROOT; };
+		7621AD701474E517004A55C1 /* category32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = category32.png; path = Images/category32.png; sourceTree = SOURCE_ROOT; };
+		7621AD741474EA0B004A55C1 /* back_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = back_icon.png; path = Images/back_icon.png; sourceTree = SOURCE_ROOT; };
 		7681AFAA146FA95400BC179C /* RateButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RateButton.h; path = Src/Controls/RateButton.h; sourceTree = SOURCE_ROOT; };
 		7681AFAB146FA95400BC179C /* RateButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RateButton.m; path = Src/Controls/RateButton.m; sourceTree = SOURCE_ROOT; };
 		7681AFB5146FD58100BC179C /* star-black16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-black16.png"; path = "Images/star-black16.png"; sourceTree = SOURCE_ROOT; };
@@ -332,6 +336,8 @@
 		768510B2146ADCFE00072A6E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7621AD741474EA0B004A55C1 /* back_icon.png */,
+				7621AD701474E517004A55C1 /* category32.png */,
 				769169971473A6DF00043FA9 /* search.png */,
 				7691DFF01472BC6500592C43 /* star-gold24.png */,
 				7691DFF11472BC6500592C43 /* star-white24.png */,
@@ -451,6 +457,8 @@
 				7691E0101472BC6500592C43 /* star-white24.png in Resources */,
 				769169981473A6DF00043FA9 /* search.png in Resources */,
 				7689A8511474076A00499608 /* RssCategoryViewController.xib in Resources */,
+				7621AD721474E517004A55C1 /* category32.png in Resources */,
+				7621AD751474EA0B004A55C1 /* back_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

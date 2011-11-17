@@ -43,6 +43,9 @@
     [rssFeedViewController release];
     [rssFeedNavigationController release];
     
+    [rssCategoryViewController release];
+    [rssCategoryNavigationController release];
+    
     return YES;
 }
 

@@ -33,9 +33,8 @@
         m_readerModel = [ReaderModel instance];
         m_rssFeedModel = [[RssFeedModel alloc] init];     
         
-        // Set up our navigation bar.
-        self.title = RssFeedTitle;        
-        self.tabBarItem.image = [UIImage imageNamed:@"rss_story_grey.png"]; 
+        self.tabBarItem.title = RssFeedTitle;
+        self.tabBarItem.image = [UIImage imageNamed:RssFeedTabBarIcon];
         
         m_rateValue = -1;
         m_searchMode = SearchByTitle;
@@ -249,10 +248,10 @@
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addRssFeed)];
     }*/
     
-    UITabBarItem *tbi = [self tabBarItem];
-    //[tbi setTitle:@"abc"];
-    UIImage *i = [UIImage imageNamed:@"star-white32.png"];
-    [tbi setImage:i];
+    /*UITabBarItem *tbi = [self tabBarItem];
+    [tbi setTitle:RssFeedTitle];
+    UIImage *i = [UIImage imageNamed:RssFeedTabBarIcon];
+    [tbi setImage:i];*/
     
     [self loadDataFromDB];
     

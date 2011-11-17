@@ -28,11 +28,10 @@
     if (self != nil) {       
         // Initialize the reader model
         m_readerModel = [ReaderModel instance];
-        m_rssFeedModel = [[RssFeedModel alloc] init];     
-        
-        // Set up our navigation bar.
-        self.title = RssCategoryTitle;        
-        self.tabBarItem.image = [UIImage imageNamed:@"rss_grey.png"]; 
+        m_rssFeedModel = [[RssFeedModel alloc] init];             
+                
+        self.tabBarItem.title = RssCategoryTitle;
+        self.tabBarItem.image = [UIImage imageNamed:RssCategoryTabBarIcon];
         
         m_rateValue = -1;
         m_searchMode = SearchByTitle;
@@ -237,10 +236,10 @@
     // Hide the navigation bar
     [self hideNavigationBar];
     
-    UITabBarItem *tbi = [self tabBarItem];
-    //[tbi setTitle:@"abc"];
-    UIImage *i = [UIImage imageNamed:@"star-white32.png"];
-    [tbi setImage:i];
+    /*UITabBarItem *tbi = [self tabBarItem];
+    [tbi setTitle:RssCategoryTitle];
+    UIImage *i = [UIImage imageNamed:RssCategoryTabBarIcon];
+    [tbi setImage:i];*/
     
     [self loadDataFromDB];
     
