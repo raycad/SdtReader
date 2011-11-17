@@ -299,4 +299,10 @@
     [searchBar resignFirstResponder];
 }
 
+- (IBAction)backButtonClicked:(id)sender 
+{
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 @end

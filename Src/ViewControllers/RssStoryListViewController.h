@@ -29,6 +29,8 @@
 @property (nonatomic, retain) RssFeed *rssFeed;
 @property (nonatomic, retain) IBOutlet UISearchBar *searchBar;
 
+- (IBAction)backButtonClicked:(id)sender;
+
 - (void)parseRssFeed;
 - (void)refreshData;
 @end

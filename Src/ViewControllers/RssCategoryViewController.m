@@ -11,6 +11,7 @@
 #import "RssCategoryViewCell.h"
 #import "RssStoryListViewController.h"
 #import "RateButton.h"
+#import "RssFeedViewController.h"
 
 @implementation RssCategoryViewController
 @synthesize searchBar = m_searchBar;
@@ -46,7 +47,6 @@
 
 - (void)dealloc
 {
-    [self releaseRateButtons];
     [m_rssCategoryModel release];
     [m_searchBar release];
     [m_rssCategoryTableView release];
@@ -316,9 +316,11 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     UITableViewCell *cell = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     assert(cell != nil);
     
-    if (m_selectionMode == ViewSelectionMode)
-        [self viewRssCategoryAtCell:cell];
-    else if (m_selectionMode == EditSelectionMode)
+    if (m_selectionMode == ViewSelectionMode) {
+        RssFeedViewController *rssFeedViewController = [[[RssFeedViewController alloc] init] autorelease];
+        assert(rssFeedViewController != nil);        
+        [rssFeedViewController presentModallyOn:self];
+    } else if (m_selectionMode == EditSelectionMode)
         [self editRssCategoryAtCell:cell];    
 }
 
