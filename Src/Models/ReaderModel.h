@@ -21,4 +21,15 @@
 @property (nonatomic, retain) RssFeedModel      *rssFeedModel;
 @property (nonatomic, retain) RssCategoryModel  *rssCategoryModel;
 
+- (BOOL)initialize;
+
+- (BOOL)addRssFeed:(RssFeed *)rssFeed;
+- (BOOL)removeRssFeedByPK:(RssFeedPK *)rssFeedPK;
+- (BOOL)removeRssFeedByIndex:(int)index;
+- (BOOL)removeRssFeed:(RssFeed *)rssFeed;
+
+- (BOOL)addRssCategory:(RssCategory *)rssCategory;
+- (BOOL)removeRssCategoryByPK:(RssCategoryPK *)rssCategoryPK;
+- (BOOL)removeRssCategoryByIndex:(int)index;
+- (BOOL)removeRssCategory:(RssCategory *)rssCategory;
 @end

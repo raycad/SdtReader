@@ -251,9 +251,7 @@
         rssFeed.website = website;
         rssFeed.rate = m_rateValue;
         
-        RssFeedModel *rssFeedModel = readerModel.rssFeedModel;
-        
-        if (![rssFeedModel addRssFeed:rssFeed]) {
+        if (![readerModel addRssFeed:rssFeed]) {
             // Open a alert with an OK button
             NSString *alertString = [NSString stringWithFormat:@"This RSS Feed is existing"];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:alertString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
