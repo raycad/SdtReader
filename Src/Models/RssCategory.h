@@ -23,13 +23,13 @@
 
     RssCategoryPK   *m_rssCategoryPK;
     
-    int             m_rssFeedCount; // The number os feeds it has
+    int             m_totalRssFeeds; // The number os feeds it has
 }
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *description;
 @property int rate;
-@property int rssFeedCount;
+@property int totalRssFeeds;
 
 - (id)initWithRssCategoryPK:(RssCategoryPK *)rssCategoryPK;
 - (RssCategoryPK *)rssCategoryPK;

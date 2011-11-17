@@ -22,23 +22,23 @@
 {
     if ((self = [super initWithFrame:frame reuseIdentifier:reuseIdentifier])) {
         // Initialization code
-        m_titleLabel = [[UILabel alloc]init];
+        m_titleLabel = [[UILabel alloc] init];
         m_titleLabel.textAlignment = UITextAlignmentLeft;
         m_titleLabel.font = [UIFont fontWithMarkupDescription:@"font-family: Arial; font-size: 17px; font-weight: bold;"];
         
-        /*m_indexLabel = [[UILabel alloc]init];
+        /*m_indexLabel = [[UILabel alloc] init];
         m_indexLabel.textAlignment = UITextAlignmentRight;
         //m_indexLabel.font = [UIFont systemFontOfSize:10];
         m_indexLabel.font = [UIFont fontWithMarkupDescription:@"font-family: Arial; font-size: 15px; font-weight: bold; font-style : italic;"];
         m_indexLabel.textColor = [UIColor blueColor];*/
         
-        m_categoryLabel = [[UILabel alloc]init];
+        m_categoryLabel = [[UILabel alloc] init];
         m_categoryLabel.textAlignment = UITextAlignmentLeft;
         //m_indexLabel.font = [UIFont systemFontOfSize:10];
         m_categoryLabel.font = [UIFont fontWithMarkupDescription:@"font-family: Arial; font-size: 13px; font-weight: bold; font-style : italic;"];
         m_categoryLabel.textColor = [UIColor blueColor];
         
-        m_thumbnailImageView = [[UIImageView alloc]init];
+        m_thumbnailImageView = [[UIImageView alloc] init];
         
         [self.contentView addSubview:m_titleLabel];
         //[self.contentView addSubview:m_indexLabel];

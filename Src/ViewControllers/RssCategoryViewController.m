@@ -8,9 +8,8 @@
 
 #import "RssCategoryViewController.h"
 #import "Common.h"
-#import "RssFeedViewCell.h"
+#import "RssCategoryViewCell.h"
 #import "RssStoryListViewController.h"
-#import "RssFeedDetailViewController.h"
 #import "RateButton.h"
 
 @implementation RssCategoryViewController
@@ -19,7 +18,7 @@
 @synthesize editSelectionModeButton = m_editSelectionModeButton;
 @synthesize viewSelectionModeLabel = m_viewSelectionModeLabel;
 @synthesize editSelectionModeLabel = m_editSelectionModeLabel;
-@synthesize rssFeedTableView = m_rssFeedTableView;
+@synthesize rssCategoryTableView = m_rssCategoryTableView;
 
 - (id)init
 {
@@ -28,12 +27,11 @@
     if (self != nil) {       
         // Initialize the reader model
         m_readerModel = [ReaderModel instance];
-        m_rssFeedModel = [[RssFeedModel alloc] init];             
+        m_rssCategoryModel = [[RssCategoryModel alloc] init];             
                 
         self.tabBarItem.title = RssCategoryTitle;
         self.tabBarItem.image = [UIImage imageNamed:RssCategoryTabBarIcon];
         
-        m_rateValue = -1;
         m_searchMode = SearchByTitle;
         m_selectionMode = ViewSelectionMode;
     }
@@ -43,15 +41,15 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 67;
+    return 55;
 }
 
 - (void)dealloc
 {
     [self releaseRateButtons];
-    [m_rssFeedModel release];
+    [m_rssCategoryModel release];
     [m_searchBar release];
-    [m_rssFeedTableView release];
+    [m_rssCategoryTableView release];
     [m_viewSelectionModeButton release];
     [m_editSelectionModeButton release];
     [m_viewSelectionModeLabel release];
@@ -59,168 +57,8 @@
     [super dealloc];
 }
 
-- (void)loadDataFromDB
+- (void)loadData
 {
-    if (m_readerModel.rssFeedModel == nil) {
-        RssFeedModel *rssFeedModel = [[RssFeedModel alloc] init];
-        
-        NSString    *title;
-        NSString    *link;
-        NSString    *website;
-        NSString    *description;   
-        NSString    *category;
-        RssFeedPK   *rssFeedPK;
-        RssFeed     *rssFeed;
-        
-        title = [NSString stringWithFormat:@"CNN - Top Stories (gg)"];
-        rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
-        rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
-        link = @"http://rss.cnn.com/rss/cnn_topstories.rss";
-        website = @"cnn.com";
-        description = @"CNN";
-        category = @"Entertainment";
-        rssFeed.title = title;
-        rssFeed.link = link;
-        rssFeed.website = website;
-        rssFeed.description = description;
-        rssFeed.category = category;
-        rssFeed.rate = 4;
-        if ([rssFeedModel addRssFeed:rssFeed]) {
-            NSLog(@"Added rss feed sucessfully");
-        }
-        [title release];
-        [link release];
-        [website release];
-        [description release];
-        [category release];
-        [rssFeedPK release];
-        [rssFeed release];  
-        
-        title = [NSString stringWithFormat:@"MSDN"];
-        rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
-        rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
-        link = @"http://feeds2.feedburner.com/TheMdnShow";
-        website = @"msdn.com";
-        description = @"MSDN";
-        category = @"Education";
-        rssFeed.title = title;
-        rssFeed.link = link;
-        rssFeed.website = website;
-        rssFeed.description = description;
-        rssFeed.category = category;
-        rssFeed.rate = 0;
-        if ([rssFeedModel addRssFeed:rssFeed]) {
-            NSLog(@"Added rss feed sucessfully");
-        }
-        [title release];
-        [link release];
-        [website release];
-        [description release];
-        [category release];
-        [rssFeedPK release];
-        [rssFeed release];http:
-        
-        title = [NSString stringWithFormat:@"BBC Top Stories"];
-        rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
-        rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
-        link = @"http://feeds.bbci.co.uk/news/rss.xml";
-        website = @"bbc.com";
-        description = @"BBC";
-        category = @"Entertainment";
-        rssFeed.title = title;
-        rssFeed.link = link;
-        rssFeed.website = website;
-        rssFeed.description = description;
-        rssFeed.category = category;
-        rssFeed.rate = 2;
-        if ([rssFeedModel addRssFeed:rssFeed]) {
-            NSLog(@"Added rss feed sucessfully");
-        }
-        [title release];
-        [link release];
-        [website release];
-        [description release];
-        [category release];
-        [rssFeedPK release];
-        [rssFeed release]; 
-        
-        title = [NSString stringWithFormat:@"BBC"];
-        rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
-        rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
-        link = @"http://newsrss.bbc.co.uk/rss/sportonline_world_edition/front_page/rss.xml";
-        website = @"bbc.com";
-        description = @"BBC";
-        category = @"Travel";
-        rssFeed.title = title;
-        rssFeed.link = link;
-        rssFeed.website = website;
-        rssFeed.description = description;
-        rssFeed.category = category;
-        rssFeed.rate = -1;
-        if ([rssFeedModel addRssFeed:rssFeed]) {
-            NSLog(@"Added rss feed sucessfully");
-        }
-        [title release];
-        [link release];
-        [website release];
-        [description release];
-        [category release];
-        [rssFeedPK release];
-        [rssFeed release];        
-                
-        title = [NSString stringWithFormat:@"BBC Education"];
-        rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
-        rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
-        link = @"http://feeds.bbci.co.uk/news/education/rss.xml";
-        website = @"bbc.com";
-        description = @"BBC";
-        category = @"Education";
-        rssFeed.title = title;
-        rssFeed.link = link;
-        rssFeed.website = website;
-        rssFeed.description = description;
-        rssFeed.category = category;
-        rssFeed.rate = 2;
-        if ([rssFeedModel addRssFeed:rssFeed]) {
-            NSLog(@"Added rss feed sucessfully");
-        }
-        [title release];
-        [link release];
-        [website release];
-        [description release];
-        [category release];
-        [rssFeedPK release];
-        [rssFeed release]; 
-        
-        title = [NSString stringWithFormat:@"BBC Politics"];
-        rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
-        rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
-        link = @"http://feeds.bbci.co.uk/news/politics/rss.xml";
-        website = @"bbc.com";
-        description = @"BBC";
-        category = @"Politics";
-        rssFeed.title = title;
-        rssFeed.link = link;
-        rssFeed.website = website;
-        rssFeed.description = description;
-        rssFeed.category = category;
-        rssFeed.rate = 4;
-        if ([rssFeedModel addRssFeed:rssFeed]) {
-            NSLog(@"Added rss feed sucessfully");
-        }
-        [title release];
-        [link release];
-        [website release];
-        [description release];
-        [category release];
-        [rssFeedPK release];
-        [rssFeed release]; 
-        
-        // Set data model
-        m_readerModel.rssFeedModel = rssFeedModel;
-        
-        [rssFeedModel release];
-    }
 }
 
 #pragma mark - View lifecycle
@@ -230,8 +68,8 @@
     [super viewDidLoad];
     
     // Configure the table view    
-    m_rssFeedTableView.editing = YES;
-    m_rssFeedTableView.allowsSelectionDuringEditing = YES;
+    m_rssCategoryTableView.editing = YES;
+    m_rssCategoryTableView.allowsSelectionDuringEditing = YES;
     
     // Hide the navigation bar
     [self hideNavigationBar];
@@ -241,7 +79,7 @@
     UIImage *i = [UIImage imageNamed:RssCategoryTabBarIcon];
     [tbi setImage:i];*/
     
-    [self loadDataFromDB];
+    [self loadData];
     
     // Reload data
     [self refreshData];
@@ -252,35 +90,35 @@
 - (void)didRateButtonClicked:(NSObject *)object
 {
     if (m_searchMode != SearchByRate) {
-        NSIndexPath *selectedIndexPath = [m_rssFeedTableView indexPathForSelectedRow];    
-        NSIndexPath *indexPath = [m_rssFeedTableView indexPathForCell:(UITableViewCell *)object];
+        NSIndexPath *selectedIndexPath = [m_rssCategoryTableView indexPathForSelectedRow];    
+        NSIndexPath *indexPath = [m_rssCategoryTableView indexPathForCell:(UITableViewCell *)object];
         
         if (indexPath != selectedIndexPath)
             return;
         
         // Reset selection to avoid break draw rate buttons
-        [m_rssFeedTableView deselectRowAtIndexPath:selectedIndexPath animated:NO];
+        [m_rssCategoryTableView deselectRowAtIndexPath:selectedIndexPath animated:NO];
         
-        [m_rssFeedTableView selectRowAtIndexPath:selectedIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+        [m_rssCategoryTableView selectRowAtIndexPath:selectedIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
     } else {
         [self refreshData];
     }
 }
 
-- (void)viewRssFeedAtCell:(UITableViewCell *)cell
+- (void)viewRssCategoryAtCell:(UITableViewCell *)cell
 {
-    if (!cell)
+    /*if (!cell)
         return;
     
-    RssFeedViewCell *rssFeedViewCell = (RssFeedViewCell *)cell;
-    if (!rssFeedViewCell)
+    RssCategoryViewCell *rssCategoryViewCell = (RssCategoryViewCell *)cell;
+    if (!rssCategoryViewCell)
         return;
     
-    RssFeed *rssFeed = rssFeedViewCell.rssFeed;
-    if (!rssFeed)
+    RssCategory *rssCategory = rssCategoryViewCell.rssCategory;
+    if (!rssCategory)
         return;
     
-    NSString *rssLink = rssFeed.link;
+    NSString *rssLink = rssCategory.link;
     if (!rssLink || [rssLink isEqualToString:@""]) {
         // Open a alert with an OK button
         NSString *alertString = [NSString stringWithFormat:@"RSS link is empty. Please enter the link"];
@@ -292,58 +130,58 @@
     
     RssStoryListViewController *rssStoryListViewController = [[[RssStoryListViewController alloc] init] autorelease];
     
-    rssStoryListViewController.rssFeed = rssFeed;
+    rssStoryListViewController.rssCategory = rssCategory;
     rssStoryListViewController.delegate = self;
     
     [[self navigationController] pushViewController:rssStoryListViewController animated:YES];
     //[self showNavigationBar];
     
     // Parse RSS Feeds
-    [rssStoryListViewController parseRssFeed];
+    [rssStoryListViewController parseRssCategory];*/
 }
 
-- (void)editRssFeedAtCell:(UITableViewCell *)cell
+- (void)editRssCategoryAtCell:(UITableViewCell *)cell
 {
-    if (!cell)
+    /*if (!cell)
         return;
     
-    RssFeedViewCell *rssFeedViewCell = (RssFeedViewCell *)cell;
-    if (!rssFeedViewCell)
+    RssCategoryViewCell *rssCategoryViewCell = (RssCategoryViewCell *)cell;
+    if (!rssCategoryViewCell)
         return;
     
-    RssFeed *rssFeed = rssFeedViewCell.rssFeed;
-    if (!rssFeed)
+    RssCategory *rssCategory = rssCategoryViewCell.rssCategory;
+    if (!rssCategory)
         return;    
     
-    RssFeedDetailViewController *rssFeedDetailViewController = [[[RssFeedDetailViewController alloc] init] autorelease];
-    assert(rssFeedDetailViewController != nil);        
-    rssFeedDetailViewController.delegate = self;  
-    rssFeedDetailViewController.rssFeed = rssFeed;
-    rssFeedDetailViewController.viewMode = UpdateMode;
-    [rssFeedDetailViewController presentModallyOn:self];
+    RssCategoryDetailViewController *rssCategoryDetailViewController = [[[RssCategoryDetailViewController alloc] init] autorelease];
+    assert(rssCategoryDetailViewController != nil);        
+    rssCategoryDetailViewController.delegate = self;  
+    rssCategoryDetailViewController.rssCategory = rssCategory;
+    rssCategoryDetailViewController.viewMode = UpdateMode;
+    [rssCategoryDetailViewController presentModallyOn:self];*/
 }
 
-- (IBAction)viewRssFeed:(id)sender 
+- (IBAction)viewRssCategory:(id)sender 
 {
     m_selectionMode = EditSelectionMode;
     
     [self updateSelectionMode];
 }
 
-- (IBAction)editRssFeed:(id)sender
+- (IBAction)editRssCategory:(id)sender
 {
     m_selectionMode = ViewSelectionMode;
     
     [self updateSelectionMode];
 }
 
-- (IBAction)addRssFeed:(id)sender 
+- (IBAction)addRssCategory:(id)sender 
 {
-    RssFeedDetailViewController *rssFeedDetailViewController = [[[RssFeedDetailViewController alloc] init] autorelease];
-    assert(rssFeedDetailViewController != nil);        
-    rssFeedDetailViewController.delegate = self;  
-    rssFeedDetailViewController.viewMode = CreateNewMode;
-    [rssFeedDetailViewController presentModallyOn:self];
+    /*RssCategoryDetailViewController *rssCategoryDetailViewController = [[[RssCategoryDetailViewController alloc] init] autorelease];
+    assert(rssCategoryDetailViewController != nil);        
+    rssCategoryDetailViewController.delegate = self;  
+    rssCategoryDetailViewController.viewMode = CreateNewMode;
+    [rssCategoryDetailViewController presentModallyOn:self];*/
 }
 
 - (void)refreshData
@@ -351,38 +189,26 @@
     if (m_searchMode == SearchByTitle) {
         NSString *searchText = m_searchBar.text;
         if([searchText isEqualToString:@""] || (searchText == nil)){
-            [m_rssFeedModel copyDataFrom:m_readerModel.rssFeedModel];        
+            [m_rssCategoryModel copyDataFrom:m_readerModel.rssCategoryModel];        
         } else {    
             // Filter course by title
-            RssFeedModel *rssFeedModel = [m_readerModel.rssFeedModel searchByTitle:searchText];
-            if (rssFeedModel == nil)
-                [m_rssFeedModel clear];
+            RssCategoryModel *rssCategoryModel = [m_readerModel.rssCategoryModel searchByTitle:searchText];
+            if (rssCategoryModel == nil)
+                [m_rssCategoryModel clear];
             else {
-                [m_rssFeedModel copyDataFrom:rssFeedModel];
-                //[rssFeedModel release]; // Cause the crash
+                [m_rssCategoryModel copyDataFrom:rssCategoryModel];
+                //[rssCategoryModel release]; // Cause the crash
             }
         }
-    } else if (m_searchMode == SearchByRate) {
-        // Filter course by rate
-        RssFeedModel *rssFeedModel = [m_readerModel.rssFeedModel searchByRate:m_rateValue];
-        if (rssFeedModel == nil)
-            [m_rssFeedModel clear];
-        else {
-            [m_rssFeedModel copyDataFrom:rssFeedModel];
-            //[rssFeedModel release]; // Cause the crash
-        }
-    }
+    } 
     
-    /*NSString *title = [NSString stringWithFormat:@"%@ (%d)", RssReaderTitle, [m_rssFeedModel count]];
-    self.title = title;*/
-    
-    [m_rssFeedTableView reloadData];
+    [m_rssCategoryTableView reloadData];
 }
 
 - (void)viewDidUnload
 {
     m_searchBar = nil;
-    m_rssFeedTableView = nil;
+    m_rssCategoryTableView = nil;
     
     [self setViewSelectionModeButton:nil];
     [self setEditSelectionModeButton:nil];
@@ -404,26 +230,26 @@
 {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return [m_rssFeedModel count];
+    return [m_rssCategoryModel count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     
-    RssFeedViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    RssCategoryViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-		cell = [[[RssFeedViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+		cell = [[[RssCategoryViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
         // Show row with the AccessoryDisclosureIndicator
 		cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
 	}
     
     int row = indexPath.row;
-    //int total = [m_rssFeedModel count]; 
+    //int total = [m_rssCategoryModel count]; 
     
     // Set up the cell...
-    RssFeed *rssFeed = [m_rssFeedModel rssFeedAtIndex:row];
-    if (!rssFeed)
+    RssCategory *rssCategory = [m_rssCategoryModel rssCategoryAtIndex:row];
+    if (!rssCategory)
         return nil;
 	
     // Reset it to default values.
@@ -433,20 +259,8 @@
     // Set cell selection is blue style
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    cell.delegate = self;
-    
-    NSString *thumbnailFile;
-    if (row%3 == 0)
-        thumbnailFile = @"rss_yellow.png";
-    else if (row%3 == 1)
-        thumbnailFile = @"rss_green.png";
-    else
-        thumbnailFile = @"rss_blue.png";
-    
-    cell.thumbnailImageView.image = [UIImage imageNamed:thumbnailFile]; 
-    
     // Set data for cell
-    cell.rssFeed = rssFeed;
+    cell.rssCategory = rssCategory;
     
     // Update data
     [cell updateData];    
@@ -459,7 +273,7 @@
 forRowAtIndexPath: (NSIndexPath*)indexPath
 {
     cell.backgroundColor = indexPath.row % 2 
-    ? [UIColor colorWithRed: 0.3 green: 0.3 blue: 0.3 alpha: 0.3] 
+    ? [UIColor colorWithRed: 0.3 green: 0.3 blue: 0.3 alpha: 0.25] 
     : [UIColor whiteColor];
     for (UIView* view in cell.contentView.subviews) {
         view.backgroundColor = [UIColor clearColor];
@@ -480,16 +294,15 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
 //tutorial for now we are hard coding the text to be added.   
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    RssFeedModel *rssFeedModel = m_readerModel.rssFeedModel;
     // If row is deleted, remove it from the list.
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        RssFeedViewCell *cell = (RssFeedViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+        RssCategoryViewCell *cell = (RssCategoryViewCell *)[tableView cellForRowAtIndexPath:indexPath];
         assert(cell != nil);
-        RssFeed *rssFeed = cell.rssFeed;
-        assert(rssFeed != nil);
-        if ([rssFeedModel removeRssFeed:rssFeed]) {
+        RssCategory *rssCategory = cell.rssCategory;
+        assert(rssCategory != nil);
+        if ([m_readerModel removeRssCategory:rssCategory]) {
             [self refreshData];
-            //[m_rssFeedTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            //[m_rssCategoryTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
             
             NSLog(@"Remove course button was clicked");
         }
@@ -504,9 +317,9 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     assert(cell != nil);
     
     if (m_selectionMode == ViewSelectionMode)
-        [self viewRssFeedAtCell:cell];
+        [self viewRssCategoryAtCell:cell];
     else if (m_selectionMode == EditSelectionMode)
-        [self editRssFeedAtCell:cell];    
+        [self editRssCategoryAtCell:cell];    
 }
 
 - (void)presentCourseViewModally
@@ -520,7 +333,7 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
 #pragma unused(object)
     assert(object != nil);
     
-    /*RssFeedDetailViewController *rssFeedDetailViewController = (RssFeedDetailViewController *)object;*/      
+    /*RssCategoryDetailViewController *rssCategoryDetailViewController = (RssCategoryDetailViewController *)object;*/      
     [self dismissModalViewControllerAnimated:YES];
     
     [self refreshData];

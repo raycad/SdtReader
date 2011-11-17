@@ -51,7 +51,7 @@
 
 @synthesize title           = m_title;
 @synthesize description     = m_description;
-@synthesize rssFeedCount    = m_rssFeedCount;
+@synthesize totalRssFeeds   = m_totalRssFeeds;
 
 - (id)initWithRssCategoryPK:(RssCategoryPK *)rssCategoryPK
 {
@@ -59,6 +59,8 @@
         // Initialize parameters
         [m_rssCategoryPK autorelease]; // Use this to avoid releasing itself
         m_rssCategoryPK = [rssCategoryPK retain];
+        
+        m_totalRssFeeds = 0;
     }
     
     return self;

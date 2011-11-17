@@ -22,4 +22,6 @@
 @property (nonatomic, retain) UILabel     *indexLabel;
 @property (nonatomic, retain) UIImageView *thumbnailImageView;
 @property (nonatomic, retain) RssStory     *rssStory;
+
+- (void)updateData;
 @end

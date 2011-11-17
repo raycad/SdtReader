@@ -9,22 +9,21 @@
 #import <UIKit/UIKit.h>
 #import "SdtSearchViewController.h"
 #import "ReaderModel.h"
-#import "RssFeedModel.h"
+#import "RssCategoryModel.h"
 
 @interface RssCategoryViewController : SdtSearchViewController {
-    RssFeedModel    *m_rssFeedModel;
-    ReaderModel     *m_readerModel;
-    UISearchBar     *m_searchBar;
-    UITableView     *m_rssFeedTableView;
+    RssCategoryModel    *m_rssCategoryModel;
+    ReaderModel         *m_readerModel;
+    UISearchBar         *m_searchBar;
+    UITableView         *m_rssCategoryTableView;
     
-    int             m_rateValue;
-    UIButton        *m_viewSelectionModeButton;
-    UIButton        *m_editSelectionModeButton;
-    UIButton        *m_viewSelectionModeLabel;
-    UIButton        *m_editSelectionModeLabel;
+    UIButton            *m_viewSelectionModeButton;
+    UIButton            *m_editSelectionModeButton;
+    UIButton            *m_viewSelectionModeLabel;
+    UIButton            *m_editSelectionModeLabel;
 }
 
-@property (nonatomic, retain) IBOutlet UITableView *rssFeedTableView;
+@property (nonatomic, retain) IBOutlet UITableView *rssCategoryTableView;
 
 @property (nonatomic, retain) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, retain) IBOutlet UIButton *viewSelectionModeButton;
@@ -35,16 +34,10 @@
 
 - (IBAction)viewRssFeed:(id)sender;
 - (IBAction)editRssFeed:(id)sender;
-- (IBAction)addRssFeed:(id)sender;
+- (IBAction)addRssCategory:(id)sender;
 
 - (void) refreshData;
 
-- (void)viewRssFeedAtCell:(UITableViewCell *)cell;
-- (void)editRssFeedAtCell:(UITableViewCell *)cell;
-
-- (void)setRateValue:(int)rateValue;
-- (void)createRateButtons;
-- (void)releaseRateButtons;
-
-- (void)updateSelectionMode;
+- (void)viewRssCategoryAtCell:(UITableViewCell *)cell;
+- (void)editRssCategoryAtCell:(UITableViewCell *)cell;
 @end

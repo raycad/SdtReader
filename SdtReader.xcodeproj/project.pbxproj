@@ -18,6 +18,7 @@
 		761334F6146D011200EFFF88 /* RssStoryListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 761334F5146D011200EFFF88 /* RssStoryListViewController.xib */; };
 		7621AD721474E517004A55C1 /* category32.png in Resources */ = {isa = PBXBuildFile; fileRef = 7621AD701474E517004A55C1 /* category32.png */; };
 		7621AD751474EA0B004A55C1 /* back_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7621AD741474EA0B004A55C1 /* back_icon.png */; };
+		7621AD781475016D004A55C1 /* RssCategoryViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7621AD771475016D004A55C1 /* RssCategoryViewCell.m */; };
 		7681AFAC146FA95400BC179C /* RateButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7681AFAB146FA95400BC179C /* RateButton.m */; };
 		7681AFB6146FD58100BC179C /* star-black16.png in Resources */ = {isa = PBXBuildFile; fileRef = 7681AFB5146FD58100BC179C /* star-black16.png */; };
 		7681AFBA146FD63000BC179C /* star-green16.png in Resources */ = {isa = PBXBuildFile; fileRef = 7681AFB7146FD63000BC179C /* star-green16.png */; };
@@ -86,6 +87,8 @@
 		761334F5146D011200EFFF88 /* RssStoryListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RssStoryListViewController.xib; path = XIBs/RssStoryListViewController.xib; sourceTree = SOURCE_ROOT; };
 		7621AD701474E517004A55C1 /* category32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = category32.png; path = Images/category32.png; sourceTree = SOURCE_ROOT; };
 		7621AD741474EA0B004A55C1 /* back_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = back_icon.png; path = Images/back_icon.png; sourceTree = SOURCE_ROOT; };
+		7621AD761475016D004A55C1 /* RssCategoryViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RssCategoryViewCell.h; path = Src/ViewControllers/RssCategoryViewCell.h; sourceTree = SOURCE_ROOT; };
+		7621AD771475016D004A55C1 /* RssCategoryViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RssCategoryViewCell.m; path = Src/ViewControllers/RssCategoryViewCell.m; sourceTree = SOURCE_ROOT; };
 		7681AFAA146FA95400BC179C /* RateButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RateButton.h; path = Src/Controls/RateButton.h; sourceTree = SOURCE_ROOT; };
 		7681AFAB146FA95400BC179C /* RateButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RateButton.m; path = Src/Controls/RateButton.m; sourceTree = SOURCE_ROOT; };
 		7681AFB5146FD58100BC179C /* star-black16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-black16.png"; path = "Images/star-black16.png"; sourceTree = SOURCE_ROOT; };
@@ -252,6 +255,8 @@
 		7681FD6B146A931A00CF8C27 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7621AD761475016D004A55C1 /* RssCategoryViewCell.h */,
+				7621AD771475016D004A55C1 /* RssCategoryViewCell.m */,
 				7689A85214740D1300499608 /* SdtSearchViewController.h */,
 				7689A85314740D1300499608 /* SdtSearchViewController.m */,
 				7689A84D1474075F00499608 /* RssCategoryViewController.h */,
@@ -492,6 +497,7 @@
 				7689A84B1474074E00499608 /* RssCategoryModel.m in Sources */,
 				7689A84F1474075F00499608 /* RssCategoryViewController.m in Sources */,
 				7689A85414740D1300499608 /* SdtSearchViewController.m in Sources */,
+				7621AD781475016D004A55C1 /* RssCategoryViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

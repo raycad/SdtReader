@@ -149,8 +149,7 @@
         
     // Set data for cell
     cell.rssStory = rssStory;
-    cell.titleLabel.text = rssStory.title;
-    cell.descriptionLabel.text = rssStory.description;
+    [cell updateData];
     cell.thumbnailImageView.image = [UIImage imageNamed:thumbnailFile];
     
     return cell;

@@ -324,22 +324,66 @@ static ReaderModel *_instance = nil;
 
 - (BOOL)addRssFeed:(RssFeed *)rssFeed
 {
-    return [m_rssFeedModel addRssFeed:rssFeed];
+    BOOL result = [m_rssFeedModel addRssFeed:rssFeed];
+    if (result) {
+        // Increase total rss feeds
+        RssCategory *rssCategory = rssFeed.category;
+        if (rssCategory)
+            rssCategory.totalRssFeeds += 1;
+    }
+    
+    return result;
 }
 
 - (BOOL)removeRssFeedByPK:(RssFeedPK *)rssFeedPK
 {
-    return [m_rssFeedModel removeRssFeedByPK:rssFeedPK];
+    RssFeed *rssFeed = [m_rssFeedModel getRssFeedByPK:rssFeedPK];
+    if (!rssFeed)
+        return NO;
+    RssCategory *rssCategory = rssFeed.category;
+    
+    BOOL result = [m_rssFeedModel removeRssFeedByPK:rssFeedPK];
+    
+    if (result && rssCategory) {
+        // Decrease total rss feeds
+        rssCategory.totalRssFeeds -= 1;
+    }
+    
+    return result;
 }
 
 - (BOOL)removeRssFeedByIndex:(int)index
 {
-    return [m_rssFeedModel removeRssFeedByIndex:index];
+    RssFeed *rssFeed = [m_rssFeedModel rssFeedAtIndex:index];
+    if (!rssFeed)
+        return NO;
+    
+    RssCategory *rssCategory = rssFeed.category;
+    BOOL result = [m_rssFeedModel removeRssFeedByIndex:index];
+    
+    if (result && rssCategory) {
+        // Decrease total rss feeds
+        rssCategory.totalRssFeeds -= 1;
+    }
+    
+    return result;
 }
 
 - (BOOL)removeRssFeed:(RssFeed *)rssFeed
 {
-    return [m_rssFeedModel removeRssFeed:rssFeed];
+    if (!rssFeed)
+        return NO;
+    
+    RssCategory *rssCategory = rssFeed.category;
+    
+    BOOL result = [m_rssFeedModel removeRssFeed:rssFeed];
+    
+    if (result && rssCategory) {
+        // Decrease total rss feeds
+        rssCategory.totalRssFeeds -= 1;
+    }
+    
+    return result;
 }
 
 - (BOOL)addRssCategory:(RssCategory *)rssCategory
