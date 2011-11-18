@@ -58,6 +58,9 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Show Story" style:UIBarButtonItemStylePlain target:self action:@selector(showStory)];*/
     
+    // Hide the navigation bar
+    [self hideNavigationBar];
+    
     m_activityIndicatorView = [[UIActivityIndicatorView alloc]     initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     m_activityIndicatorView.center = self.view.center;
     [self.view addSubview: m_activityIndicatorView];

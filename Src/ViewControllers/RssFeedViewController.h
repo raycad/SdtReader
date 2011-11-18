@@ -27,6 +27,9 @@
     UIButton        *m_editSelectionModeLabel;
     UILabel         *m_rateLabel;
     UIButton        *m_searchModeLabel;
+    UIButton        *m_backButton;
+    UIButton        *m_addNewRssFeedButton;
+    UIButton        *m_addNewRssFeedLabel;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *rssFeedTableView;
@@ -40,11 +43,15 @@
 @property (nonatomic, retain) IBOutlet UIButton *editSelectionModeButton;
 @property (nonatomic, retain) IBOutlet UIButton *viewSelectionModeLabel;
 @property (nonatomic, retain) IBOutlet UIButton *editSelectionModeLabel;
+@property (nonatomic, retain) IBOutlet UIButton *backButton;
+@property (nonatomic, retain) IBOutlet UIButton *addNewRssFeedButton;
+@property (nonatomic, retain) IBOutlet UIButton *addNewRssFeedLabel;
 
 - (IBAction)viewRssFeed:(id)sender;
 - (IBAction)editRssFeed:(id)sender;
 - (IBAction)addRssFeed:(id)sender;
 - (IBAction)switchSearchMode:(id)sender;
+- (IBAction)backButtonClicked:(id)sender;
 
 - (void) refreshData;
 

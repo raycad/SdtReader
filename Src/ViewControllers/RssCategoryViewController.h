@@ -32,8 +32,8 @@
 @property (nonatomic, retain) IBOutlet UIButton *viewSelectionModeLabel;
 @property (nonatomic, retain) IBOutlet UIButton *editSelectionModeLabel;
 
-- (IBAction)viewRssFeed:(id)sender;
-- (IBAction)editRssFeed:(id)sender;
+- (IBAction)viewRssCategory:(id)sender;
+- (IBAction)editRssCategory:(id)sender;
 - (IBAction)addRssCategory:(id)sender;
 
 - (void) refreshData;

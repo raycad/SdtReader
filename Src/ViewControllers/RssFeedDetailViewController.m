@@ -20,6 +20,7 @@
 @synthesize websiteTextField        = m_websiteTextField;
 @synthesize descriptionTextView     = m_descriptionTextView;
 @synthesize rateLabel               = m_rateLabel;
+@synthesize rssCategoryPickerView   = m_rssCategoryPickerView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,6 +41,7 @@
     [m_websiteTextField release];
     [m_descriptionTextView release];
     [m_rateLabel release];
+    [m_rssCategoryPickerView release];
     [super dealloc];
 }
 
@@ -86,6 +88,7 @@
     [self setWebsiteTextField:nil];
     [self setDescriptionTextView:nil];
     [self setRateLabel:nil];
+    [self setRssCategoryPickerView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -122,7 +125,7 @@
     CGRect baseBound = [m_rateLabel bounds];
     CGRect leftBound = [m_rateLabel convertRect:baseBound toView:self.view];
     
-    double x = leftBound.origin.x + leftBound.size.width + 19;
+    double x = leftBound.origin.x + leftBound.size.width + 16;
     double y = leftBound.origin.y - 10;
     
     // Create a new dynamic buttons
@@ -140,7 +143,7 @@
         [self.view addSubview:rateButton];
         [m_rateButtons addObject:rateButton];
         
-        x += 48;
+        x += 50;
     }
 }
 

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ModelessViewController.h"
+#import "SdtViewController.h"
 
 typedef enum {
     SearchByTitle       = 0,
@@ -20,7 +20,7 @@ typedef enum {
     EditSelectionMode   = 1, 
 } SelectionMode;
 
-@interface SdtSearchViewController : ModelessViewController {   
+@interface SdtSearchViewController : SdtViewController {   
     SearchMode      m_searchMode;
     SelectionMode   m_selectionMode;
 }

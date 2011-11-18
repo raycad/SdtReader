@@ -14,6 +14,8 @@
 #import "RateButton.h"
 
 @implementation RssFeedViewController
+@synthesize addNewRssFeedButton = m_addNewRssFeedButton;
+@synthesize addNewRssFeedLabel = m_addNewRssFeedLabel;
 @synthesize searchBar = m_searchBar;
 @synthesize searchModeButton = m_searchModeButton;
 @synthesize viewSelectionModeButton = m_viewSelectionModeButton;
@@ -22,6 +24,7 @@
 @synthesize editSelectionModeButton = m_editSelectionModeButton;
 @synthesize viewSelectionModeLabel = m_viewSelectionModeLabel;
 @synthesize editSelectionModeLabel = m_editSelectionModeLabel;
+@synthesize backButton = m_backButton;
 @synthesize rssFeedTableView = m_rssFeedTableView;
 
 - (id)init
@@ -62,6 +65,9 @@
     [m_editSelectionModeLabel release];
     [m_rateLabel release];
     [m_searchModeLabel release];
+    [m_backButton release];
+    [m_addNewRssFeedButton release];
+    [m_addNewRssFeedLabel release];
     [super dealloc];
 }
 
@@ -93,6 +99,16 @@
     [tbi setTitle:RssFeedTitle];
     UIImage *i = [UIImage imageNamed:RssFeedTabBarIcon];
     [tbi setImage:i];*/
+    
+    if (m_viewMode == SelectMode) {
+        [m_backButton setHidden:NO];
+        [m_addNewRssFeedLabel setHidden:YES];
+        [m_addNewRssFeedButton setHidden:YES];
+    } else {
+        [m_backButton setHidden:YES];
+        [m_addNewRssFeedLabel setHidden:NO];
+        [m_addNewRssFeedButton setHidden:NO];
+    }
     
     [self loadData];
     
@@ -149,7 +165,9 @@
     rssStoryListViewController.rssFeed = rssFeed;
     rssStoryListViewController.delegate = self;
     
-    [[self navigationController] pushViewController:rssStoryListViewController animated:YES];
+    //[[self navigationController] pushViewController:rssStoryListViewController animated:YES];
+    
+    [rssStoryListViewController presentModallyOn:self];    
     //[self showNavigationBar];
     
     // Parse RSS Feeds
@@ -245,6 +263,9 @@
     [self setEditSelectionModeLabel:nil];
     [self setRateLabel:nil];
     [self setSearchModeLabel:nil];
+    [self setBackButton:nil];
+    [self setAddNewRssFeedButton:nil];
+    [self setAddNewRssFeedLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -626,5 +647,10 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     
     [self updateSearchMode];
     [self refreshData];
+}
+
+- (IBAction)backButtonClicked:(id)sender 
+{
+    [self dismissModalViewControllerAnimated:YES];
 }
 @end

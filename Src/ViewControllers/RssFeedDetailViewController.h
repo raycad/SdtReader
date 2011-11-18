@@ -21,6 +21,7 @@
     UILabel         *m_rateLabel;
     
     int             m_rateValue;
+    UIPickerView    *m_rssCategoryPickerView;
 }
 
 @property (nonatomic, retain) RssFeed *rssFeed;
@@ -30,6 +31,7 @@
 @property (nonatomic, retain) IBOutlet UITextField *websiteTextField;
 @property (nonatomic, retain) IBOutlet UITextView *descriptionTextView;
 @property (nonatomic, retain) IBOutlet UILabel *rateLabel;
+@property (nonatomic, retain) IBOutlet UIPickerView *rssCategoryPickerView;
 
 - (void)setRateValue:(int)rateValue;
 - (void)createRateButtons;

@@ -161,29 +161,6 @@
     [rssCategoryDetailViewController presentModallyOn:self];*/
 }
 
-- (IBAction)viewRssCategory:(id)sender 
-{
-    m_selectionMode = EditSelectionMode;
-    
-    [self updateSelectionMode];
-}
-
-- (IBAction)editRssCategory:(id)sender
-{
-    m_selectionMode = ViewSelectionMode;
-    
-    [self updateSelectionMode];
-}
-
-- (IBAction)addRssCategory:(id)sender 
-{
-    /*RssCategoryDetailViewController *rssCategoryDetailViewController = [[[RssCategoryDetailViewController alloc] init] autorelease];
-    assert(rssCategoryDetailViewController != nil);        
-    rssCategoryDetailViewController.delegate = self;  
-    rssCategoryDetailViewController.viewMode = CreateNewMode;
-    [rssCategoryDetailViewController presentModallyOn:self];*/
-}
-
 - (void)refreshData
 {
     if (m_searchMode == SearchByTitle) {
@@ -318,16 +295,11 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     
     if (m_selectionMode == ViewSelectionMode) {
         RssFeedViewController *rssFeedViewController = [[[RssFeedViewController alloc] init] autorelease];
+        rssFeedViewController.viewMode = SelectMode;
         assert(rssFeedViewController != nil);        
         [rssFeedViewController presentModallyOn:self];
     } else if (m_selectionMode == EditSelectionMode)
         [self editRssCategoryAtCell:cell];    
-}
-
-- (void)presentCourseViewModally
-// Displays the options view so that the user can add a new number to the 
-// list of numbers to add up.
-{
 }
 
 - (void)didSave:(NSObject *)object
@@ -414,5 +386,28 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
         [m_editSelectionModeLabel setHidden:NO];
         [m_editSelectionModeButton setHidden:NO];
     }
+}
+
+- (IBAction)viewRssCategory:(id)sender 
+{
+    m_selectionMode = EditSelectionMode;
+    
+    [self updateSelectionMode];
+}
+
+- (IBAction)editRssCategory:(id)sender
+{
+    m_selectionMode = ViewSelectionMode;
+    
+    [self updateSelectionMode];
+}
+
+- (IBAction)addRssCategory:(id)sender 
+{
+    /*RssCategoryDetailViewController *rssCategoryDetailViewController = [[[RssCategoryDetailViewController alloc] init] autorelease];
+     assert(rssCategoryDetailViewController != nil);        
+     rssCategoryDetailViewController.delegate = self;  
+     rssCategoryDetailViewController.viewMode = CreateNewMode;
+     [rssCategoryDetailViewController presentModallyOn:self];*/
 }
 @end
