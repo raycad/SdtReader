@@ -12,6 +12,7 @@
 #import "RssFeedModel.h"
 
 @interface RssFeedViewController : SdtSearchViewController {
+    RssFeedModel    *m_filterRssFeedModel;
     RssFeedModel    *m_rssFeedModel;
     ReaderModel     *m_readerModel;
     UISearchBar     *m_searchBar;
@@ -30,7 +31,11 @@
     UIButton        *m_backButton;
     UIButton        *m_addNewRssFeedButton;
     UIButton        *m_addNewRssFeedLabel;
+    
+    RssCategory     *m_rssCategory;
 }
+
+@property (nonatomic, retain) RssCategory *rssCategory;
 
 @property (nonatomic, retain) IBOutlet UITableView *rssFeedTableView;
 

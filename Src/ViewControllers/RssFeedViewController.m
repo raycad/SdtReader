@@ -26,6 +26,7 @@
 @synthesize editSelectionModeLabel = m_editSelectionModeLabel;
 @synthesize backButton = m_backButton;
 @synthesize rssFeedTableView = m_rssFeedTableView;
+@synthesize rssCategory = m_rssCategory;
 
 - (id)init
 {
@@ -34,7 +35,8 @@
     if (self != nil) {       
         // Initialize the reader model
         m_readerModel = [ReaderModel instance];
-        m_rssFeedModel = [[RssFeedModel alloc] init];     
+        m_filterRssFeedModel = [[RssFeedModel alloc] init];    
+        m_rssFeedModel = [[RssFeedModel alloc] init]; 
         
         self.tabBarItem.title = RssFeedTitle;
         self.tabBarItem.image = [UIImage imageNamed:RssFeedTabBarIcon];
@@ -55,7 +57,9 @@
 - (void)dealloc
 {
     [self releaseRateButtons];
+    [m_rssCategory release];
     [m_rssFeedModel release];
+    [m_filterRssFeedModel release];
     [m_searchBar release];
     [m_rssFeedTableView release];
     [m_searchModeButton release];
@@ -73,7 +77,19 @@
 
 - (void)loadData
 {
-    [m_rssFeedModel copyDataFrom:m_readerModel.rssFeedModel]; 
+    RssFeedModel *rssFeedModel = nil;
+    if (m_rssCategory) {
+         rssFeedModel = [m_readerModel.rssFeedModel searchByCategory:m_rssCategory];
+    } else
+        rssFeedModel = m_readerModel.rssFeedModel;
+    
+    if (rssFeedModel)
+        [m_rssFeedModel copyDataFrom:rssFeedModel]; 
+    
+    [m_filterRssFeedModel copyDataFrom:m_rssFeedModel];
+    
+    // Reload date view
+    [self refreshData];
 }
 
 #pragma mark - View lifecycle
@@ -100,7 +116,7 @@
     UIImage *i = [UIImage imageNamed:RssFeedTabBarIcon];
     [tbi setImage:i];*/
     
-    if (m_viewMode == SelectMode) {
+    if (m_rssCategory) {
         [m_backButton setHidden:NO];
         [m_addNewRssFeedLabel setHidden:YES];
         [m_addNewRssFeedButton setHidden:YES];
@@ -111,9 +127,6 @@
     }
     
     [self loadData];
-    
-    // Reload data
-    [self refreshData];
     
     [self updateSearchMode];
     [self updateSelectionMode];
@@ -223,29 +236,29 @@
     if (m_searchMode == SearchByTitle) {
         NSString *searchText = m_searchBar.text;
         if([searchText isEqualToString:@""] || (searchText == nil)){
-            [m_rssFeedModel copyDataFrom:m_readerModel.rssFeedModel];        
+            [m_filterRssFeedModel copyDataFrom:m_rssFeedModel];        
         } else {    
             // Filter course by title
-            RssFeedModel *rssFeedModel = [m_readerModel.rssFeedModel searchByTitle:searchText];
+            RssFeedModel *rssFeedModel = [m_rssFeedModel searchByTitle:searchText];
             if (rssFeedModel == nil)
-                [m_rssFeedModel clear];
+                [m_filterRssFeedModel clear];
             else {
-                [m_rssFeedModel copyDataFrom:rssFeedModel];
-                //[rssFeedModel release]; // Cause the crash
+                [m_filterRssFeedModel copyDataFrom:rssFeedModel];
+                //[m_filterRssFeedModel release]; // Cause the crash
             }
         }
     } else if (m_searchMode == SearchByRate) {
         // Filter course by rate
-        RssFeedModel *rssFeedModel = [m_readerModel.rssFeedModel searchByRate:m_rateValue];
+        RssFeedModel *rssFeedModel = [m_rssFeedModel searchByRate:m_rateValue];
         if (rssFeedModel == nil)
-            [m_rssFeedModel clear];
+            [m_filterRssFeedModel clear];
         else {
-            [m_rssFeedModel copyDataFrom:rssFeedModel];
+            [m_filterRssFeedModel copyDataFrom:rssFeedModel];
             //[rssFeedModel release]; // Cause the crash
         }
     }
     
-    /*NSString *title = [NSString stringWithFormat:@"%@ (%d)", RssReaderTitle, [m_rssFeedModel count]];
+    /*NSString *title = [NSString stringWithFormat:@"%@ (%d)", RssReaderTitle, [m_filterRssFeedModel count]];
     self.title = title;*/
     
     [m_rssFeedTableView reloadData];
@@ -282,7 +295,7 @@
 {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return [m_rssFeedModel count];
+    return [m_filterRssFeedModel count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -297,10 +310,10 @@
 	}
     
     int row = indexPath.row;
-    //int total = [m_rssFeedModel count]; 
+    //int total = [m_filterRssFeedModel count]; 
     
     // Set up the cell...
-    RssFeed *rssFeed = [m_rssFeedModel rssFeedAtIndex:row];
+    RssFeed *rssFeed = [m_filterRssFeedModel rssFeedAtIndex:row];
     if (!rssFeed)
         return nil;
 	

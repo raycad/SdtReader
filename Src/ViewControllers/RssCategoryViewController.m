@@ -292,10 +292,13 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
 {
     UITableViewCell *cell = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     assert(cell != nil);
+    RssCategoryViewCell *rssCategoryViewCell = (RssCategoryViewCell *)cell;
+    if (!rssCategoryViewCell)
+        return;
     
     if (m_selectionMode == ViewSelectionMode) {
         RssFeedViewController *rssFeedViewController = [[[RssFeedViewController alloc] init] autorelease];
-        rssFeedViewController.viewMode = SelectMode;
+        rssFeedViewController.rssCategory = rssCategoryViewCell.rssCategory;
         assert(rssFeedViewController != nil);        
         [rssFeedViewController presentModallyOn:self];
     } else if (m_selectionMode == EditSelectionMode)
