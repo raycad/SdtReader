@@ -9,9 +9,9 @@
 #import "RssCategoryViewController.h"
 #import "Common.h"
 #import "RssCategoryViewCell.h"
-#import "RssStoryListViewController.h"
 #import "RateButton.h"
 #import "RssFeedViewController.h"
+#import "RssCategoryDetailViewController.h"
 
 @implementation RssCategoryViewController
 @synthesize searchBar = m_searchBar;
@@ -103,62 +103,6 @@
     } else {
         [self refreshData];
     }
-}
-
-- (void)viewRssCategoryAtCell:(UITableViewCell *)cell
-{
-    /*if (!cell)
-        return;
-    
-    RssCategoryViewCell *rssCategoryViewCell = (RssCategoryViewCell *)cell;
-    if (!rssCategoryViewCell)
-        return;
-    
-    RssCategory *rssCategory = rssCategoryViewCell.rssCategory;
-    if (!rssCategory)
-        return;
-    
-    NSString *rssLink = rssCategory.link;
-    if (!rssLink || [rssLink isEqualToString:@""]) {
-        // Open a alert with an OK button
-        NSString *alertString = [NSString stringWithFormat:@"RSS link is empty. Please enter the link"];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:alertString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-        [alert release];
-        return;
-    }
-    
-    RssStoryListViewController *rssStoryListViewController = [[[RssStoryListViewController alloc] init] autorelease];
-    
-    rssStoryListViewController.rssCategory = rssCategory;
-    rssStoryListViewController.delegate = self;
-    
-    [[self navigationController] pushViewController:rssStoryListViewController animated:YES];
-    //[self showNavigationBar];
-    
-    // Parse RSS Feeds
-    [rssStoryListViewController parseRssCategory];*/
-}
-
-- (void)editRssCategoryAtCell:(UITableViewCell *)cell
-{
-    /*if (!cell)
-        return;
-    
-    RssCategoryViewCell *rssCategoryViewCell = (RssCategoryViewCell *)cell;
-    if (!rssCategoryViewCell)
-        return;
-    
-    RssCategory *rssCategory = rssCategoryViewCell.rssCategory;
-    if (!rssCategory)
-        return;    
-    
-    RssCategoryDetailViewController *rssCategoryDetailViewController = [[[RssCategoryDetailViewController alloc] init] autorelease];
-    assert(rssCategoryDetailViewController != nil);        
-    rssCategoryDetailViewController.delegate = self;  
-    rssCategoryDetailViewController.rssCategory = rssCategory;
-    rssCategoryDetailViewController.viewMode = UpdateMode;
-    [rssCategoryDetailViewController presentModallyOn:self];*/
 }
 
 - (void)refreshData
@@ -292,16 +236,10 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
 {
     UITableViewCell *cell = (UITableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     assert(cell != nil);
-    RssCategoryViewCell *rssCategoryViewCell = (RssCategoryViewCell *)cell;
-    if (!rssCategoryViewCell)
-        return;
     
-    if (m_selectionMode == ViewSelectionMode) {
-        RssFeedViewController *rssFeedViewController = [[[RssFeedViewController alloc] init] autorelease];
-        rssFeedViewController.rssCategory = rssCategoryViewCell.rssCategory;
-        assert(rssFeedViewController != nil);        
-        [rssFeedViewController presentModallyOn:self];
-    } else if (m_selectionMode == EditSelectionMode)
+    if (m_selectionMode == ViewSelectionMode)
+        [self viewRssCategoryAtCell:cell];
+    else if (m_selectionMode == EditSelectionMode)
         [self editRssCategoryAtCell:cell];    
 }
 
@@ -407,10 +345,50 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
 
 - (IBAction)addRssCategory:(id)sender 
 {
-    /*RssCategoryDetailViewController *rssCategoryDetailViewController = [[[RssCategoryDetailViewController alloc] init] autorelease];
+    RssCategoryDetailViewController *rssCategoryDetailViewController = [[[RssCategoryDetailViewController alloc] init] autorelease];
      assert(rssCategoryDetailViewController != nil);        
      rssCategoryDetailViewController.delegate = self;  
      rssCategoryDetailViewController.viewMode = CreateNewMode;
-     [rssCategoryDetailViewController presentModallyOn:self];*/
+     [rssCategoryDetailViewController presentModallyOn:self];
+}
+
+- (void)viewRssCategoryAtCell:(UITableViewCell *)cell
+{
+    if (!cell)
+        return;
+    
+    RssCategoryViewCell *rssCategoryViewCell = (RssCategoryViewCell *)cell;
+    if (!rssCategoryViewCell)
+        return;
+    
+    RssCategory *rssCategory = rssCategoryViewCell.rssCategory;
+    if (!rssCategory)
+        return;   
+    
+    RssFeedViewController *rssFeedViewController = [[[RssFeedViewController alloc] init] autorelease];
+    rssFeedViewController.rssCategory = rssCategoryViewCell.rssCategory;
+    assert(rssFeedViewController != nil);        
+    [rssFeedViewController presentModallyOn:self];
+}
+
+- (void)editRssCategoryAtCell:(UITableViewCell *)cell
+{
+    if (!cell)
+        return;
+    
+    RssCategoryViewCell *rssCategoryViewCell = (RssCategoryViewCell *)cell;
+    if (!rssCategoryViewCell)
+        return;
+    
+    RssCategory *rssCategory = rssCategoryViewCell.rssCategory;
+    if (!rssCategory)
+        return;    
+    
+    RssCategoryDetailViewController *rssCategoryDetailViewController = [[[RssCategoryDetailViewController alloc] init] autorelease];
+    assert(rssCategoryDetailViewController != nil);        
+    rssCategoryDetailViewController.delegate = self;  
+    rssCategoryDetailViewController.rssCategory = rssCategory;
+    rssCategoryDetailViewController.viewMode = UpdateMode;
+    [rssCategoryDetailViewController presentModallyOn:self];
 }
 @end

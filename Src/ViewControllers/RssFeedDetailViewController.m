@@ -288,7 +288,7 @@
         m_rssFeed.website = website;
         m_rssFeed.rate = m_rateValue;
         
-        // Reset coursePK
+        // Reset RssFeedPK
         [m_rssFeed rssFeedPK].title = title;
     }
     

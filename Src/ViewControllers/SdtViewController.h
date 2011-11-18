@@ -17,7 +17,10 @@ typedef enum {
 } ViewMode; 
 
 @interface SdtViewController : ModelessViewController {   
-    ViewMode m_viewMode;
+    ViewMode    m_viewMode;
+    
+    UIButton    *m_saveButton;
+    UIButton    *m_cancelButton;
 }
 
 @property (nonatomic) ViewMode viewMode;
