@@ -50,7 +50,6 @@
 						<string key="NSFrame">{{0, 95}, {320, 365}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<object class="NSColor" key="IBUIBackgroundColor" id="432222201">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
@@ -81,7 +80,7 @@
 					<object class="IBUIButton" id="348335038">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{4.00001, 5}, {40, 40}}</string>
+						<string key="NSFrame">{{207, 5}, {40, 40}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="28908622"/>
@@ -111,7 +110,7 @@
 					<object class="IBUIButton" id="112160091">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{4, 5}, {40, 40}}</string>
+						<string key="NSFrame">{{207, 5}, {40, 40}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="12949762"/>
@@ -134,7 +133,7 @@
 					<object class="IBUIButton" id="1055005023">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{245, 5}, {40, 40}}</string>
+						<string key="NSFrame">{{3, 5}, {40, 40}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="593001509"/>
@@ -151,13 +150,13 @@
 						<reference key="IBUINormalTitleShadowColor" ref="962445641"/>
 						<object class="NSCustomResource" key="IBUINormalImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">rss_feed_add.png</string>
+							<string key="NSResourceName">category_add_icon.png</string>
 						</object>
 					</object>
 					<object class="IBUIButton" id="28908622">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{45, 5}, {70, 40}}</string>
+						<string key="NSFrame">{{248, 5}, {70, 40}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1055005023"/>
@@ -181,7 +180,7 @@
 					<object class="IBUIButton" id="12949762">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{42, 5}, {70, 40}}</string>
+						<string key="NSFrame">{{245, 5}, {70, 40}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="153624659"/>
@@ -201,7 +200,7 @@
 					<object class="IBUIButton" id="593001509">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{282, 5}, {35, 40}}</string>
+						<string key="NSFrame">{{40, 5}, {35, 40}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="316060853"/>
@@ -652,14 +651,14 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>category_add_icon.png</string>
 				<string>edit.jpg</string>
-				<string>rss_feed_add.png</string>
 				<string>view.jpg</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>{138, 139}</string>
 				<string>{48, 48}</string>
+				<string>{138, 139}</string>
 				<string>{204, 204}</string>
 			</object>
 		</object>

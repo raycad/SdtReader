@@ -75,7 +75,7 @@
     [super dealloc];
 }
 
-- (void)loadData
+- (void)refreshData
 {
     RssFeedModel *rssFeedModel = nil;
     if (m_rssCategory) {
@@ -83,13 +83,16 @@
     } else
         rssFeedModel = m_readerModel.rssFeedModel;
     
-    if (rssFeedModel)
+    if (rssFeedModel) {
         [m_rssFeedModel copyDataFrom:rssFeedModel]; 
-    
-    [m_filterRssFeedModel copyDataFrom:m_rssFeedModel];
+        [m_filterRssFeedModel copyDataFrom:m_rssFeedModel];
+    } else {
+        [m_rssFeedModel clear];
+        [m_filterRssFeedModel clear];
+    }    
     
     // Reload date view
-    [self refreshData];
+    [self refreshView];
 }
 
 #pragma mark - View lifecycle
@@ -126,7 +129,7 @@
         [m_addNewRssFeedButton setHidden:NO];
     }
     
-    [self loadData];
+    [self refreshData];
     
     [self updateSearchMode];
     [self updateSelectionMode];
@@ -146,7 +149,7 @@
         
         [m_rssFeedTableView selectRowAtIndexPath:selectedIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
     } else {
-        [self refreshData];
+        [self refreshView];
     }
 }
 
@@ -231,7 +234,7 @@
     [rssFeedDetailViewController presentModallyOn:self];
 }
 
-- (void)refreshData
+- (void)refreshView
 {
     if (m_searchMode == SearchByTitle) {
         NSString *searchText = m_searchBar.text;
@@ -465,7 +468,7 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     if (searchBar != m_searchBar)
         return;
     
-    [self refreshData];
+    [self refreshView];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
@@ -473,7 +476,7 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     [m_searchBar resignFirstResponder];
     m_searchBar.text = @"";
     
-    [self refreshData];
+    [self refreshView];
 }
 
 // called when Search (in our case “Done”) button pressed
@@ -589,7 +592,7 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     [self setRateValue:rateValue];
     
     // Refresh data
-    [self refreshData];
+    [self refreshView];
     
     NSLog(@"new button clicked!!! %d", rateValue);
 }
@@ -659,7 +662,7 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     }
     
     [self updateSearchMode];
-    [self refreshData];
+    [self refreshView];
 }
 
 - (IBAction)backButtonClicked:(id)sender 

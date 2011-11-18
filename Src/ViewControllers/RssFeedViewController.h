@@ -58,7 +58,8 @@
 - (IBAction)switchSearchMode:(id)sender;
 - (IBAction)backButtonClicked:(id)sender;
 
-- (void) refreshData;
+- (void)refreshView;
+- (void)refreshData;
 
 - (void)viewRssFeedAtCell:(UITableViewCell *)cell;
 - (void)editRssFeedAtCell:(UITableViewCell *)cell;
