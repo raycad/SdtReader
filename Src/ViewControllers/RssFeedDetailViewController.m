@@ -12,15 +12,24 @@
 #import "RssFeedModel.h"
 #import "ReaderModel.h"
 
-@implementation RssFeedDetailViewController
+@interface CategoryViewCell : UITableViewCell {
+    RssCategory    *m_rssCategory;
+}
+@property (nonatomic, retain) RssCategory     *rssCategory;
+@end
 
+@implementation CategoryViewCell
+@synthesize rssCategory = m_rssCategory;
+@end
+
+@implementation RssFeedDetailViewController
 @synthesize rssFeed                 = m_rssFeed;
 @synthesize titleTextField          = m_titleTextField;
 @synthesize linkTextField           = m_linkTextField;
 @synthesize websiteTextField        = m_websiteTextField;
 @synthesize descriptionTextView     = m_descriptionTextView;
 @synthesize rateLabel               = m_rateLabel;
-@synthesize rssCategoryPickerView   = m_rssCategoryPickerView;
+@synthesize rssCategoryTableView    = m_rssCategoryTableView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,7 +50,7 @@
     [m_websiteTextField release];
     [m_descriptionTextView release];
     [m_rateLabel release];
-    [m_rssCategoryPickerView release];
+    [m_rssCategoryTableView release];
     [super dealloc];
 }
 
@@ -79,6 +88,9 @@
         
         [self setRateValue:m_rssFeed.rate];
     }
+    
+    ReaderModel *readerModel = [ReaderModel instance];
+    m_rssCategoryModel = readerModel.rssCategoryModel;
 }
 
 - (void)viewDidUnload
@@ -88,10 +100,75 @@
     [self setWebsiteTextField:nil];
     [self setDescriptionTextView:nil];
     [self setRateLabel:nil];
-    [self setRssCategoryPickerView:nil];
+    [self setRssCategoryTableView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+#warning Potentially incomplete method implementation.
+    // Return the number of sections.
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+#warning Incomplete method implementation.
+    // Return the number of rows in the section.
+    return [m_rssCategoryModel count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView != m_rssCategoryTableView)
+        return;
+    
+    static NSString *CellIdentifier = @"Cell";
+    
+    CategoryViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+		cell = [[[CategoryViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+	}
+    
+    int row = indexPath.row;
+    
+    // Set up the cell...
+    RssCategory *rssCategory = [m_rssCategoryModel rssCategoryAtIndex:row];
+    if (!rssCategory)
+        return nil;
+	
+    // Reset it to default values.
+    
+    cell.editingAccessoryView = nil;
+    cell.detailTextLabel.text = nil;
+    // Set cell selection is blue style
+    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+    
+    // Set data for cell
+    cell.rssCategory = rssCategory;
+    
+    cell.textLabel.text = rssCategory.title;    
+    
+    if (m_rssFeed.category == rssCategory) {
+        // Select the cell
+        [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionTop];
+    }
+    
+    return cell;
+}
+
+// Customize the background color of the rows
+- (void)tableView: (UITableView*)tableView willDisplayCell: (UITableViewCell*)cell 
+forRowAtIndexPath: (NSIndexPath*)indexPath
+{
+    cell.backgroundColor = indexPath.row % 2 
+    ? [UIColor colorWithRed: 0.3 green: 0.3 blue: 0.3 alpha: 0.25] 
+    : [UIColor whiteColor];
+    for (UIView* view in cell.contentView.subviews) {
+        view.backgroundColor = [UIColor clearColor];
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -246,13 +323,22 @@
     ReaderModel *readerModel = [ReaderModel instance];
     RssFeedPK *rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
     
+    RssCategory *rssCategory = [readerModel.rssCategoryModel rssCategoryAtIndex:0];    
+    NSIndexPath *indexPath = [m_rssCategoryTableView indexPathForSelectedRow];   
+    if (indexPath) {
+        CategoryViewCell *cell = (CategoryViewCell *)[m_rssCategoryTableView cellForRowAtIndexPath:indexPath];
+        if (cell)
+            rssCategory = cell.rssCategory;
+    }
+    
     if (self.viewMode == CreateNewMode) {        
         RssFeed *rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
         rssFeed.title = title;
         rssFeed.link = link;
         rssFeed.description = description;
         rssFeed.website = website;
-        rssFeed.rate = m_rateValue;
+        rssFeed.rate = m_rateValue;        
+        [readerModel updateRssFeedCategoryOf:rssFeed To:rssCategory];
         
         if (![readerModel addRssFeed:rssFeed]) {
             // Open a alert with an OK button
@@ -287,6 +373,7 @@
         m_rssFeed.description = description;
         m_rssFeed.website = website;
         m_rssFeed.rate = m_rateValue;
+        [readerModel updateRssFeedCategoryOf:m_rssFeed To:rssCategory];
         
         // Reset RssFeedPK
         [m_rssFeed rssFeedPK].title = title;

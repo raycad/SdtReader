@@ -57,8 +57,31 @@
     [super dealloc];
 }
 
-- (void)loadData
+- (void)refreshView
 {
+    if (m_searchMode == SearchByTitle) {
+        NSString *searchText = m_searchBar.text;
+        if([searchText isEqualToString:@""] || (searchText == nil)){
+            [m_rssCategoryModel copyDataFrom:m_readerModel.rssCategoryModel];        
+        } else {    
+            // Filter course by title
+            RssCategoryModel *rssCategoryModel = [m_readerModel.rssCategoryModel searchByTitle:searchText];
+            if (rssCategoryModel == nil)
+                [m_rssCategoryModel clear];
+            else {
+                [m_rssCategoryModel copyDataFrom:rssCategoryModel];
+                //[rssCategoryModel release]; // Cause the crash
+            }
+        }
+    } 
+    
+    [m_rssCategoryTableView reloadData];
+}
+
+- (void)refreshData
+{
+    // Reload date view
+    [self refreshView];
 }
 
 #pragma mark - View lifecycle
@@ -79,9 +102,6 @@
     UIImage *i = [UIImage imageNamed:RssCategoryTabBarIcon];
     [tbi setImage:i];*/
     
-    [self loadData];
-    
-    // Reload data
     [self refreshData];
     
     [self updateSelectionMode];
@@ -101,29 +121,8 @@
         
         [m_rssCategoryTableView selectRowAtIndexPath:selectedIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
     } else {
-        [self refreshData];
+        [self refreshView];
     }
-}
-
-- (void)refreshData
-{
-    if (m_searchMode == SearchByTitle) {
-        NSString *searchText = m_searchBar.text;
-        if([searchText isEqualToString:@""] || (searchText == nil)){
-            [m_rssCategoryModel copyDataFrom:m_readerModel.rssCategoryModel];        
-        } else {    
-            // Filter course by title
-            RssCategoryModel *rssCategoryModel = [m_readerModel.rssCategoryModel searchByTitle:searchText];
-            if (rssCategoryModel == nil)
-                [m_rssCategoryModel clear];
-            else {
-                [m_rssCategoryModel copyDataFrom:rssCategoryModel];
-                //[rssCategoryModel release]; // Cause the crash
-            }
-        }
-    } 
-    
-    [m_rssCategoryTableView reloadData];
 }
 
 - (void)viewDidUnload
@@ -295,7 +294,7 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     if (searchBar != m_searchBar)
         return;
     
-    [self refreshData];
+    [self refreshView];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
@@ -303,7 +302,7 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     [m_searchBar resignFirstResponder];
     m_searchBar.text = @"";
     
-    [self refreshData];
+    [self refreshView];
 }
 
 // called when Search (in our case “Done”) button pressed

@@ -36,7 +36,8 @@
 - (IBAction)editRssCategory:(id)sender;
 - (IBAction)addRssCategory:(id)sender;
 
-- (void) refreshData;
+- (void)refreshView;
+- (void)refreshData;
 
 - (void)viewRssCategoryAtCell:(UITableViewCell *)cell;
 - (void)editRssCategoryAtCell:(UITableViewCell *)cell;

@@ -65,7 +65,7 @@ static ReaderModel *_instance = nil;
     RssCategoryPK   *rssCategoryPK;
     RssCategory     *rssCategory;
     
-    title = [NSString stringWithFormat:@"<Uncategorized>"];
+    title = [NSString stringWithFormat:@"Uncategorized"];
     rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
     rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
     description = @"";
@@ -459,6 +459,31 @@ static ReaderModel *_instance = nil;
 - (BOOL)removeRssFeedByCategory:(RssCategory *)rssCategory
 {
     return [m_rssFeedModel removeRssFeedByCategory:rssCategory];
+}
+
+- (void)updateRssFeedCategoryOf:(RssFeed *)rssFeed To:(RssCategory *)to
+{
+    assert(rssFeed != nil);
+    
+    RssCategory *from = rssFeed.category;
+    
+    if ([from isEqual:to])
+         return;
+    
+    int totalRssFeeds = 0;
+    
+    if (from) {
+        totalRssFeeds = from.totalRssFeeds;
+        from.totalRssFeeds = totalRssFeeds-1;
+    }
+    
+    if (to) {
+        totalRssFeeds = to.totalRssFeeds;
+        to.totalRssFeeds = totalRssFeeds+1;
+    }
+    
+    // Update reference
+    rssFeed.category = to;
 }
 
 - (BOOL)addRssCategory:(RssCategory *)rssCategory
