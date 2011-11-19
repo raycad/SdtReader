@@ -36,6 +36,8 @@
 @property (nonatomic, retain) IBOutlet UILabel *rateLabel;
 @property (nonatomic, retain) IBOutlet UITableView *rssCategoryTableView;
 
+- (void)refreshView;
+
 - (void)setRateValue:(int)rateValue;
 - (void)createRateButtons;
 - (void)releaseRateButtons;

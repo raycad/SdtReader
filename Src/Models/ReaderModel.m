@@ -461,29 +461,29 @@ static ReaderModel *_instance = nil;
     return [m_rssFeedModel removeRssFeedByCategory:rssCategory];
 }
 
-- (void)updateRssFeedCategoryOf:(RssFeed *)rssFeed To:(RssCategory *)to
+- (void)updateRssFeedCategoryOf:(RssFeed *)rssFeed to:(RssCategory *)toCategory
 {
     assert(rssFeed != nil);
     
-    RssCategory *from = rssFeed.category;
+    RssCategory *fromCategory = rssFeed.category;
     
-    if ([from isEqual:to])
+    if ([fromCategory isEqual:toCategory])
          return;
     
     int totalRssFeeds = 0;
     
-    if (from) {
-        totalRssFeeds = from.totalRssFeeds;
-        from.totalRssFeeds = totalRssFeeds-1;
+    if (fromCategory) {
+        totalRssFeeds = fromCategory.totalRssFeeds;
+        fromCategory.totalRssFeeds = totalRssFeeds-1;
     }
     
-    if (to) {
-        totalRssFeeds = to.totalRssFeeds;
-        to.totalRssFeeds = totalRssFeeds+1;
+    if (toCategory) {
+        totalRssFeeds = toCategory.totalRssFeeds;
+        toCategory.totalRssFeeds = totalRssFeeds+1;
     }
     
     // Update reference
-    rssFeed.category = to;
+    rssFeed.category = toCategory;
 }
 
 - (BOOL)addRssCategory:(RssCategory *)rssCategory

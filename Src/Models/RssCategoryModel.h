@@ -20,6 +20,9 @@
 - (BOOL)removeRssCategoryByIndex:(int)index;
 - (BOOL)removeRssCategory:(RssCategory *)rssCategory;
 
+- (void)setValue:(RssCategory *)rssCategory atIndex:(int)index;
+- (void)swapValueBetweenIndex:(int)firstIndex andIndex:(int)secondIndex;
+
 - (RssCategory *)rssCategoryAtIndex:(int)index;
 
 - (BOOL)copyDataFrom:(RssCategoryModel *)other;

@@ -21,6 +21,10 @@
 
 - (RssStoryModel *)searchByTitle:(NSString *)searchText;
 
+- (void)setValue:(RssStory *)rssStory atIndex:(int)index;
+
+- (void)swapValueBetweenIndex:(int)firstIndex andIndex:(int)secondIndex;
+
 - (void)clear;
 
 - (int)count;

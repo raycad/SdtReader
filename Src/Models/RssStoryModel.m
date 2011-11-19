@@ -32,6 +32,36 @@
     return [m_rssStoryList objectAtIndex:index];
 }
 
+- (void)setValue:(RssStory *)rssStory atIndex:(int)index
+{
+    if (index < 0)
+        return;
+    if (index > [m_rssStoryList count]-1)
+        return;
+    
+    [m_rssStoryList replaceObjectAtIndex:index withObject:rssStory];
+}
+
+- (void)swapValueBetweenIndex:(int)firstIndex andIndex:(int)secondIndex
+{
+    int count = [m_rssStoryList count];
+    if (firstIndex < 0)
+        return;
+    if (firstIndex > count-1)
+        return;
+    
+    if (secondIndex < 0)
+        return;
+    if (secondIndex > count-1)
+        return;
+    
+    RssStory *firstStory = [m_rssStoryList objectAtIndex:firstIndex];
+    RssStory *secondStory = [m_rssStoryList objectAtIndex:secondIndex];
+    
+    [m_rssStoryList replaceObjectAtIndex:firstIndex withObject:secondStory];
+    [m_rssStoryList replaceObjectAtIndex:secondIndex withObject:firstStory];
+}
+
 - (BOOL)copyDataFrom:(RssStoryModel *)other
 {
     // Clear the current model

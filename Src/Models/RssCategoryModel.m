@@ -123,6 +123,36 @@
     return [rssCategoryModel autorelease];
 }
 
+- (void)setValue:(RssCategory *)rssCategory atIndex:(int)index
+{
+    if (index < 0)
+        return;
+    if (index > [m_rssCategoryList count]-1)
+        return;
+    
+    [m_rssCategoryList replaceObjectAtIndex:index withObject:rssCategory];
+}
+
+- (void)swapValueBetweenIndex:(int)firstIndex andIndex:(int)secondIndex
+{
+    int count = [m_rssCategoryList count];
+    if (firstIndex < 0)
+        return;
+    if (firstIndex > count-1)
+        return;
+    
+    if (secondIndex < 0)
+        return;
+    if (secondIndex > count-1)
+        return;
+    
+    RssCategory *firstCategory = [m_rssCategoryList objectAtIndex:firstIndex];
+    RssCategory *secondCategory = [m_rssCategoryList objectAtIndex:secondIndex];
+    
+    [m_rssCategoryList replaceObjectAtIndex:firstIndex withObject:secondCategory];
+    [m_rssCategoryList replaceObjectAtIndex:secondIndex withObject:firstCategory];
+}
+
 - (void)clear
 {
     [m_rssCategoryList removeAllObjects];

@@ -28,7 +28,7 @@
 - (BOOL)removeRssFeedByIndex:(int)index;
 - (BOOL)removeRssFeedByCategory:(RssCategory *)rssCategory;
 - (BOOL)removeRssFeed:(RssFeed *)rssFeed;
-- (void)updateRssFeedCategoryOf:(RssFeed *)rssFeed To:(RssCategory *)to;
+- (void)updateRssFeedCategoryOf:(RssFeed *)rssFeed to:(RssCategory *)toCategory;
 
 - (BOOL)addRssCategory:(RssCategory *)rssCategory;
 - (BOOL)removeRssCategoryByPK:(RssCategoryPK *)rssCategoryPK;

@@ -91,6 +91,29 @@
     
     ReaderModel *readerModel = [ReaderModel instance];
     m_rssCategoryModel = readerModel.rssCategoryModel;
+    
+    [self refreshView];
+}
+
+- (void)refreshView
+{
+    if (m_rssFeed) {
+        RssCategory *rssCategory = nil;
+        int section = 0;
+        for(int i = 0; i < [m_rssCategoryModel count]; i++) {        
+            rssCategory = [m_rssCategoryModel rssCategoryAtIndex:i];
+            if (rssCategory == m_rssFeed.category) {
+                if (i < 2)
+                    break;
+                
+                // Swap to the second position
+                [m_rssCategoryModel swapValueBetweenIndex:1 andIndex:i];
+                break;
+            }            		
+        }
+    }
+    
+    [m_rssCategoryTableView reloadData];
 }
 
 - (void)viewDidUnload
@@ -151,9 +174,9 @@
     
     cell.textLabel.text = rssCategory.title;    
     
-    if (m_rssFeed.category == rssCategory) {
-        // Select the cell
-        [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionTop];
+    if (rssCategory == m_rssFeed.category) {
+        // Select cell
+        [m_rssCategoryTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     }
     
     return cell;
@@ -338,7 +361,7 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
         rssFeed.description = description;
         rssFeed.website = website;
         rssFeed.rate = m_rateValue;        
-        [readerModel updateRssFeedCategoryOf:rssFeed To:rssCategory];
+        [readerModel updateRssFeedCategoryOf:rssFeed to:rssCategory];
         
         if (![readerModel addRssFeed:rssFeed]) {
             // Open a alert with an OK button
@@ -373,7 +396,7 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
         m_rssFeed.description = description;
         m_rssFeed.website = website;
         m_rssFeed.rate = m_rateValue;
-        [readerModel updateRssFeedCategoryOf:m_rssFeed To:rssCategory];
+        [readerModel updateRssFeedCategoryOf:m_rssFeed to:rssCategory];
         
         // Reset RssFeedPK
         [m_rssFeed rssFeedPK].title = title;
