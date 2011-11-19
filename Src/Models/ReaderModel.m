@@ -65,7 +65,21 @@ static ReaderModel *_instance = nil;
     RssCategoryPK   *rssCategoryPK;
     RssCategory     *rssCategory;
     
-    title = [NSString stringWithFormat:@"Politics"];
+    title = [NSString stringWithFormat:@"<Uncategorized>"];
+    rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
+    rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
+    description = @"";
+    rssCategory.title = title;
+    rssCategory.description = description;
+    if ([self addRssCategory:rssCategory]) {
+        NSLog(@"Added rss category sucessfully");
+    }
+    [title release];
+    [description release];
+    [rssCategoryPK release];
+    [rssCategory release];
+    
+    title = [NSString stringWithFormat:@"Technology"];
     rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
     rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
     description = @"";
@@ -79,7 +93,21 @@ static ReaderModel *_instance = nil;
     [rssCategoryPK release];
     [rssCategory release];  
     
-    title = [NSString stringWithFormat:@"Technology"];
+    title = [NSString stringWithFormat:@"Business"];
+    rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
+    rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
+    description = @"";
+    rssCategory.title = title;
+    rssCategory.description = description;
+    if ([self addRssCategory:rssCategory]) {
+        NSLog(@"Added rss category sucessfully");
+    }
+    [title release];
+    [description release];
+    [rssCategoryPK release];
+    [rssCategory release];
+    
+    title = [NSString stringWithFormat:@"Politics"];
     rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
     rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
     description = @"";
@@ -107,20 +135,6 @@ static ReaderModel *_instance = nil;
     [rssCategoryPK release];
     [rssCategory release];
     
-    title = [NSString stringWithFormat:@"Music"];
-    rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
-    rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
-    description = @"";
-    rssCategory.title = title;
-    rssCategory.description = description;
-    if ([self addRssCategory:rssCategory]) {
-        NSLog(@"Added rss category sucessfully");
-    }
-    [title release];
-    [description release];
-    [rssCategoryPK release];
-    [rssCategory release];
-    
     title = [NSString stringWithFormat:@"Games"];
     rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
     rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
@@ -135,7 +149,63 @@ static ReaderModel *_instance = nil;
     [rssCategoryPK release];
     [rssCategory release];
     
-    title = [NSString stringWithFormat:@"Sport"];
+    title = [NSString stringWithFormat:@"Sports"];
+    rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
+    rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
+    description = @"";
+    rssCategory.title = title;
+    rssCategory.description = description;
+    if ([self addRssCategory:rssCategory]) {
+        NSLog(@"Added rss category sucessfully");
+    }
+    [title release];
+    [description release];
+    [rssCategoryPK release];
+    [rssCategory release];
+    
+    title = [NSString stringWithFormat:@"Health"];
+    rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
+    rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
+    description = @"";
+    rssCategory.title = title;
+    rssCategory.description = description;
+    if ([self addRssCategory:rssCategory]) {
+        NSLog(@"Added rss category sucessfully");
+    }
+    [title release];
+    [description release];
+    [rssCategoryPK release];
+    [rssCategory release];
+    
+    title = [NSString stringWithFormat:@"Entertainment"];
+    rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
+    rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
+    description = @"";
+    rssCategory.title = title;
+    rssCategory.description = description;
+    if ([self addRssCategory:rssCategory]) {
+        NSLog(@"Added rss category sucessfully");
+    }
+    [title release];
+    [description release];
+    [rssCategoryPK release];
+    [rssCategory release];
+    
+    title = [NSString stringWithFormat:@"Travel"];
+    rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
+    rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
+    description = @"";
+    rssCategory.title = title;
+    rssCategory.description = description;
+    if ([self addRssCategory:rssCategory]) {
+        NSLog(@"Added rss category sucessfully");
+    }
+    [title release];
+    [description release];
+    [rssCategoryPK release];
+    [rssCategory release];
+    
+    title = [NSString stringWithFormat:@"Funny News"];
     rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
     rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
     description = @"";
@@ -170,17 +240,17 @@ static ReaderModel *_instance = nil;
     RssFeedPK       *rssFeedPK;
     RssFeed         *rssFeed;
     
-    title = [NSString stringWithFormat:@"CNN - Top Stories (gg)"];
+    title = [NSString stringWithFormat:@"BBC News - Technology"];
     rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
     rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
-    link = @"http://rss.cnn.com/rss/cnn_topstories.rss";
-    website = @"cnn.com";
-    description = @"CNN";
+    link = @"http://feeds.bbci.co.uk/news/technology/rss.xml";
+    website = @"bbc.com";
+    description = @"This is an RSS feed from the BBC News - Technology website. RSS feeds allow you to stay up to date with the latest news and features you want from BBC News - Technology.";
     rssFeed.title = title;
     rssFeed.link = link;
     rssFeed.website = website;
     rssFeed.description = description;
-    rssFeed.category = [m_rssCategoryModel rssCategoryAtIndex:0];
+    rssFeed.category = [m_rssCategoryModel rssCategoryAtIndex:1];
     rssFeed.rate = 4;
     if ([self addRssFeed:rssFeed]) {
         NSLog(@"Added rss feed sucessfully");
@@ -192,34 +262,12 @@ static ReaderModel *_instance = nil;
     [rssFeedPK release];
     [rssFeed release];  
     
-    title = [NSString stringWithFormat:@"MSDN"];
+    title = [NSString stringWithFormat:@"BBC News - Business"];
     rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
     rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
-    link = @"http://feeds2.feedburner.com/TheMdnShow";
-    website = @"msdn.com";
-    description = @"MSDN";
-    rssFeed.title = title;
-    rssFeed.link = link;
-    rssFeed.website = website;
-    rssFeed.description = description;
-    rssFeed.category = [m_rssCategoryModel rssCategoryAtIndex:1];
-    rssFeed.rate = 0;
-    if ([self addRssFeed:rssFeed]) {
-        NSLog(@"Added rss feed sucessfully");
-    }
-    [title release];
-    [link release];
-    [website release];
-    [description release];
-    [rssFeedPK release];
-    [rssFeed release];http:
-    
-    title = [NSString stringWithFormat:@"BBC Top Stories"];
-    rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
-    rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
-    link = @"http://feeds.bbci.co.uk/news/rss.xml";
+    link = @"http://feeds.bbci.co.uk/news/business/rss.xml";
     website = @"bbc.com";
-    description = @"BBC";
+    description = @"This is an RSS feed from the BBC News - Business website. RSS feeds allow you to stay up to date with the latest news and features you want from BBC News - Business.";
     rssFeed.title = title;
     rssFeed.link = link;
     rssFeed.website = website;
@@ -234,19 +282,41 @@ static ReaderModel *_instance = nil;
     [website release];
     [description release];
     [rssFeedPK release];
-    [rssFeed release]; 
+    [rssFeed release];http:
     
-    title = [NSString stringWithFormat:@"BBC"];
+    title = [NSString stringWithFormat:@"BBC News - Politics"];
     rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
     rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
-    link = @"http://newsrss.bbc.co.uk/rss/sportonline_world_edition/front_page/rss.xml";
+    link = @"http://feeds.bbci.co.uk/news/politics/rss.xml";
     website = @"bbc.com";
-    description = @"BBC";
+    description = @"This is an RSS feed from the BBC News - Politics website. RSS feeds allow you to stay up to date with the latest news and features you want from BBC News - Politics.";
     rssFeed.title = title;
     rssFeed.link = link;
     rssFeed.website = website;
     rssFeed.description = description;
     rssFeed.category = [m_rssCategoryModel rssCategoryAtIndex:3];
+    rssFeed.rate = 3;
+    if ([self addRssFeed:rssFeed]) {
+        NSLog(@"Added rss feed sucessfully");
+    }
+    [title release];
+    [link release];
+    [website release];
+    [description release];
+    [rssFeedPK release];
+    [rssFeed release]; 
+    
+    title = [NSString stringWithFormat:@"BBC News - Top Stories"];
+    rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
+    rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
+    link = @"http://feeds.bbci.co.uk/news/rss.xml";
+    website = @"bbc.com";
+    description = @"This is an RSS feed from the BBC News - Home website. RSS feeds allow you to stay up to date with the latest news and features you want from BBC News - Home.";
+    rssFeed.title = title;
+    rssFeed.link = link;
+    rssFeed.website = website;
+    rssFeed.description = description;
+    rssFeed.category = [m_rssCategoryModel rssCategoryAtIndex:0];
     rssFeed.rate = -1;
     if ([self addRssFeed:rssFeed]) {
         NSLog(@"Added rss feed sucessfully");
@@ -269,7 +339,7 @@ static ReaderModel *_instance = nil;
     rssFeed.website = website;
     rssFeed.description = description;
     rssFeed.category = [m_rssCategoryModel rssCategoryAtIndex:4];
-    rssFeed.rate = 2;
+    rssFeed.rate = 3;
     if ([self addRssFeed:rssFeed]) {
         NSLog(@"Added rss feed sucessfully");
     }
@@ -280,18 +350,18 @@ static ReaderModel *_instance = nil;
     [rssFeedPK release];
     [rssFeed release]; 
     
-    title = [NSString stringWithFormat:@"BBC Politics"];
+    title = [NSString stringWithFormat:@"CNN - Top Stories"];
     rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
     rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
-    link = @"http://feeds.bbci.co.uk/news/politics/rss.xml";
-    website = @"bbc.com";
-    description = @"BBC";
-    rssFeed.category = [m_rssCategoryModel rssCategoryAtIndex:5];
+    link = @"http://rss.cnn.com/rss/edition.rss";
+    website = @"cnn.com";
+    description = @"CNN";
+    rssFeed.category = [m_rssCategoryModel rssCategoryAtIndex:0];
     rssFeed.title = title;
     rssFeed.link = link;
     rssFeed.website = website;
     rssFeed.description = description;
-    rssFeed.rate = 4;
+    rssFeed.rate = 1;
     if ([self addRssFeed:rssFeed]) {
         NSLog(@"Added rss feed sucessfully");
     }
