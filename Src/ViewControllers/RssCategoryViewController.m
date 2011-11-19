@@ -366,6 +366,7 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     
     RssFeedViewController *rssFeedViewController = [[[RssFeedViewController alloc] init] autorelease];
     rssFeedViewController.rssCategory = rssCategoryViewCell.rssCategory;
+    rssFeedViewController.delegate = self;
     assert(rssFeedViewController != nil);        
     [rssFeedViewController presentModallyOn:self];
 }
@@ -389,5 +390,10 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     rssCategoryDetailViewController.rssCategory = rssCategory;
     rssCategoryDetailViewController.viewMode = UpdateMode;
     [rssCategoryDetailViewController presentModallyOn:self];
+}
+
+- (void)didBackView:(id)sender
+{
+    [self refreshData];
 }
 @end

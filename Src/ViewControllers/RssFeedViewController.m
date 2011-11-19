@@ -668,5 +668,9 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
 - (IBAction)backButtonClicked:(id)sender 
 {
     [self dismissModalViewControllerAnimated:YES];
+    
+    if ((self.delegate != nil) && [self.delegate respondsToSelector:@selector(didBackView:)] ) {
+        [self.delegate didBackView:self];
+    }
 }
 @end
