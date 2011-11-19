@@ -75,7 +75,9 @@
     for (int i = 0; i < [m_rssFeedList count]; i++) {
         RssFeed *rssFeed = [m_rssFeedList objectAtIndex:i];
         if (rssFeed.category == rssCategory) {
-            [m_rssFeedList removeObjectAtIndex:i];            
+            [m_rssFeedList removeObjectAtIndex:i];  
+            // Call recusively removing feeds
+            [self removeRssFeedByCategory:rssCategory];
         }
     }
     

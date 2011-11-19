@@ -25,6 +25,7 @@
     UITableView         *m_rssCategoryTableView;
     
     RssCategoryModel    *m_rssCategoryModel;
+    RssCategory         *m_selectedRssCategory;
 }
 
 @property (nonatomic, retain) RssFeed *rssFeed;
