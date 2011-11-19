@@ -55,17 +55,35 @@
     CGFloat leftBoundsX = contentRect.origin.x;
     CGFloat rightBoundsX = contentRect.size.width;
     CGRect frame;
-    frame = CGRectMake(leftBoundsX+5, 2, 32, 32);
-    m_thumbnailImageView.frame = frame;
+    int iconSize = 64;
+    CGFloat leftTitleX = leftBoundsX+iconSize+5;
     
-    frame = CGRectMake(leftBoundsX+42, 2, contentRect.size.width - 50, 28);
+    frame = CGRectMake(leftBoundsX+2, 10, iconSize, iconSize);
+    m_thumbnailImageView.frame = frame;    
+    
+    frame = CGRectMake(leftTitleX, 3, rightBoundsX-iconSize-5, 25);
     m_titleLabel.frame = frame;
     
-    frame = CGRectMake(leftBoundsX, 28, contentRect.size.width - 6, 70);
+    frame = CGRectMake(leftTitleX-6, 26, rightBoundsX-iconSize-5, 55);
     m_descriptionLabel.frame = frame;
     
     /*frame = CGRectMake(rightBoundsX-50, 18, 40, 20);
     m_indexLabel.frame = frame;*/
+}
+
+- (void)loadImageInBackground
+{
+    NSString *imageLink = m_rssStory.mediaUrl;
+    if (imageLink == nil || [imageLink isEqualToString:@""]) 
+        return;
+    
+    NSURL *url = [NSURL URLWithString:imageLink];
+    
+    UIImage *image = [[UIImage imageWithData: [NSData dataWithContentsOfURL:url]] retain];
+    
+    // Update thumbnail image
+    m_rssStory.image = image;
+    m_thumbnailImageView.image = image;
 }
 
 - (void)updateData
@@ -76,6 +94,20 @@
     // Update data
     self.titleLabel.text = m_rssStory.title;
     self.descriptionLabel.text = m_rssStory.description;
+    
+    UIImage *image = m_rssStory.image;
+    if (image == nil) {
+        image = [UIImage imageNamed:@"rss_icon64.png"];
+        m_rssStory.image = image;
+        
+        NSString *imageLink = m_rssStory.mediaUrl;
+        if (imageLink != nil && ![imageLink isEqualToString:@""]) {
+            [NSThread detachNewThreadSelector:@selector(loadImageInBackground)
+                                     toTarget:self withObject:nil];
+        }
+    } 
+    
+    m_thumbnailImageView.image = image;
 }
 
 - (void)dealloc

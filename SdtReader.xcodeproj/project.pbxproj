@@ -48,6 +48,7 @@
 		76822D46146E374900698D1B /* rss_story_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 76822D42146E374900698D1B /* rss_story_yellow.png */; };
 		76822D4A146E506000698D1B /* RssStoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76822D48146E506000698D1B /* RssStoryViewController.m */; };
 		76822D4D146E508F00698D1B /* RssStoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76822D4C146E508F00698D1B /* RssStoryViewController.xib */; };
+		768284B3147778060084490B /* rss_icon64.png in Resources */ = {isa = PBXBuildFile; fileRef = 768284B2147778060084490B /* rss_icon64.png */; };
 		7683B330146D6D900023A557 /* RssParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7683B32F146D6D900023A557 /* RssParser.m */; };
 		7684151A146B87E4009F399B /* RssFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 76841519146B87E4009F399B /* RssFeed.m */; };
 		7684151E146B8A65009F399B /* RssFeedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7684151D146B8A65009F399B /* RssFeedModel.m */; };
@@ -142,6 +143,7 @@
 		76822D47146E506000698D1B /* RssStoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RssStoryViewController.h; path = Src/ViewControllers/RssStoryViewController.h; sourceTree = SOURCE_ROOT; };
 		76822D48146E506000698D1B /* RssStoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RssStoryViewController.m; path = Src/ViewControllers/RssStoryViewController.m; sourceTree = SOURCE_ROOT; };
 		76822D4C146E508F00698D1B /* RssStoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RssStoryViewController.xib; path = XIBs/RssStoryViewController.xib; sourceTree = SOURCE_ROOT; };
+		768284B2147778060084490B /* rss_icon64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rss_icon64.png; path = Images/rss_icon64.png; sourceTree = SOURCE_ROOT; };
 		7683B32E146D6D900023A557 /* RssParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RssParser.h; path = Src/Models/RssParser.h; sourceTree = SOURCE_ROOT; };
 		7683B32F146D6D900023A557 /* RssParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RssParser.m; path = Src/Models/RssParser.m; sourceTree = SOURCE_ROOT; };
 		76841518146B87E4009F399B /* RssFeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RssFeed.h; path = Src/Models/RssFeed.h; sourceTree = SOURCE_ROOT; };
@@ -367,6 +369,7 @@
 		768510B2146ADCFE00072A6E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				768284B2147778060084490B /* rss_icon64.png */,
 				7681CAE414771CAE00E313E9 /* cancel_icon.png */,
 				7681CADF14771BD400E313E9 /* cancel_icon.jpg */,
 				7681CAE014771BD400E313E9 /* save_icon.png */,
@@ -509,6 +512,7 @@
 				7681CAE114771BD400E313E9 /* cancel_icon.jpg in Resources */,
 				7681CAE214771BD400E313E9 /* save_icon.png in Resources */,
 				7681CAE514771CAE00E313E9 /* cancel_icon.png in Resources */,
+				768284B3147778060084490B /* rss_icon64.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

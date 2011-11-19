@@ -17,6 +17,7 @@
 @synthesize guidUrl     = m_guidUrl;
 @synthesize pubDate     = m_pubDate;
 @synthesize mediaUrl    = m_mediaUrl;
+@synthesize image       = m_image;
 
 - (id)init
 {
@@ -34,6 +35,7 @@
 	[m_guidUrl release];
 	[m_pubDate release];
 	[m_mediaUrl release];
+    [m_image release];
     [super dealloc];
 }
 @end

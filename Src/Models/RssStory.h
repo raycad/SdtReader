@@ -16,6 +16,8 @@
     NSString    *m_guidUrl;
     NSDate      *m_pubDate;
     NSString    *m_mediaUrl;
+    
+    UIImage     *m_image;
 }
 
 @property (nonatomic, copy)     NSString    *title;
@@ -25,5 +27,6 @@
 @property (nonatomic, copy)     NSString    *guidUrl;
 @property (nonatomic, retain)   NSDate      *pubDate;
 @property (nonatomic, copy)     NSString    *mediaUrl;
+@property (nonatomic, retain)   UIImage     *image;
 
 @end

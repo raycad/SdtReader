@@ -41,7 +41,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 105;
+    return 84;
 }
 
 #pragma mark - View lifecycle
@@ -142,18 +142,9 @@
     // Set cell selection is blue style
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     
-    NSString *thumbnailFile;
-    if (row%3 == 0)
-        thumbnailFile = @"rss_story_yellow.png";
-    else if (row%3 == 1)
-        thumbnailFile = @"rss_story_green.png";
-    else
-        thumbnailFile = @"rss_story_blue.png";    
-        
     // Set data for cell
     cell.rssStory = rssStory;
     [cell updateData];
-    cell.thumbnailImageView.image = [UIImage imageNamed:thumbnailFile];
     
     return cell;
 }
