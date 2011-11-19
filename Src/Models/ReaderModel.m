@@ -386,6 +386,11 @@ static ReaderModel *_instance = nil;
     return result;
 }
 
+- (BOOL)removeRssFeedByCategory:(RssCategory *)rssCategory
+{
+    return [m_rssFeedModel removeRssFeedByCategory:rssCategory];
+}
+
 - (BOOL)addRssCategory:(RssCategory *)rssCategory
 {
     return [m_rssCategoryModel addRssCategory:rssCategory];
@@ -393,16 +398,27 @@ static ReaderModel *_instance = nil;
 
 - (BOOL)removeRssCategoryByPK:(RssCategoryPK *)rssCategoryPK
 {
-    return [m_rssCategoryModel removeRssCategoryByPK:rssCategoryPK];
+    RssCategory *rssCategory = [m_rssCategoryModel getRssCategoryByPK:rssCategoryPK];
+    BOOL result = [m_rssCategoryModel removeRssCategoryByPK:rssCategoryPK];
+    if (result)
+        [self removeRssFeedByCategory:rssCategory];
+    return result;
 }
 
 - (BOOL)removeRssCategoryByIndex:(int)index
 {
-    return [m_rssCategoryModel removeRssCategoryByIndex:index];
+    RssCategory *rssCategory = [m_rssCategoryModel rssCategoryAtIndex:index];
+    BOOL result = [m_rssCategoryModel removeRssCategoryByIndex:index];
+    if (result)
+        [self removeRssFeedByCategory:rssCategory];
+    return result;
 }
 
 - (BOOL)removeRssCategory:(RssCategory *)rssCategory
 {
-    return [m_rssCategoryModel removeRssCategory:rssCategory];
+    BOOL result = [m_rssCategoryModel removeRssCategory:rssCategory];
+    if (result)
+        [self removeRssFeedByCategory:rssCategory];
+    return result;
 }
 @end

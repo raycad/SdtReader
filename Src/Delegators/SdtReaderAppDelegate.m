@@ -34,6 +34,8 @@
     
     m_tabBarController.viewControllers = [NSArray arrayWithObjects:rssFeedNavigationController, rssCategoryNavigationController, nil];    
     
+    m_tabBarController.delegate = self;
+    
     // Add sub view to the window
     [self.window addSubview:[self.tabBarController view]];
     
@@ -47,6 +49,19 @@
     [rssCategoryNavigationController release];
     
     return YES;
+}
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+{
+    if (tabBarController != m_tabBarController)
+        return;
+    
+    NSUInteger index = [tabBarController selectedIndex];
+    UIViewController *readerVC = [[m_viewControllerMap allValues] objectAtIndex:index];
+    
+    if ((readerVC != nil) && [readerVC respondsToSelector:@selector(refreshData)]) {
+        [readerVC refreshData];
+    }
 }
 
 - (id)createViewControllerByIdString:(NSString *)viewControllerIdString

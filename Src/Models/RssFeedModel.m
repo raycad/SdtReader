@@ -70,6 +70,18 @@
     }    
 }
 
+- (BOOL)removeRssFeedByCategory:(RssCategory *)rssCategory
+{
+    for (int i = 0; i < [m_rssFeedList count]; i++) {
+        RssFeed *rssFeed = [m_rssFeedList objectAtIndex:i];
+        if (rssFeed.category == rssCategory) {
+            [m_rssFeedList removeObjectAtIndex:i];            
+        }
+    }
+    
+    return YES;
+}
+
 - (BOOL)removeRssFeed:(RssFeed *)rssFeed
 {
     for (int i = 0; i < [m_rssFeedList count]; i++) {
