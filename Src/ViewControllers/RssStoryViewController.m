@@ -11,8 +11,11 @@
 
 @implementation RssStoryViewController
 
-@synthesize webView     = m_webView;
-@synthesize rssStory    = m_rssStory;
+@synthesize webView                 = m_webView;
+@synthesize rssStory                = m_rssStory;
+@synthesize loadingLabel            = m_loadingLabel;
+@synthesize backWebPageButton       = m_backWebPageButton;
+@synthesize forwardWebPageButton    = m_forwardWebPageButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -21,6 +24,49 @@
         // Custom initialization
     }
     return self;
+}
+
+- (IBAction)backViewButtonClicked:(id)sender
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (IBAction)browserButtonClicked:(id)sender
+{
+    NSString *link = m_rssStory.linkUrl;
+    if (!link)
+        return;
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:link]];
+}
+
+- (void)refreshWebPageState
+{
+    if ([m_webView canGoBack]) {
+        [m_backWebPageButton setEnabled:YES];
+    } else {
+        [m_backWebPageButton setEnabled:NO];
+    }
+    
+    if ([m_webView canGoForward]) {
+        [m_forwardWebPageButton setEnabled:YES];
+    } else {
+        [m_forwardWebPageButton setEnabled:NO];
+    }
+}
+
+- (IBAction)backWebPageButtonClicked:(id)sender 
+{
+    [m_webView goBack];
+    
+    //[self refreshWebPageState];
+}
+
+- (IBAction)forwardWebPageButtonClicked:(id)sender
+{
+    [m_webView goForward];
+    
+    //[self refreshWebPageState];
 }
 
 - (id)initWithRssStory:(RssStory *)rssStory
@@ -38,6 +84,9 @@
     [m_webView release];
     [m_rssStory release];
     [m_activityIndicatorView release];
+    [m_loadingLabel release];
+    [m_backWebPageButton release];
+    [m_forwardWebPageButton release];
     [super dealloc];
 }
 
@@ -48,6 +97,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.navigationController.navigationBarHidden = YES;
+    
     m_activityIndicatorView = [[UIActivityIndicatorView alloc]     initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     m_activityIndicatorView.center = self.view.center;
     [self.view addSubview: m_activityIndicatorView];
@@ -55,23 +106,20 @@
     m_webView.contentMode = UIViewContentModeScaleAspectFit;
     
     //m_webView.userInteractionEnabled = NO;
-    self.navigationItem.leftBarButtonItem  = [[[UIBarButtonItem alloc] initWithTitle:RssStoryTitle style:UIBarButtonItemStylePlain target:self action:@selector(backViewAction:)] autorelease]; 
+    /*self.navigationItem.leftBarButtonItem  = [[[UIBarButtonItem alloc] initWithTitle:RssStoryTitle style:UIBarButtonItemStylePlain target:self action:@selector(backViewAction:)] autorelease]; 
     assert(self.navigationItem.leftBarButtonItem != nil);
     self.navigationItem.rightBarButtonItem  = [[[UIBarButtonItem alloc] initWithTitle:@"Back Page" style:UIBarButtonItemStylePlain target:self action:@selector(goBackPageAction:)] autorelease]; 
-    assert(self.navigationItem.rightBarButtonItem != nil);
+    assert(self.navigationItem.rightBarButtonItem != nil);*/
     
     [self reload];
-}
-
-- (void)goBackPageAction:(id)sender
-{
-#pragma unused(sender)
-    [m_webView goBack];
 }
 
 - (void)viewDidUnload
 {
     [self setWebView:nil];
+    [self setLoadingLabel:nil];
+    [self setBackWebPageButton:nil];
+    [self setForwardWebPageButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -115,15 +163,17 @@
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:storyURL];
     
     [m_webView loadRequest:request];
+    
+    //[self refreshWebPageState];
 }
 
 - (void)showLoadingIndicator:(BOOL)show
 {
     if (show) {
-        self.title = @"Loading ..."; 
+        [m_loadingLabel setHidden:NO]; 
         [m_activityIndicatorView startAnimating];
     } else {
-        self.title = @"";
+        [m_loadingLabel setHidden:YES]; 
         [m_activityIndicatorView stopAnimating];
     }
     

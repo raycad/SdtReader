@@ -15,10 +15,21 @@
     UIActivityIndicatorView *m_activityIndicatorView;
     
     RssStory                *m_rssStory;
+    UILabel                 *m_loadingLabel;
+    UIButton                *m_backWebPageButton;
+    UIButton                *m_forwardWebPageButton;
 }
 
 @property (nonatomic, retain) IBOutlet UIWebView *webView;
 @property (nonatomic, retain) RssStory *rssStory;
+@property (nonatomic, retain) IBOutlet UILabel *loadingLabel;
+@property (nonatomic, retain) IBOutlet UIButton *backWebPageButton;
+@property (nonatomic, retain) IBOutlet UIButton *forwardWebPageButton;
+
+- (IBAction)backViewButtonClicked:(id)sender;
+- (IBAction)browserButtonClicked:(id)sender;
+- (IBAction)backWebPageButtonClicked:(id)sender;
+- (IBAction)forwardWebPageButtonClicked:(id)sender;
 
 - (id)initWithRssStory:(RssStory *)rssStory;
 - (void)reload;
