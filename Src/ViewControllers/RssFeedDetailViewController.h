@@ -26,6 +26,9 @@
     
     RssCategoryModel    *m_rssCategoryModel;
     RssCategory         *m_selectedRssCategory;
+    
+    UIButton            *m_categoryButton;
+    UIAlertView         *m_categoryModalDialog;
 }
 
 @property (nonatomic, retain) RssFeed *rssFeed;
@@ -36,8 +39,13 @@
 @property (nonatomic, retain) IBOutlet UITextView *descriptionTextView;
 @property (nonatomic, retain) IBOutlet UILabel *rateLabel;
 @property (nonatomic, retain) IBOutlet UITableView *rssCategoryTableView;
+@property (nonatomic, retain) IBOutlet UIButton *categoryButton;
+
+- (IBAction)categoryButtonClicked:(id)sender;
 
 - (void)refreshView;
+
+- (void)showCategoryModalDialog;
 
 - (void)setRateValue:(int)rateValue;
 - (void)createRateButtons;

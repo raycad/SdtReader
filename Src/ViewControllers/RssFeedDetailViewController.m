@@ -30,6 +30,7 @@
 @synthesize descriptionTextView     = m_descriptionTextView;
 @synthesize rateLabel               = m_rateLabel;
 @synthesize rssCategoryTableView    = m_rssCategoryTableView;
+@synthesize categoryButton          = m_categoryButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -52,6 +53,8 @@
     [m_rateLabel release];
     [m_rssCategoryTableView release];
     [m_selectedRssCategory release];
+    [m_categoryButton release];
+    [m_categoryModalDialog release];
     [super dealloc];
 }
 
@@ -118,6 +121,9 @@
         }
     }
     
+    if (m_selectedRssCategory)
+        [m_categoryButton setTitle:m_selectedRssCategory.title forState:UIControlStateNormal];
+    
     [m_rssCategoryTableView reloadData];
 }
 
@@ -129,6 +135,7 @@
     [self setDescriptionTextView:nil];
     [self setRateLabel:nil];
     [self setRssCategoryTableView:nil];
+    [self setCategoryButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -205,6 +212,12 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     assert(cell != nil);
     
     m_selectedRssCategory = cell.rssCategory;
+    
+    if (m_selectedRssCategory)
+        [m_categoryButton setTitle:m_selectedRssCategory.title forState:UIControlStateNormal];
+    
+    if (m_categoryModalDialog)
+        [m_categoryModalDialog dismissWithClickedButtonIndex:0 animated:YES];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -412,6 +425,63 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     if ((self.delegate != nil) && [self.delegate respondsToSelector:@selector(didUpdate:)] ) {
         [self.delegate didSave:self];
     }
+}
+
+const int CategoryDialogTopMargin       = 18;
+const int CategoryDialogLeftMargin      = 20;
+const int CategoryTableViewTopMargin    = 45;
+const int CategoryTableViewLeftMargin   = 20;
+const int DeltaY                        = 25;
+- (void)showCategoryModalDialog
+{
+    if (!m_categoryModalDialog) {
+        m_categoryModalDialog = [[UIAlertView alloc] initWithTitle:@"Select Category" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+        
+        m_rssCategoryTableView = [[UITableView alloc] init]; 
+        [m_rssCategoryTableView setBackgroundColor:[UIColor whiteColor]];
+        m_rssCategoryTableView.delegate = self;
+        m_rssCategoryTableView.dataSource = self;
+        
+        /*CGAffineTransform affineTransform = CGAffineTransformMakeTranslation(0, 20);
+        [m_categoryModelDialog setTransform:affineTransform];*/
+        
+        [m_categoryModalDialog addSubview:m_rssCategoryTableView];
+    }
+    
+    [m_categoryModalDialog show];
+}
+
+- (void)willPresentAlertView:(UIAlertView *)alertView 
+{
+    if (alertView == m_categoryModalDialog && m_categoryModalDialog != nil) {   
+        CGRect boundRect = [self.view bounds];
+        int boundWidth  = boundRect.size.width;
+        int boundHeight = boundRect.size.height;
+        CGRect frame;
+        frame = CGRectMake(CategoryDialogLeftMargin, CategoryDialogTopMargin+15, boundWidth-2*CategoryDialogLeftMargin, boundHeight-2*CategoryDialogTopMargin);         
+        m_categoryModalDialog.frame = frame;
+        
+        boundRect = [m_categoryModalDialog bounds];
+        boundWidth  = boundRect.size.width;
+        boundHeight = boundRect.size.height;
+        frame = CGRectMake(CategoryTableViewLeftMargin, CategoryTableViewTopMargin, boundWidth-2*CategoryTableViewLeftMargin, boundHeight-2*CategoryTableViewTopMargin-DeltaY);         
+        m_rssCategoryTableView.frame = frame;
+        
+        // iterate through the subviews in order to find the button and resize it
+        for(UIView *view in m_categoryModalDialog.subviews) {
+            if([[view class] isSubclassOfClass:[UIControl class]]) {
+                view.frame = CGRectMake(view.frame.origin.x,
+                                           boundHeight-view.frame.size.height-18,
+                                           view.frame.size.width-2,
+                                           view.frame.size.height-2);
+            }
+        }
+    }
+}
+
+- (IBAction)categoryButtonClicked:(id)sender
+{
+    [self showCategoryModalDialog];
 }
 
 @end
