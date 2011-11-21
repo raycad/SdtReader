@@ -10,6 +10,7 @@
 #import "RssFeedViewController.h"
 #import "RssCategoryViewController.h"
 #import "Common.h"
+#import "SplashViewController.h"
 
 @implementation SdtReaderAppDelegate
 
@@ -17,6 +18,14 @@
 @synthesize tabBarController    = m_tabBarController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    // Show the splash screen
+    [self showSplash];
+    
+    return YES;
+}
+
+- (void)initialize
 {
     // Initialize view controller map
     m_viewControllerMap = [[NSMutableDictionary alloc] init];
@@ -47,8 +56,26 @@
     
     [rssCategoryViewController release];
     [rssCategoryNavigationController release];
+}
+
+- (void)showSplash
+{    
+    m_splashViewController = [[SplashViewController alloc] init];
+    m_splashViewController.delegate = self;
     
-    return YES;
+    // Override point for customization after app launch    
+    [self.window addSubview:[m_splashViewController view]];
+	
+    [self.window makeKeyAndVisible];    
+}
+
+- (void)didHideSplash:(NSObject *)object
+{
+    for (int i = 0; i < [[self.window subviews] count]; i++ ) {
+        [[[self.window subviews] objectAtIndex:i] removeFromSuperview];
+    }
+    
+    [self initialize];
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
@@ -106,9 +133,10 @@
     }
     [m_viewControllerMap removeAllObjects];
     
-    [m_window release];
+    [m_splashViewController release];    
     [m_viewControllerMap release];
     [m_tabBarController release];
+    [m_window release];
 }
 
 - (void)dealloc

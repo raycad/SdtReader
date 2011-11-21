@@ -472,7 +472,7 @@ const int DeltaY                        = 25;
             if([[view class] isSubclassOfClass:[UIControl class]]) {
                 view.frame = CGRectMake(view.frame.origin.x,
                                            boundHeight-view.frame.size.height-18,
-                                           view.frame.size.width-2,
+                                           view.frame.size.width-4,
                                            view.frame.size.height-2);
             }
         }

@@ -25,6 +25,8 @@
         m_titleLabel = [[UILabel alloc] init];
         m_titleLabel.textAlignment = UITextAlignmentLeft;
         m_titleLabel.font = [UIFont fontWithMarkupDescription:@"font-family: Arial; font-size: 17px; font-weight: bold;"];
+        // Transparent background
+        m_titleLabel.backgroundColor = [UIColor clearColor];
         
         /*m_indexLabel = [[UILabel alloc] init];
         m_indexLabel.textAlignment = UITextAlignmentRight;
@@ -37,6 +39,8 @@
         //m_indexLabel.font = [UIFont systemFontOfSize:10];
         m_categoryLabel.font = [UIFont fontWithMarkupDescription:@"font-family: Arial; font-size: 13px; font-weight: bold; font-style : italic;"];
         m_categoryLabel.textColor = [UIColor blueColor];
+        // Transparent background
+        m_categoryLabel.backgroundColor = [UIColor clearColor];
         
         m_thumbnailImageView = [[UIImageView alloc] init];
         

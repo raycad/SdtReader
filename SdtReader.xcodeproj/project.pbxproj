@@ -21,6 +21,9 @@
 		7621AD781475016D004A55C1 /* RssCategoryViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7621AD771475016D004A55C1 /* RssCategoryViewCell.m */; };
 		767F8D2D1476771400FC624C /* RssCategoryDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767F8D2C1476771400FC624C /* RssCategoryDetailViewController.xib */; };
 		767F8D311476772500FC624C /* RssCategoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767F8D301476772500FC624C /* RssCategoryDetailViewController.m */; };
+		768135451479C85500929366 /* newsreader.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 768135441479C85400929366 /* newsreader.jpg */; };
+		768135491479C8B300929366 /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 768135471479C8B300929366 /* SplashViewController.m */; };
+		7681354C1479C8DD00929366 /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7681354B1479C8DD00929366 /* SplashViewController.xib */; };
 		7681AFAC146FA95400BC179C /* RateButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7681AFAB146FA95400BC179C /* RateButton.m */; };
 		7681AFB6146FD58100BC179C /* star-black16.png in Resources */ = {isa = PBXBuildFile; fileRef = 7681AFB5146FD58100BC179C /* star-black16.png */; };
 		7681AFBA146FD63000BC179C /* star-green16.png in Resources */ = {isa = PBXBuildFile; fileRef = 7681AFB7146FD63000BC179C /* star-green16.png */; };
@@ -104,6 +107,10 @@
 		767F8D2C1476771400FC624C /* RssCategoryDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RssCategoryDetailViewController.xib; path = XIBs/RssCategoryDetailViewController.xib; sourceTree = SOURCE_ROOT; };
 		767F8D2F1476772500FC624C /* RssCategoryDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RssCategoryDetailViewController.h; path = Src/ViewControllers/RssCategoryDetailViewController.h; sourceTree = SOURCE_ROOT; };
 		767F8D301476772500FC624C /* RssCategoryDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RssCategoryDetailViewController.m; path = Src/ViewControllers/RssCategoryDetailViewController.m; sourceTree = SOURCE_ROOT; };
+		768135441479C85400929366 /* newsreader.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = newsreader.jpg; path = Images/newsreader.jpg; sourceTree = SOURCE_ROOT; };
+		768135461479C8B300929366 /* SplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SplashViewController.h; path = Src/ViewControllers/SplashViewController.h; sourceTree = SOURCE_ROOT; };
+		768135471479C8B300929366 /* SplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SplashViewController.m; path = Src/ViewControllers/SplashViewController.m; sourceTree = SOURCE_ROOT; };
+		7681354B1479C8DD00929366 /* SplashViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SplashViewController.xib; path = XIBs/SplashViewController.xib; sourceTree = SOURCE_ROOT; };
 		7681AFAA146FA95400BC179C /* RateButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RateButton.h; path = Src/Controls/RateButton.h; sourceTree = SOURCE_ROOT; };
 		7681AFAB146FA95400BC179C /* RateButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RateButton.m; path = Src/Controls/RateButton.m; sourceTree = SOURCE_ROOT; };
 		7681AFB5146FD58100BC179C /* star-black16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-black16.png"; path = "Images/star-black16.png"; sourceTree = SOURCE_ROOT; };
@@ -306,6 +313,8 @@
 				76822D48146E506000698D1B /* RssStoryViewController.m */,
 				7688F520146EC327008F80A5 /* RssFeedDetailViewController.h */,
 				7688F521146EC327008F80A5 /* RssFeedDetailViewController.m */,
+				768135461479C8B300929366 /* SplashViewController.h */,
+				768135471479C8B300929366 /* SplashViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -313,6 +322,7 @@
 		7681FD6C146A932700CF8C27 /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
+				7681354B1479C8DD00929366 /* SplashViewController.xib */,
 				767F8D2C1476771400FC624C /* RssCategoryDetailViewController.xib */,
 				7689A8501474076A00499608 /* RssCategoryViewController.xib */,
 				7688F525146EC359008F80A5 /* RssFeedDetailViewController.xib */,
@@ -369,6 +379,7 @@
 		768510B2146ADCFE00072A6E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				768135441479C85400929366 /* newsreader.jpg */,
 				768284B2147778060084490B /* rss_icon64.png */,
 				7681CAE414771CAE00E313E9 /* cancel_icon.png */,
 				7681CADF14771BD400E313E9 /* cancel_icon.jpg */,
@@ -513,6 +524,8 @@
 				7681CAE214771BD400E313E9 /* save_icon.png in Resources */,
 				7681CAE514771CAE00E313E9 /* cancel_icon.png in Resources */,
 				768284B3147778060084490B /* rss_icon64.png in Resources */,
+				768135451479C85500929366 /* newsreader.jpg in Resources */,
+				7681354C1479C8DD00929366 /* SplashViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -548,6 +561,7 @@
 				7689A85414740D1300499608 /* SdtSearchViewController.m in Sources */,
 				7621AD781475016D004A55C1 /* RssCategoryViewCell.m in Sources */,
 				767F8D311476772500FC624C /* RssCategoryDetailViewController.m in Sources */,
+				768135491479C8B300929366 /* SplashViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
