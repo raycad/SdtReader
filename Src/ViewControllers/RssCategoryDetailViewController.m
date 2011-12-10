@@ -128,6 +128,9 @@
             
             return;
         }
+        
+        // Insert to DB
+        [readerModel insertRssCategoryToDb:rssCategory];
     } else if (self.viewMode == UpdateMode) {
         if (!m_rssCategory)
             return;

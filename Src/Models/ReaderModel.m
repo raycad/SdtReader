@@ -109,7 +109,7 @@ static ReaderModel *_instance = nil;
     else 
         m_rssCategoryModel = [[RssCategoryModel alloc] init];
     
-	[RssCategoryDAO getAllRssCategory];
+	[RssCategoryDAO getAllRssCategories];
 }
 
 - (void)loadRssFeedFromDatabase {
@@ -118,7 +118,7 @@ static ReaderModel *_instance = nil;
     else 
         m_rssFeedModel = [[RssFeedModel alloc] init];
     
-	[RssFeedDAO getAllRssFeed];
+	[RssFeedDAO getAllRssFeeds];
 }
 
 - (BOOL)initialize
@@ -234,6 +234,21 @@ static ReaderModel *_instance = nil;
     rssFeed.rssCategory = toCategory;
 }
 
+- (BOOL)insertRssCategoryToDb:(RssCategory *)rssCategory
+{
+    return [RssCategoryDAO insertRssCategory:rssCategory];
+}
+
+- (BOOL)deleteRssCategoryFromDb:(RssCategory *)rssCategory
+{
+    // Remove RSS Category from database
+    [RssCategoryDAO deleteRssCategory:rssCategory];
+    
+    // Remove RSS Feeds from database
+    
+    return TRUE;
+}
+
 - (BOOL)addRssCategory:(RssCategory *)rssCategory
 {
     return [m_rssCategoryModel addRssCategory:rssCategory];
@@ -241,40 +256,22 @@ static ReaderModel *_instance = nil;
 
 - (BOOL)removeRssCategoryByPK:(RssCategoryPK *)rssCategoryPK
 {
-    RssCategory *rssCategory = [[m_rssCategoryModel getRssCategoryByPK:rssCategoryPK] retain];
-    BOOL result = [m_rssCategoryModel removeRssCategoryByPK:rssCategoryPK];
-    
-    if (result)
-        [self removeRssFeedByCategory:rssCategory];
-    
-    [rssCategory release];
-    
-    return result;
+    RssCategory *rssCategory = [m_rssCategoryModel getRssCategoryByPK:rssCategoryPK];
+    return [m_rssCategoryModel removeRssCategoryByPK:rssCategoryPK];
 }
 
 - (BOOL)removeRssCategoryByIndex:(int)index
 {
-    RssCategory *rssCategory = [[m_rssCategoryModel rssCategoryAtIndex:index] retain];
+    RssCategory     *rssCategory    = [m_rssCategoryModel rssCategoryAtIndex:index];
+    RssCategoryPK   *rssCategoryPK  = rssCategory.rssCategoryPK;
     
-    BOOL result = [m_rssCategoryModel removeRssCategoryByIndex:index];
-    if (result)
-        [self removeRssFeedByCategory:rssCategory];
-    
-    [rssCategory release];
-    
-    return result;
+    return [self removeRssCategoryByPK:rssCategoryPK];
 }
 
 - (BOOL)removeRssCategory:(RssCategory *)category
 {
-    RssCategory *rssCategory = [category retain];
+    RssCategoryPK   *rssCategoryPK  = category.rssCategoryPK;
     
-    BOOL result = [m_rssCategoryModel removeRssCategory:rssCategory];
-    if (result)
-        [self removeRssFeedByCategory:rssCategory];
-    
-    [rssCategory release];
-    
-    return result;
+    return [self removeRssCategoryByPK:rssCategoryPK];
 }
 @end

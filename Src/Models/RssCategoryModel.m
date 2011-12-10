@@ -50,6 +50,7 @@
         RssCategory *rssCategory = [m_rssCategoryList objectAtIndex:i];
         if ([rssCategoryPK isEqual:[rssCategory rssCategoryPK]]) {
             [m_rssCategoryList removeObjectAtIndex:i];
+            [rssCategory release];
             return YES;
         }
     }
@@ -153,12 +154,12 @@
     [m_rssCategoryList replaceObjectAtIndex:secondIndex withObject:firstCategory];
 }
 
-- (RssCategory *)getCategoryById:(int)id
+- (RssCategory *)getCategoryById:(int)categoryId
 {
     RssCategory *rssCategory = nil;
     for (int i = 0; i < [self count]; i++) {
         rssCategory = [self rssCategoryAtIndex:i];
-        if ([rssCategory id] == id)
+        if ([rssCategory rssCategoryId] == categoryId)
             return rssCategory;
     }
     

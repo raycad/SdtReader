@@ -10,6 +10,6 @@
 
 @interface RssFeedDAO : NSObject
 
-+ (void) getAllRssFeed;
++ (void) getAllRssFeeds;
 
 @end

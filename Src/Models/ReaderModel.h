@@ -40,4 +40,7 @@
 - (BOOL)removeRssCategoryByPK:(RssCategoryPK *)rssCategoryPK;
 - (BOOL)removeRssCategoryByIndex:(int)index;
 - (BOOL)removeRssCategory:(RssCategory *)rssCategory;
+- (BOOL)insertRssCategoryToDb:(RssCategory *)rssCategory;
+- (BOOL)deleteRssCategoryFromDb:(RssCategory *)rssCategory;
+
 @end

@@ -218,14 +218,18 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         RssCategoryViewCell *cell = (RssCategoryViewCell *)[tableView cellForRowAtIndexPath:indexPath];
         assert(cell != nil);
-        RssCategory *rssCategory = cell.rssCategory;
+        RssCategory *rssCategory = [cell.rssCategory retain];
         assert(rssCategory != nil);
         if ([m_readerModel removeRssCategory:rssCategory]) {
+            // Delete from the database
+            [m_readerModel deleteRssCategoryFromDb:rssCategory];
+            
             [self refreshData];
             //[m_rssCategoryTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
             
             NSLog(@"Remove course button was clicked");
         }
+        [rssCategory release];
     }
 }
 

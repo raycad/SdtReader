@@ -29,7 +29,7 @@
 
 - (RssCategoryModel *)searchByTitle:(NSString *)searchText;
 
-- (RssCategory *)getCategoryById:(int)id;
+- (RssCategory *)getCategoryById:(int)categoryId;
 
 - (void)clear;
 

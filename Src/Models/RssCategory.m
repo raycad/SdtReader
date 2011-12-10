@@ -49,7 +49,7 @@
 
 @implementation RssCategory
 
-@synthesize id              = m_id;
+@synthesize rssCategoryId   = m_rssCategoryId;
 @synthesize title           = m_title;
 @synthesize description     = m_description;
 @synthesize totalRssFeeds   = m_totalRssFeeds;

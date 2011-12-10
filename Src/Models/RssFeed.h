@@ -19,7 +19,7 @@
 @end
 
 @interface RssFeed : NSObject {
-    int         m_id;
+    int         m_rssFeedId;
     int         m_rssCategoryId;
     NSString    *m_title;
     NSString    *m_link;
@@ -31,7 +31,7 @@
     RssFeedPK   *m_rssFeedPK;
 }
 
-@property (nonatomic)           int         id;
+@property (nonatomic)           int         rssFeedId;
 @property (nonatomic)           int         rssCategoryId;
 @property (nonatomic, copy)     NSString    *title;
 @property (nonatomic, copy)     NSString    *link;

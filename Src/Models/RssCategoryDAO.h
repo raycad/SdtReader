@@ -11,6 +11,16 @@
 
 @interface RssCategoryDAO : NSObject
 
-+ (void) getAllRssCategory;
++ (void) getAllRssCategories;
+
+/**
+ * Insert an RSS Category to database
+ * Returns TRUE if successful and then update the rss category, otherwise returns FALSE
+ */
++ (BOOL) insertRssCategory:(RssCategory *)rssCategory;
+
++ (BOOL) updateRssCategory:(RssCategory *)rssCategory;
+
++ (BOOL) deleteRssCategory:(RssCategory *)rssCategory;
 
 @end
