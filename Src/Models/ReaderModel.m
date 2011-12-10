@@ -6,7 +6,8 @@
 //  Copyright 2011 seedotech. All rights reserved.
 //
 #import "ReaderModel.h"
-
+#import "Common.h"
+#import <sqlite3.h> // Import the SQLite database framework
 
 @implementation ReaderModel
 
@@ -57,337 +58,155 @@ static ReaderModel *_instance = nil;
     [m_rssCategoryModel release];
     [super dealloc];
 }
-
-- (void)setDefaultRssCategories
+ 
+- (void) checkAndCreateDatabase 
 {
-    NSString    *title;
-    NSString    *description;   
-    RssCategoryPK   *rssCategoryPK;
-    RssCategory     *rssCategory;
+	// Check if the SQL database has already been saved to the users phone, if not then copy it over
+	BOOL success = FALSE;
     
-    title = [NSString stringWithFormat:@"Uncategorized"];
-    rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
-    rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
-    description = @"";
-    rssCategory.title = title;
-    rssCategory.description = description;
-    if ([self addRssCategory:rssCategory]) {
-        NSLog(@"Added rss category sucessfully");
-    }
-    [title release];
-    [description release];
-    [rssCategoryPK release];
-    [rssCategory release];
+	// Create a FileManager object, we will use this to check the status
+	// of the database and to copy it over if required
+	NSFileManager *fileManager = [NSFileManager defaultManager];
     
-    title = [NSString stringWithFormat:@"Technology"];
-    rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
-    rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
-    description = @"";
-    rssCategory.title = title;
-    rssCategory.description = description;
-    if ([self addRssCategory:rssCategory]) {
-        NSLog(@"Added rss category sucessfully");
-    }
-    [title release];
-    [description release];
-    [rssCategoryPK release];
-    [rssCategory release];  
+	// Check if the database has already been created in the users filesystem
+	success = [fileManager fileExistsAtPath:m_databasePath];
     
-    title = [NSString stringWithFormat:@"Business"];
-    rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
-    rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
-    description = @"";
-    rssCategory.title = title;
-    rssCategory.description = description;
-    if ([self addRssCategory:rssCategory]) {
-        NSLog(@"Added rss category sucessfully");
-    }
-    [title release];
-    [description release];
-    [rssCategoryPK release];
-    [rssCategory release];
+	// If the database already exists then return without doing anything
+	if(success) 
+        return;
     
-    title = [NSString stringWithFormat:@"Politics"];
-    rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
-    rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
-    description = @"";
-    rssCategory.title = title;
-    rssCategory.description = description;
-    if ([self addRssCategory:rssCategory]) {
-        NSLog(@"Added rss category sucessfully");
-    }
-    [title release];
-    [description release];
-    [rssCategoryPK release];
-    [rssCategory release];
+	// If not then proceed to copy the database from the application to the users filesystem
     
-    title = [NSString stringWithFormat:@"Education"];
-    rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
-    rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
-    description = @"";
-    rssCategory.title = title;
-    rssCategory.description = description;
-    if ([self addRssCategory:rssCategory]) {
-        NSLog(@"Added rss category sucessfully");
-    }
-    [title release];
-    [description release];
-    [rssCategoryPK release];
-    [rssCategory release];
+	// Get the path to the database in the application package
+	NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:SdtReaderDBName];
     
-    title = [NSString stringWithFormat:@"Games"];
-    rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
-    rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
-    description = @"";
-    rssCategory.title = title;
-    rssCategory.description = description;
-    if ([self addRssCategory:rssCategory]) {
-        NSLog(@"Added rss category sucessfully");
+	// Copy the database from the package to the users filesystem
+    if (![fileManager copyItemAtPath:databasePathFromApp toPath:m_databasePath error:nil]) {
+        NSLog(@"Could not create database");
     }
-    [title release];
-    [description release];
-    [rssCategoryPK release];
-    [rssCategory release];
     
-    title = [NSString stringWithFormat:@"Sports"];
-    rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
-    rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
-    description = @"";
-    rssCategory.title = title;
-    rssCategory.description = description;
-    if ([self addRssCategory:rssCategory]) {
-        NSLog(@"Added rss category sucessfully");
-    }
-    [title release];
-    [description release];
-    [rssCategoryPK release];
-    [rssCategory release];
-    
-    title = [NSString stringWithFormat:@"Health"];
-    rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
-    rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
-    description = @"";
-    rssCategory.title = title;
-    rssCategory.description = description;
-    if ([self addRssCategory:rssCategory]) {
-        NSLog(@"Added rss category sucessfully");
-    }
-    [title release];
-    [description release];
-    [rssCategoryPK release];
-    [rssCategory release];
-    
-    title = [NSString stringWithFormat:@"Entertainment"];
-    rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
-    rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
-    description = @"";
-    rssCategory.title = title;
-    rssCategory.description = description;
-    if ([self addRssCategory:rssCategory]) {
-        NSLog(@"Added rss category sucessfully");
-    }
-    [title release];
-    [description release];
-    [rssCategoryPK release];
-    [rssCategory release];
-    
-    title = [NSString stringWithFormat:@"Travel"];
-    rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
-    rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
-    description = @"";
-    rssCategory.title = title;
-    rssCategory.description = description;
-    if ([self addRssCategory:rssCategory]) {
-        NSLog(@"Added rss category sucessfully");
-    }
-    [title release];
-    [description release];
-    [rssCategoryPK release];
-    [rssCategory release];
-    
-    title = [NSString stringWithFormat:@"Funny News"];
-    rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
-    rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
-    description = @"";
-    rssCategory.title = title;
-    rssCategory.description = description;
-    if ([self addRssCategory:rssCategory]) {
-        NSLog(@"Added rss category sucessfully");
-    }
-    [title release];
-    [description release];
-    [rssCategoryPK release];
-    [rssCategory release];
+	[fileManager release];
 }
 
-- (void)loadRssCategoriesFromDB
-{
+- (void)loadRssCategoryFromDatabase {
     if (m_rssCategoryModel)
         [m_rssCategoryModel clear];
     else 
         m_rssCategoryModel = [[RssCategoryModel alloc] init];
     
-    // test
-    [self setDefaultRssCategories];
+	// Setup the database object
+	sqlite3         *database;
+    
+    NSString        *title;
+    NSString        *description;   
+    RssCategoryPK   *rssCategoryPK;
+    RssCategory     *rssCategory;
+     
+	// Open the database from the users filessytem
+	if(sqlite3_open([m_databasePath UTF8String], &database) == SQLITE_OK) {
+		// Setup the SQL Statement and compile it for faster access
+		const char *sqlStatement = "select * from rsscategory";
+		sqlite3_stmt *compiledStatement;
+		if(sqlite3_prepare_v2(database, sqlStatement, -1, &compiledStatement, NULL) == SQLITE_OK) {
+			// Loop through the results and add them to the feeds array
+			while(sqlite3_step(compiledStatement) == SQLITE_ROW) {
+				// Read the data from the result row
+				title       = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 1)];
+				description = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 2)];
+				
+				rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
+                rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
+                rssCategory.title = title;
+                rssCategory.description = description;
+                if ([self addRssCategory:rssCategory]) {
+                    NSLog(@"Added rss category sucessfully");
+                }
+                [title release];
+                [description release];
+                [rssCategoryPK release];
+                [rssCategory release];
+			}
+		}
+		// Release the compiled statement from memory
+		sqlite3_finalize(compiledStatement);
+        
+	}
+	sqlite3_close(database);    
 }
 
-- (void)setDefaultRssFeeds
-{
+- (void)loadRssFeedFromDatabase {
+    if (m_rssFeedModel)
+        [m_rssFeedModel clear];
+    else 
+        m_rssFeedModel = [[RssFeedModel alloc] init];
+    
+	// Setup the database object
+	sqlite3 *database;
+    
     NSString        *title;
     NSString        *link;
     NSString        *website;
     NSString        *description;   
     RssFeedPK       *rssFeedPK;
     RssFeed         *rssFeed;
+    int             rate = 0;
     
-    title = [NSString stringWithFormat:@"BBC News - Technology"];
-    rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
-    rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
-    link = @"http://feeds.bbci.co.uk/news/technology/rss.xml";
-    website = @"bbc.com";
-    description = @"This is an RSS feed from the BBC News - Technology website. RSS feeds allow you to stay up to date with the latest news and features you want from BBC News - Technology.";
-    rssFeed.title = title;
-    rssFeed.link = link;
-    rssFeed.website = website;
-    rssFeed.description = description;
-    rssFeed.category = [m_rssCategoryModel rssCategoryAtIndex:1];
-    rssFeed.rate = 4;
-    if ([self addRssFeed:rssFeed]) {
-        NSLog(@"Added rss feed sucessfully");
-    }
-    [title release];
-    [link release];
-    [website release];
-    [description release];
-    [rssFeedPK release];
-    [rssFeed release];  
-    
-    title = [NSString stringWithFormat:@"BBC News - Business"];
-    rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
-    rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
-    link = @"http://feeds.bbci.co.uk/news/business/rss.xml";
-    website = @"bbc.com";
-    description = @"This is an RSS feed from the BBC News - Business website. RSS feeds allow you to stay up to date with the latest news and features you want from BBC News - Business.";
-    rssFeed.title = title;
-    rssFeed.link = link;
-    rssFeed.website = website;
-    rssFeed.description = description;
-    rssFeed.category = [m_rssCategoryModel rssCategoryAtIndex:2];
-    rssFeed.rate = 2;
-    if ([self addRssFeed:rssFeed]) {
-        NSLog(@"Added rss feed sucessfully");
-    }
-    [title release];
-    [link release];
-    [website release];
-    [description release];
-    [rssFeedPK release];
-    [rssFeed release];http:
-    
-    title = [NSString stringWithFormat:@"BBC News - Politics"];
-    rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
-    rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
-    link = @"http://feeds.bbci.co.uk/news/politics/rss.xml";
-    website = @"bbc.com";
-    description = @"This is an RSS feed from the BBC News - Politics website. RSS feeds allow you to stay up to date with the latest news and features you want from BBC News - Politics.";
-    rssFeed.title = title;
-    rssFeed.link = link;
-    rssFeed.website = website;
-    rssFeed.description = description;
-    rssFeed.category = [m_rssCategoryModel rssCategoryAtIndex:3];
-    rssFeed.rate = 3;
-    if ([self addRssFeed:rssFeed]) {
-        NSLog(@"Added rss feed sucessfully");
-    }
-    [title release];
-    [link release];
-    [website release];
-    [description release];
-    [rssFeedPK release];
-    [rssFeed release]; 
-    
-    title = [NSString stringWithFormat:@"BBC News - Top Stories"];
-    rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
-    rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
-    link = @"http://feeds.bbci.co.uk/news/rss.xml";
-    website = @"bbc.com";
-    description = @"This is an RSS feed from the BBC News - Home website. RSS feeds allow you to stay up to date with the latest news and features you want from BBC News - Home.";
-    rssFeed.title = title;
-    rssFeed.link = link;
-    rssFeed.website = website;
-    rssFeed.description = description;
-    rssFeed.category = [m_rssCategoryModel rssCategoryAtIndex:0];
-    rssFeed.rate = -1;
-    if ([self addRssFeed:rssFeed]) {
-        NSLog(@"Added rss feed sucessfully");
-    }
-    [title release];
-    [link release];
-    [website release];
-    [description release];
-    [rssFeedPK release];
-    [rssFeed release];        
-    
-    title = [NSString stringWithFormat:@"BBC Education"];
-    rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
-    rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
-    link = @"http://feeds.bbci.co.uk/news/education/rss.xml";
-    website = @"bbc.com";
-    description = @"BBC";
-    rssFeed.title = title;
-    rssFeed.link = link;
-    rssFeed.website = website;
-    rssFeed.description = description;
-    rssFeed.category = [m_rssCategoryModel rssCategoryAtIndex:4];
-    rssFeed.rate = 3;
-    if ([self addRssFeed:rssFeed]) {
-        NSLog(@"Added rss feed sucessfully");
-    }
-    [title release];
-    [link release];
-    [website release];
-    [description release];
-    [rssFeedPK release];
-    [rssFeed release]; 
-    
-    title = [NSString stringWithFormat:@"CNN - Top Stories"];
-    rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
-    rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
-    link = @"http://rss.cnn.com/rss/edition.rss";
-    website = @"cnn.com";
-    description = @"CNN";
-    rssFeed.category = [m_rssCategoryModel rssCategoryAtIndex:0];
-    rssFeed.title = title;
-    rssFeed.link = link;
-    rssFeed.website = website;
-    rssFeed.description = description;
-    rssFeed.rate = 1;
-    if ([self addRssFeed:rssFeed]) {
-        NSLog(@"Added rss feed sucessfully");
-    }
-    [title release];
-    [link release];
-    [website release];
-    [description release];
-    [rssFeedPK release];
-    [rssFeed release]; 
-}
-
-- (void)loadRssFeedsFromDB
-{
-    if (m_rssFeedModel)
-        [m_rssFeedModel clear];
-    else 
-        m_rssFeedModel = [[RssFeedModel alloc] init];
-    
-    // test
-    [self setDefaultRssFeeds];
+	// Open the database from the users filessytem
+	if(sqlite3_open([m_databasePath UTF8String], &database) == SQLITE_OK) {
+		// Setup the SQL Statement and compile it for faster access
+		const char *sqlStatement = "select * from rssfeed";
+		sqlite3_stmt *compiledStatement;
+		if(sqlite3_prepare_v2(database, sqlStatement, -1, &compiledStatement, NULL) == SQLITE_OK) {
+			// Loop through the results and add them to the feeds array
+			while(sqlite3_step(compiledStatement) == SQLITE_ROW) {
+				// Read the data from the result row
+				title = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 2)];
+				link = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 3)];
+                website = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 4)];
+                description = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 5)];
+                rate = [[NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 6)] intValue];
+				
+                rssFeedPK           = [[RssFeedPK alloc] initWithTitle:title];
+                rssFeed             = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
+				rssFeed.title       = title;
+                rssFeed.link        = link;
+                rssFeed.website     = website;
+                rssFeed.description = description;
+                rssFeed.category    = [m_rssCategoryModel rssCategoryAtIndex:1];
+                rssFeed.rate        = rate;
+                if ([self addRssFeed:rssFeed]) {
+                    NSLog(@"Added rss feed sucessfully");
+                }
+                [title          release];
+                [link           release];
+                [website        release];
+                [description    release];
+                [rssFeedPK      release];
+                [rssFeed        release];  
+			}
+		}
+		// Release the compiled statement from memory
+		sqlite3_finalize(compiledStatement);
+        
+	}
+	sqlite3_close(database);    
 }
 
 - (BOOL)initialize
 {
-    [self loadRssCategoriesFromDB];
-    [self loadRssFeedsFromDB];
+    // Setup some globals
+	NSString *databaseName = SdtReaderDBName;
+    
+	// Get the path to the documents directory and append the databaseName
+	NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentsDir = [documentPaths objectAtIndex:0];
+	m_databasePath = [documentsDir stringByAppendingPathComponent:databaseName];
+    
+	// Execute the "checkAndCreateDatabase" function
+	[self checkAndCreateDatabase];
+    
+    [self loadRssCategoryFromDatabase];
+    [self loadRssFeedFromDatabase];
     
      return YES;
 }

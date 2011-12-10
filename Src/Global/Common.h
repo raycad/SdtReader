@@ -16,3 +16,6 @@ extern const NSString *RssStoryTitle;
 // Icon strings
 extern const NSString *RssFeedTabBarIcon;
 extern const NSString *RssCategoryTabBarIcon;
+
+// Database name
+extern const NSString *SdtReaderDBName;

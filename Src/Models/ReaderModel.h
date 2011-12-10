@@ -13,6 +13,8 @@
 @interface ReaderModel : NSObject {
     RssFeedModel        *m_rssFeedModel; 
     RssCategoryModel    *m_rssCategoryModel;
+    
+    NSString            *m_databasePath;
 }
 
 // Declare the singleton

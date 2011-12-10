@@ -63,6 +63,8 @@
 		768510B1146ADAB700072A6E /* RssFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 768510B0146ADAB700072A6E /* RssFeedViewController.m */; };
 		768510C2146ADD1200072A6E /* rss_feed_add.png in Resources */ = {isa = PBXBuildFile; fileRef = 768510BA146ADD1200072A6E /* rss_feed_add.png */; };
 		7685593B146E77FD0058DE3F /* WebBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7685593A146E77FD0058DE3F /* WebBrowserViewController.m */; };
+		76857D2114930D3700C875AD /* sdtreader.db in Resources */ = {isa = PBXBuildFile; fileRef = 76857D2014930D3700C875AD /* sdtreader.db */; };
+		76857D231493117D00C875AD /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 76857D221493117D00C875AD /* libsqlite3.0.dylib */; };
 		7685E1F3146F4C25008E275E /* star-gold16.png in Resources */ = {isa = PBXBuildFile; fileRef = 7685E1EF146F4C25008E275E /* star-gold16.png */; };
 		7685E1F4146F4C25008E275E /* star-gold48.png in Resources */ = {isa = PBXBuildFile; fileRef = 7685E1F0146F4C25008E275E /* star-gold48.png */; };
 		7685E1F5146F4C25008E275E /* star-white16.png in Resources */ = {isa = PBXBuildFile; fileRef = 7685E1F1146F4C25008E275E /* star-white16.png */; };
@@ -168,6 +170,8 @@
 		768510BA146ADD1200072A6E /* rss_feed_add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rss_feed_add.png; path = Images/rss_feed_add.png; sourceTree = SOURCE_ROOT; };
 		76855939146E77FD0058DE3F /* WebBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebBrowserViewController.h; path = Src/ViewControllers/WebBrowserViewController.h; sourceTree = SOURCE_ROOT; };
 		7685593A146E77FD0058DE3F /* WebBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebBrowserViewController.m; path = Src/ViewControllers/WebBrowserViewController.m; sourceTree = SOURCE_ROOT; };
+		76857D2014930D3700C875AD /* sdtreader.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = sdtreader.db; path = Assets/sdtreader.db; sourceTree = SOURCE_ROOT; };
+		76857D221493117D00C875AD /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		7685E1EF146F4C25008E275E /* star-gold16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-gold16.png"; path = "Images/star-gold16.png"; sourceTree = SOURCE_ROOT; };
 		7685E1F0146F4C25008E275E /* star-gold48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-gold48.png"; path = "Images/star-gold48.png"; sourceTree = SOURCE_ROOT; };
 		7685E1F1146F4C25008E275E /* star-white16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-white16.png"; path = "Images/star-white16.png"; sourceTree = SOURCE_ROOT; };
@@ -205,6 +209,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76857D231493117D00C875AD /* libsqlite3.0.dylib in Frameworks */,
 				7681FD51146A915F00CF8C27 /* UIKit.framework in Frameworks */,
 				7681FD53146A915F00CF8C27 /* Foundation.framework in Frameworks */,
 				7681FD55146A915F00CF8C27 /* CoreGraphics.framework in Frameworks */,
@@ -243,6 +248,7 @@
 		7681FD4F146A915F00CF8C27 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				76857D221493117D00C875AD /* libsqlite3.0.dylib */,
 				7681FD50146A915F00CF8C27 /* UIKit.framework */,
 				7681FD52146A915F00CF8C27 /* Foundation.framework */,
 				7681FD54146A915F00CF8C27 /* CoreGraphics.framework */,
@@ -253,6 +259,8 @@
 		7681FD56146A915F00CF8C27 /* SdtReader */ = {
 			isa = PBXGroup;
 			children = (
+				76857D1F149307A900C875AD /* Assets */,
+				76857D1D149306E100C875AD /* Resources */,
 				7681AFA8146FA8EC00BC179C /* Controls */,
 				768510B2146ADCFE00072A6E /* Images */,
 				7681FD7E146A964000CF8C27 /* Models */,
@@ -425,6 +433,21 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		76857D1D149306E100C875AD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		76857D1F149307A900C875AD /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				76857D2014930D3700C875AD /* sdtreader.db */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -526,6 +549,7 @@
 				768284B3147778060084490B /* rss_icon64.png in Resources */,
 				768135451479C85500929366 /* newsreader.jpg in Resources */,
 				7681354C1479C8DD00929366 /* SplashViewController.xib in Resources */,
+				76857D2114930D3700C875AD /* sdtreader.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
