@@ -137,10 +137,23 @@
 
 - (void)didRateButtonClicked:(NSObject *)object
 {
+    NSIndexPath *indexPath = [m_rssFeedTableView indexPathForCell:(UITableViewCell *)object];  
+    
+    RssFeedViewCell *rssFeedViewCell = (RssFeedViewCell *)[m_rssFeedTableView cellForRowAtIndexPath:indexPath];
+    
+    if (!rssFeedViewCell)
+        return;
+    
+    RssFeed *rssFeed = rssFeedViewCell.rssFeed;
+    if (!rssFeed)
+        return;
+    
+    // Update to DB
+    [m_readerModel updateRssFeedToDb:rssFeed];
+    
     if (m_searchMode != SearchByRate) {
-        NSIndexPath *selectedIndexPath = [m_rssFeedTableView indexPathForSelectedRow];    
-        NSIndexPath *indexPath = [m_rssFeedTableView indexPathForCell:(UITableViewCell *)object];
-        
+        NSIndexPath *selectedIndexPath = [m_rssFeedTableView indexPathForSelectedRow];
+                        
         if (indexPath != selectedIndexPath)
             return;
         
@@ -381,6 +394,9 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
         RssFeed *rssFeed = cell.rssFeed;
         assert(rssFeed != nil);
         if ([m_readerModel removeRssFeed:rssFeed]) {
+            // Delete from DB
+            [m_readerModel deleteRssFeedFromDb:rssFeed];
+            
             [self refreshData];
             //[m_rssFeedTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
             

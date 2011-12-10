@@ -155,6 +155,9 @@
         
         // Reset CategoryPK
         [m_rssCategory rssCategoryPK].title = title;
+        
+        // Update to DB
+        [readerModel updateRssCategoryToDb:m_rssCategory];
     }
     
     // Tell the delegate about the update.    

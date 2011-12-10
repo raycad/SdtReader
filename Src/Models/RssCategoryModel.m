@@ -50,7 +50,6 @@
         RssCategory *rssCategory = [m_rssCategoryList objectAtIndex:i];
         if ([rssCategoryPK isEqual:[rssCategory rssCategoryPK]]) {
             [m_rssCategoryList removeObjectAtIndex:i];
-            [rssCategory release];
             return YES;
         }
     }

@@ -167,6 +167,9 @@ static ReaderModel *_instance = nil;
         rssCategory.totalRssFeeds -= 1;
     }
     
+    if (result)
+        [rssFeed release];
+    
     return result;
 }
 
@@ -176,15 +179,9 @@ static ReaderModel *_instance = nil;
     if (!rssFeed)
         return NO;
     
-    RssCategory *rssCategory = rssFeed.rssCategory;
-    BOOL result = [m_rssFeedModel removeRssFeedByIndex:index];
+    RssFeedPK *rssFeedPK = rssFeed.rssFeedPK;
     
-    if (result && rssCategory) {
-        // Decrease total rss feeds
-        rssCategory.totalRssFeeds -= 1;
-    }
-    
-    return result;
+    return [self removeRssFeedByPK:rssFeedPK];
 }
 
 - (BOOL)removeRssFeed:(RssFeed *)rssFeed
@@ -192,16 +189,9 @@ static ReaderModel *_instance = nil;
     if (!rssFeed)
         return NO;
     
-    RssCategory *rssCategory = rssFeed.rssCategory;
+    RssFeedPK *rssFeedPK = rssFeed.rssFeedPK;
     
-    BOOL result = [m_rssFeedModel removeRssFeed:rssFeed];
-    
-    if (result && rssCategory) {
-        // Decrease total rss feeds
-        rssCategory.totalRssFeeds -= 1;
-    }
-    
-    return result;
+    return [self removeRssFeedByPK:rssFeedPK];
 }
 
 - (BOOL)removeRssFeedByCategory:(RssCategory *)rssCategory
@@ -234,9 +224,31 @@ static ReaderModel *_instance = nil;
     rssFeed.rssCategory = toCategory;
 }
 
+- (BOOL)insertRssFeedToDb:(RssFeed *)rssFeed
+{
+    return [RssFeedDAO insertRssFeed:rssFeed];
+}
+
+- (BOOL)updateRssFeedToDb:(RssFeed *)rssFeed
+{
+    return [RssFeedDAO updateRssFeed:rssFeed];
+}
+
+- (BOOL)deleteRssFeedFromDb:(RssFeed *)rssFeed
+{
+    // Remove RSS Feed from database
+    [RssFeedDAO deleteRssFeed:rssFeed];
+    return TRUE;
+}
+
 - (BOOL)insertRssCategoryToDb:(RssCategory *)rssCategory
 {
     return [RssCategoryDAO insertRssCategory:rssCategory];
+}
+
+- (BOOL)updateRssCategoryToDb:(RssCategory *)rssCategory
+{
+    return [RssCategoryDAO updateRssCategory:rssCategory];
 }
 
 - (BOOL)deleteRssCategoryFromDb:(RssCategory *)rssCategory
@@ -245,6 +257,7 @@ static ReaderModel *_instance = nil;
     [RssCategoryDAO deleteRssCategory:rssCategory];
     
     // Remove RSS Feeds from database
+    [RssFeedDAO deleteRssFeedsByRssCategoryId:rssCategory.rssCategoryId];
     
     return TRUE;
 }
@@ -257,7 +270,14 @@ static ReaderModel *_instance = nil;
 - (BOOL)removeRssCategoryByPK:(RssCategoryPK *)rssCategoryPK
 {
     RssCategory *rssCategory = [m_rssCategoryModel getRssCategoryByPK:rssCategoryPK];
-    return [m_rssCategoryModel removeRssCategoryByPK:rssCategoryPK];
+    BOOL result = [m_rssCategoryModel removeRssCategoryByPK:rssCategoryPK];
+    
+    if (result) {
+        result = [self removeRssFeedByCategory:rssCategory];
+        [rssCategory release];
+    }
+    
+    return result;
 }
 
 - (BOOL)removeRssCategoryByIndex:(int)index

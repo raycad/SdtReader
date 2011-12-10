@@ -50,7 +50,6 @@
 @implementation RssFeed
 
 @synthesize rssFeedId       = m_rssFeedId;
-@synthesize rssCategoryId   = m_rssCategoryId;
 @synthesize title           = m_title;
 @synthesize link            = m_link;
 @synthesize website         = m_website;

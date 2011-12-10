@@ -35,12 +35,16 @@
 - (BOOL)removeRssFeedByCategory:(RssCategory *)rssCategory;
 - (BOOL)removeRssFeed:(RssFeed *)rssFeed;
 - (void)updateRssFeedCategoryOf:(RssFeed *)rssFeed to:(RssCategory *)toCategory;
+- (BOOL)insertRssFeedToDb:(RssFeed *)rssFeed;
+- (BOOL)updateRssFeedToDb:(RssFeed *)rssFeed;
+- (BOOL)deleteRssFeedFromDb:(RssFeed *)rssFeed;
 
 - (BOOL)addRssCategory:(RssCategory *)rssCategory;
 - (BOOL)removeRssCategoryByPK:(RssCategoryPK *)rssCategoryPK;
 - (BOOL)removeRssCategoryByIndex:(int)index;
 - (BOOL)removeRssCategory:(RssCategory *)rssCategory;
 - (BOOL)insertRssCategoryToDb:(RssCategory *)rssCategory;
+- (BOOL)updateRssCategoryToDb:(RssCategory *)rssCategory;
 - (BOOL)deleteRssCategoryFromDb:(RssCategory *)rssCategory;
 
 @end

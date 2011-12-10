@@ -391,6 +391,9 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
             
             return;
         }
+        
+        // Insert to DB
+        [readerModel insertRssFeedToDb:rssFeed];
     } else if (self.viewMode == UpdateMode) {
         if (!m_rssFeed)
             return;
@@ -419,6 +422,9 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
         
         // Reset RssFeedPK
         [m_rssFeed rssFeedPK].title = title;
+        
+        // Update to DB
+        [readerModel updateRssFeedToDb:m_rssFeed];
     }
     
     // Tell the delegate about the update.    
