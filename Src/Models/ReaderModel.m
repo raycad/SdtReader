@@ -7,7 +7,8 @@
 //
 #import "ReaderModel.h"
 #import "Common.h"
-#import <sqlite3.h> // Import the SQLite database framework
+#import "RssCategoryDAO.h"
+#import "RssFeedDAO.h"
 
 @implementation ReaderModel
 
@@ -56,36 +57,50 @@ static ReaderModel *_instance = nil;
 {
     [m_rssFeedModel release];
     [m_rssCategoryModel release];
+    
+    sqlite3_close(m_database);
+    
     [super dealloc];
 }
- 
+
 - (void) checkAndCreateDatabase 
 {
-	// Check if the SQL database has already been saved to the users phone, if not then copy it over
-	BOOL success = FALSE;
-    
-	// Create a FileManager object, we will use this to check the status
-	// of the database and to copy it over if required
-	NSFileManager *fileManager = [NSFileManager defaultManager];
-    
-	// Check if the database has already been created in the users filesystem
-	success = [fileManager fileExistsAtPath:m_databasePath];
-    
-	// If the database already exists then return without doing anything
-	if(success) 
-        return;
-    
-	// If not then proceed to copy the database from the application to the users filesystem
-    
-	// Get the path to the database in the application package
-	NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:SdtReaderDBName];
-    
-	// Copy the database from the package to the users filesystem
-    if (![fileManager copyItemAtPath:databasePathFromApp toPath:m_databasePath error:nil]) {
-        NSLog(@"Could not create database");
+    @try {
+        // Check if the SQL database has already been saved to the users phone, if not then copy it over
+        BOOL success = FALSE;
+        
+        // Create a FileManager object, we will use this to check the status
+        // of the database and to copy it over if required
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        
+        // Check if the database has already been created in the users filesystem
+        success = [fileManager fileExistsAtPath:m_databasePath];
+        
+        if(!success) {
+            // If not then proceed to copy the database from the application to the users filesystem
+            // Get the path to the database in the application package
+            NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:SdtReaderDBName];
+            
+            // Copy the database from the package to the users filesystem
+            if (![fileManager copyItemAtPath:databasePathFromApp toPath:m_databasePath error:nil]) {
+                NSLog(@"Could not create database");
+            }
+        }
+        
+        [fileManager release];
+        
+        // Open the database from the users filessytem
+        if(!sqlite3_open([m_databasePath UTF8String], &m_database) == SQLITE_OK) {
+            NSLog(@"Could not open database");
+        }
+    } @catch (NSException *e) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[e name] message:[e reason] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     }
-    
-	[fileManager release];
+}
+
+- (sqlite3 *)getDatabase
+{
+    return m_database;
 }
 
 - (void)loadRssCategoryFromDatabase {
@@ -94,44 +109,7 @@ static ReaderModel *_instance = nil;
     else 
         m_rssCategoryModel = [[RssCategoryModel alloc] init];
     
-	// Setup the database object
-	sqlite3         *database;
-    
-    NSString        *title;
-    NSString        *description;   
-    RssCategoryPK   *rssCategoryPK;
-    RssCategory     *rssCategory;
-     
-	// Open the database from the users filessytem
-	if(sqlite3_open([m_databasePath UTF8String], &database) == SQLITE_OK) {
-		// Setup the SQL Statement and compile it for faster access
-		const char *sqlStatement = "select * from rsscategory";
-		sqlite3_stmt *compiledStatement;
-		if(sqlite3_prepare_v2(database, sqlStatement, -1, &compiledStatement, NULL) == SQLITE_OK) {
-			// Loop through the results and add them to the feeds array
-			while(sqlite3_step(compiledStatement) == SQLITE_ROW) {
-				// Read the data from the result row
-				title       = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 1)];
-				description = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 2)];
-				
-				rssCategoryPK = [[RssCategoryPK alloc] initWithTitle:title];
-                rssCategory = [[RssCategory alloc] initWithRssCategoryPK:rssCategoryPK];
-                rssCategory.title = title;
-                rssCategory.description = description;
-                if ([self addRssCategory:rssCategory]) {
-                    NSLog(@"Added rss category sucessfully");
-                }
-                [title release];
-                [description release];
-                [rssCategoryPK release];
-                [rssCategory release];
-			}
-		}
-		// Release the compiled statement from memory
-		sqlite3_finalize(compiledStatement);
-        
-	}
-	sqlite3_close(database);    
+	[RssCategoryDAO getAllRssCategory];
 }
 
 - (void)loadRssFeedFromDatabase {
@@ -140,56 +118,7 @@ static ReaderModel *_instance = nil;
     else 
         m_rssFeedModel = [[RssFeedModel alloc] init];
     
-	// Setup the database object
-	sqlite3 *database;
-    
-    NSString        *title;
-    NSString        *link;
-    NSString        *website;
-    NSString        *description;   
-    RssFeedPK       *rssFeedPK;
-    RssFeed         *rssFeed;
-    int             rate = 0;
-    
-	// Open the database from the users filessytem
-	if(sqlite3_open([m_databasePath UTF8String], &database) == SQLITE_OK) {
-		// Setup the SQL Statement and compile it for faster access
-		const char *sqlStatement = "select * from rssfeed";
-		sqlite3_stmt *compiledStatement;
-		if(sqlite3_prepare_v2(database, sqlStatement, -1, &compiledStatement, NULL) == SQLITE_OK) {
-			// Loop through the results and add them to the feeds array
-			while(sqlite3_step(compiledStatement) == SQLITE_ROW) {
-				// Read the data from the result row
-				title = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 2)];
-				link = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 3)];
-                website = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 4)];
-                description = [NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 5)];
-                rate = [[NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 6)] intValue];
-				
-                rssFeedPK           = [[RssFeedPK alloc] initWithTitle:title];
-                rssFeed             = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
-				rssFeed.title       = title;
-                rssFeed.link        = link;
-                rssFeed.website     = website;
-                rssFeed.description = description;
-                rssFeed.category    = [m_rssCategoryModel rssCategoryAtIndex:1];
-                rssFeed.rate        = rate;
-                if ([self addRssFeed:rssFeed]) {
-                    NSLog(@"Added rss feed sucessfully");
-                }
-                [title          release];
-                [link           release];
-                [website        release];
-                [description    release];
-                [rssFeedPK      release];
-                [rssFeed        release];  
-			}
-		}
-		// Release the compiled statement from memory
-		sqlite3_finalize(compiledStatement);
-        
-	}
-	sqlite3_close(database);    
+	[RssFeedDAO getAllRssFeed];
 }
 
 - (BOOL)initialize
@@ -208,7 +137,7 @@ static ReaderModel *_instance = nil;
     [self loadRssCategoryFromDatabase];
     [self loadRssFeedFromDatabase];
     
-     return YES;
+    return YES;
 }
 
 - (BOOL)addRssFeed:(RssFeed *)rssFeed
@@ -216,7 +145,7 @@ static ReaderModel *_instance = nil;
     BOOL result = [m_rssFeedModel addRssFeed:rssFeed];
     if (result) {
         // Increase total rss feeds
-        RssCategory *rssCategory = rssFeed.category;
+        RssCategory *rssCategory = rssFeed.rssCategory;
         if (rssCategory)
             rssCategory.totalRssFeeds += 1;
     }
@@ -229,7 +158,7 @@ static ReaderModel *_instance = nil;
     RssFeed *rssFeed = [m_rssFeedModel getRssFeedByPK:rssFeedPK];
     if (!rssFeed)
         return NO;
-    RssCategory *rssCategory = rssFeed.category;
+    RssCategory *rssCategory = rssFeed.rssCategory;
     
     BOOL result = [m_rssFeedModel removeRssFeedByPK:rssFeedPK];
     
@@ -247,7 +176,7 @@ static ReaderModel *_instance = nil;
     if (!rssFeed)
         return NO;
     
-    RssCategory *rssCategory = rssFeed.category;
+    RssCategory *rssCategory = rssFeed.rssCategory;
     BOOL result = [m_rssFeedModel removeRssFeedByIndex:index];
     
     if (result && rssCategory) {
@@ -263,7 +192,7 @@ static ReaderModel *_instance = nil;
     if (!rssFeed)
         return NO;
     
-    RssCategory *rssCategory = rssFeed.category;
+    RssCategory *rssCategory = rssFeed.rssCategory;
     
     BOOL result = [m_rssFeedModel removeRssFeed:rssFeed];
     
@@ -284,10 +213,10 @@ static ReaderModel *_instance = nil;
 {
     assert(rssFeed != nil);
     
-    RssCategory *fromCategory = rssFeed.category;
+    RssCategory *fromCategory = rssFeed.rssCategory;
     
     if ([fromCategory isEqual:toCategory])
-         return;
+        return;
     
     int totalRssFeeds = 0;
     
@@ -302,7 +231,7 @@ static ReaderModel *_instance = nil;
     }
     
     // Update reference
-    rssFeed.category = toCategory;
+    rssFeed.rssCategory = toCategory;
 }
 
 - (BOOL)addRssCategory:(RssCategory *)rssCategory

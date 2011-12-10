@@ -18,6 +18,7 @@
 @end
 
 @interface RssCategory : NSObject {
+    int             m_id;
     NSString        *m_title;
     NSString        *m_description;
 
@@ -26,6 +27,7 @@
     int             m_totalRssFeeds; // The number os feeds it has
 }
 
+@property (nonatomic) int id;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *description;
 @property int rate;

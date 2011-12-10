@@ -10,7 +10,7 @@
 
 @implementation RssCategoryPK
 
-@synthesize title = m_title;
+@synthesize title   = m_title;
 
 - (id)initWithTitle:(NSString *)title
 {
@@ -49,6 +49,7 @@
 
 @implementation RssCategory
 
+@synthesize id              = m_id;
 @synthesize title           = m_title;
 @synthesize description     = m_description;
 @synthesize totalRssFeeds   = m_totalRssFeeds;

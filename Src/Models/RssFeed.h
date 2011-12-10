@@ -19,21 +19,25 @@
 @end
 
 @interface RssFeed : NSObject {
+    int         m_id;
+    int         m_rssCategoryId;
     NSString    *m_title;
     NSString    *m_link;
     NSString    *m_website;
     NSString    *m_description;
-    RssCategory *m_category;
+    RssCategory *m_rssCategory;
     int         m_rate; // From 0 to 4
     
     RssFeedPK   *m_rssFeedPK;
 }
 
-@property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *link;
-@property (nonatomic, copy) NSString *website;
-@property (nonatomic, copy) NSString *description;
-@property (nonatomic, retain) RssCategory *category;
+@property (nonatomic)           int         id;
+@property (nonatomic)           int         rssCategoryId;
+@property (nonatomic, copy)     NSString    *title;
+@property (nonatomic, copy)     NSString    *link;
+@property (nonatomic, copy)     NSString    *website;
+@property (nonatomic, copy)     NSString    *description;
+@property (nonatomic, retain)   RssCategory *rssCategory;
 @property int rate;
 
 - (id)initWithRssFeedPK:(RssFeedPK *)rssFeedPK;

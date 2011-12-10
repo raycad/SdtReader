@@ -49,12 +49,14 @@
 
 @implementation RssFeed
 
-@synthesize title       = m_title;
-@synthesize link        = m_link;
-@synthesize website     = m_website;
-@synthesize description = m_description;
-@synthesize category    = m_category;
-@synthesize rate        = m_rate;
+@synthesize id              = m_id;
+@synthesize rssCategoryId   = m_rssCategoryId;
+@synthesize title           = m_title;
+@synthesize link            = m_link;
+@synthesize website         = m_website;
+@synthesize description     = m_description;
+@synthesize rssCategory     = m_rssCategory;
+@synthesize rate            = m_rate;
 
 - (id)initWithRssFeedPK:(RssFeedPK *)rssFeedPK
 {
@@ -79,7 +81,7 @@
     [m_link release];
     [m_website release];
     [m_description release];
-    [m_category release];
+    [m_rssCategory release];
     [super dealloc];
 }
 @end

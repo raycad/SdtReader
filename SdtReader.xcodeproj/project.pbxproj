@@ -65,6 +65,8 @@
 		7685593B146E77FD0058DE3F /* WebBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7685593A146E77FD0058DE3F /* WebBrowserViewController.m */; };
 		76857D2114930D3700C875AD /* sdtreader.db in Resources */ = {isa = PBXBuildFile; fileRef = 76857D2014930D3700C875AD /* sdtreader.db */; };
 		76857D231493117D00C875AD /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 76857D221493117D00C875AD /* libsqlite3.0.dylib */; };
+		7685D78A14935C2900C30EA3 /* RssCategoryDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 7685D78914935C2900C30EA3 /* RssCategoryDAO.m */; };
+		7685D78E1493608500C30EA3 /* RssFeedDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 7685D78D1493608500C30EA3 /* RssFeedDAO.m */; };
 		7685E1F3146F4C25008E275E /* star-gold16.png in Resources */ = {isa = PBXBuildFile; fileRef = 7685E1EF146F4C25008E275E /* star-gold16.png */; };
 		7685E1F4146F4C25008E275E /* star-gold48.png in Resources */ = {isa = PBXBuildFile; fileRef = 7685E1F0146F4C25008E275E /* star-gold48.png */; };
 		7685E1F5146F4C25008E275E /* star-white16.png in Resources */ = {isa = PBXBuildFile; fileRef = 7685E1F1146F4C25008E275E /* star-white16.png */; };
@@ -172,6 +174,10 @@
 		7685593A146E77FD0058DE3F /* WebBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebBrowserViewController.m; path = Src/ViewControllers/WebBrowserViewController.m; sourceTree = SOURCE_ROOT; };
 		76857D2014930D3700C875AD /* sdtreader.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = sdtreader.db; path = Assets/sdtreader.db; sourceTree = SOURCE_ROOT; };
 		76857D221493117D00C875AD /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		7685D78814935C2900C30EA3 /* RssCategoryDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RssCategoryDAO.h; path = Src/Models/RssCategoryDAO.h; sourceTree = SOURCE_ROOT; };
+		7685D78914935C2900C30EA3 /* RssCategoryDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RssCategoryDAO.m; path = Src/Models/RssCategoryDAO.m; sourceTree = SOURCE_ROOT; };
+		7685D78C1493608500C30EA3 /* RssFeedDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RssFeedDAO.h; path = Src/Models/RssFeedDAO.h; sourceTree = SOURCE_ROOT; };
+		7685D78D1493608500C30EA3 /* RssFeedDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RssFeedDAO.m; path = Src/Models/RssFeedDAO.m; sourceTree = SOURCE_ROOT; };
 		7685E1EF146F4C25008E275E /* star-gold16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-gold16.png"; path = "Images/star-gold16.png"; sourceTree = SOURCE_ROOT; };
 		7685E1F0146F4C25008E275E /* star-gold48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-gold48.png"; path = "Images/star-gold48.png"; sourceTree = SOURCE_ROOT; };
 		7685E1F1146F4C25008E275E /* star-white16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-white16.png"; path = "Images/star-white16.png"; sourceTree = SOURCE_ROOT; };
@@ -380,6 +386,10 @@
 				76841519146B87E4009F399B /* RssFeed.m */,
 				7684151F146B8ACF009F399B /* RssStory.h */,
 				76841520146B8ACF009F399B /* RssStory.m */,
+				7685D78814935C2900C30EA3 /* RssCategoryDAO.h */,
+				7685D78914935C2900C30EA3 /* RssCategoryDAO.m */,
+				7685D78C1493608500C30EA3 /* RssFeedDAO.h */,
+				7685D78D1493608500C30EA3 /* RssFeedDAO.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -586,6 +596,8 @@
 				7621AD781475016D004A55C1 /* RssCategoryViewCell.m in Sources */,
 				767F8D311476772500FC624C /* RssCategoryDetailViewController.m in Sources */,
 				768135491479C8B300929366 /* SplashViewController.m in Sources */,
+				7685D78A14935C2900C30EA3 /* RssCategoryDAO.m in Sources */,
+				7685D78E1493608500C30EA3 /* RssFeedDAO.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

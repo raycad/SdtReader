@@ -29,6 +29,8 @@
 
 - (RssCategoryModel *)searchByTitle:(NSString *)searchText;
 
+- (RssCategory *)getCategoryById:(int)id;
+
 - (void)clear;
 
 - (int)count;

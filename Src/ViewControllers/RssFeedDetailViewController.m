@@ -105,7 +105,7 @@
     m_selectedRssCategory = [readerModel.rssCategoryModel rssCategoryAtIndex:0];
     
     if (m_rssFeed) {
-        m_selectedRssCategory = m_rssFeed.category;
+        m_selectedRssCategory = m_rssFeed.rssCategory;
         RssCategory *rssCategory = nil;
         int section = 0;
         for(int i = 0; i < [m_rssCategoryModel count]; i++) {        
@@ -379,7 +379,7 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
         rssFeed.description = description;
         rssFeed.website = website;
         rssFeed.rate = m_rateValue;     
-        rssFeed.category = m_selectedRssCategory;
+        rssFeed.rssCategory = m_selectedRssCategory;
         //[readerModel updateRssFeedCategoryOf:rssFeed to:m_selectedRssCategory];
         
         if (![readerModel addRssFeed:rssFeed]) {

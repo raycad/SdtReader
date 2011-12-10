@@ -153,6 +153,18 @@
     [m_rssCategoryList replaceObjectAtIndex:secondIndex withObject:firstCategory];
 }
 
+- (RssCategory *)getCategoryById:(int)id
+{
+    RssCategory *rssCategory = nil;
+    for (int i = 0; i < [self count]; i++) {
+        rssCategory = [self rssCategoryAtIndex:i];
+        if ([rssCategory id] == id)
+            return rssCategory;
+    }
+    
+    return nil;
+}
+
 - (void)clear
 {
     [m_rssCategoryList removeAllObjects];

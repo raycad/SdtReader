@@ -9,12 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "RssFeedModel.h"
 #import "RssCategoryModel.h"
+#import <sqlite3.h> // Import the SQLite database framework
 
 @interface ReaderModel : NSObject {
     RssFeedModel        *m_rssFeedModel; 
     RssCategoryModel    *m_rssCategoryModel;
     
     NSString            *m_databasePath;
+    sqlite3             *m_database;
 }
 
 // Declare the singleton
@@ -22,6 +24,8 @@
 
 @property (nonatomic, retain) RssFeedModel      *rssFeedModel;
 @property (nonatomic, retain) RssCategoryModel  *rssCategoryModel;
+
+- (sqlite3 *)getDatabase;
 
 - (BOOL)initialize;
 

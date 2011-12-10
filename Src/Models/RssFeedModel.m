@@ -74,7 +74,7 @@
 {
     for (int i = 0; i < [m_rssFeedList count]; i++) {
         RssFeed *rssFeed = [m_rssFeedList objectAtIndex:i];
-        if (rssFeed.category == rssCategory) {
+        if (rssFeed.rssCategory == rssCategory) {
             [m_rssFeedList removeObjectAtIndex:i];  
             // Call recusively removing feeds
             [self removeRssFeedByCategory:rssCategory];
@@ -123,7 +123,7 @@
     RssFeed *rssFeed = nil;
     for (int i = 0; i < [self count]; i++) {
         rssFeed = [self rssFeedAtIndex:i];
-        if (rssFeed.category == rssCategory) {
+        if (rssFeed.rssCategory == rssCategory) {
             [rssFeedModel addRssFeed:rssFeed];
         }  
     }
