@@ -337,7 +337,7 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
 
 - (void) animateViewMove:(BOOL)up
 {
-    const int   movementDistance    = 50;   // tweak as needed
+    const int   movementDistance    = 54;   // tweak as needed
     const float movementDuration    = 0.3f; // tweak as needed
     
     int movement = (up ? -movementDistance : movementDistance);

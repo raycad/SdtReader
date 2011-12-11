@@ -57,7 +57,7 @@
         CGRect frame = CGRectMake(5, 5, buttonSize, buttonSize);
         m_cancelButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
         m_cancelButton.frame = frame;
-        UIImage *buttonImage = [UIImage imageNamed:@"cancel_icon.png"];        
+        UIImage *buttonImage = [UIImage imageNamed:@"cancel.png"];        
         [m_cancelButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
         [m_cancelButton addTarget:self action:@selector(cancelAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:m_cancelButton];
@@ -65,7 +65,7 @@
         frame = CGRectMake(rect.size.width-5-buttonSize, 5, buttonSize, buttonSize);
         m_saveButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
         m_saveButton.frame = frame;
-        buttonImage = [UIImage imageNamed:@"save_icon.png"];        
+        buttonImage = [UIImage imageNamed:@"save.png"];        
         [m_saveButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
         [m_saveButton addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:m_saveButton];
