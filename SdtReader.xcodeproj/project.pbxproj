@@ -93,6 +93,7 @@
 		7693025614946D8500550DBC /* open_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7693025514946D8500550DBC /* open_icon.png */; };
 		7693025814946E1000550DBC /* edit_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7693025714946E1000550DBC /* edit_icon.png */; };
 		7693025A14946F9500550DBC /* view_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7693025914946F9500550DBC /* view_icon.png */; };
+		76C5A7831495155B00145F03 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C5A7821495155B00145F03 /* MainWindow.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -212,6 +213,7 @@
 		7693025514946D8500550DBC /* open_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = open_icon.png; path = Images/open_icon.png; sourceTree = SOURCE_ROOT; };
 		7693025714946E1000550DBC /* edit_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = edit_icon.png; path = Images/edit_icon.png; sourceTree = SOURCE_ROOT; };
 		7693025914946F9500550DBC /* view_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = view_icon.png; path = Images/view_icon.png; sourceTree = SOURCE_ROOT; };
+		76C5A7821495155B00145F03 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainWindow.xib; path = XIBs/MainWindow.xib; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -347,6 +349,7 @@
 				76822D4C146E508F00698D1B /* RssStoryViewController.xib */,
 				761334F5146D011200EFFF88 /* RssStoryListViewController.xib */,
 				768510AD146AD81B00072A6E /* RssFeedViewController.xib */,
+				76C5A7821495155B00145F03 /* MainWindow.xib */,
 			);
 			name = XIBs;
 			sourceTree = "<group>";
@@ -568,6 +571,7 @@
 				7693025614946D8500550DBC /* open_icon.png in Resources */,
 				7693025814946E1000550DBC /* edit_icon.png in Resources */,
 				7693025A14946F9500550DBC /* view_icon.png in Resources */,
+				76C5A7831495155B00145F03 /* MainWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
