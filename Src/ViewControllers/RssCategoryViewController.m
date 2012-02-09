@@ -161,7 +161,7 @@
     if (cell == nil) {
 		cell = [[[RssCategoryViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
         // Show row with the AccessoryDisclosureIndicator
-		cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	}
     
     int row = indexPath.row;
@@ -317,30 +317,36 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
 - (void)updateSelectionMode
 {
     if (m_selectionMode == ViewSelectionMode) {
+        [m_viewSelectionModeLabel setHidden:YES];
+        [m_viewSelectionModeButton setHidden:YES];
+        
+        [m_editSelectionModeLabel setHidden:NO];
+        [m_editSelectionModeButton setHidden:NO]; 
+        
+        // Set the table view as uneditable
+        [m_rssCategoryTableView setEditing:NO];
+    } else if (m_selectionMode == EditSelectionMode) {
         [m_viewSelectionModeLabel setHidden:NO];
         [m_viewSelectionModeButton setHidden:NO];
         
         [m_editSelectionModeLabel setHidden:YES];
         [m_editSelectionModeButton setHidden:YES];
-    } else if (m_selectionMode == EditSelectionMode) {
-        [m_viewSelectionModeLabel setHidden:YES];
-        [m_viewSelectionModeButton setHidden:YES];
         
-        [m_editSelectionModeLabel setHidden:NO];
-        [m_editSelectionModeButton setHidden:NO];
+        // Set the table view as editable
+        [m_rssCategoryTableView setEditing:YES];
     }
 }
 
 - (IBAction)viewRssCategory:(id)sender 
 {
-    m_selectionMode = EditSelectionMode;
+    m_selectionMode = ViewSelectionMode;
     
     [self updateSelectionMode];
 }
 
 - (IBAction)editRssCategory:(id)sender
 {
-    m_selectionMode = ViewSelectionMode;
+    m_selectionMode = EditSelectionMode;
     
     [self updateSelectionMode];
 }

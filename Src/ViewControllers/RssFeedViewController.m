@@ -226,14 +226,14 @@
 
 - (IBAction)viewRssFeed:(id)sender 
 {
-    m_selectionMode = EditSelectionMode;
+    m_selectionMode = ViewSelectionMode;
     
     [self updateSelectionMode];
 }
 
 - (IBAction)editRssFeed:(id)sender
 {
-    m_selectionMode = ViewSelectionMode;
+    m_selectionMode = EditSelectionMode;
     
     [self updateSelectionMode];
 }
@@ -322,7 +322,7 @@
     if (cell == nil) {
 		cell = [[[RssFeedViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
         // Show row with the AccessoryDisclosureIndicator
-		cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	}
     
     int row = indexPath.row;
@@ -637,29 +637,35 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
         [m_rateLabel setHidden:NO];
         [self showRateButtons:YES];
         [m_searchBar setHidden:YES];
-        [m_searchModeLabel setTitle:@"By Rate" forState:UIControlStateNormal];
+        [m_searchModeLabel setTitle:@"By Title" forState:UIControlStateNormal];
     } else if (m_searchMode == SearchByTitle) {
         [m_rateLabel setHidden:YES];
         [self showRateButtons:NO];
         [m_searchBar setHidden:NO];
-        [m_searchModeLabel setTitle:@"By Title" forState:UIControlStateNormal];
+        [m_searchModeLabel setTitle:@"By Rate" forState:UIControlStateNormal];
     }
 }
 
 - (void)updateSelectionMode
 {
     if (m_selectionMode == ViewSelectionMode) {
+        [m_viewSelectionModeLabel setHidden:YES];
+        [m_viewSelectionModeButton setHidden:YES];
+        
+        [m_editSelectionModeLabel setHidden:NO];
+        [m_editSelectionModeButton setHidden:NO];        
+        
+        // Set the table view as uneditable
+        [m_rssFeedTableView setEditing:NO];
+    } else if (m_selectionMode == EditSelectionMode) {
         [m_viewSelectionModeLabel setHidden:NO];
         [m_viewSelectionModeButton setHidden:NO];
         
         [m_editSelectionModeLabel setHidden:YES];
         [m_editSelectionModeButton setHidden:YES];
-    } else if (m_selectionMode == EditSelectionMode) {
-        [m_viewSelectionModeLabel setHidden:YES];
-        [m_viewSelectionModeButton setHidden:YES];
         
-        [m_editSelectionModeLabel setHidden:NO];
-        [m_editSelectionModeButton setHidden:NO];
+        // Set the table view as editable
+        [m_rssFeedTableView setEditing:YES];
     }
 }
 
@@ -669,11 +675,11 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
         // Dismiss keyboard
         [m_searchBar resignFirstResponder];
         // Change search mode to Rate
-        m_searchMode = SearchByRate;   
-        m_searchModeButton.titleLabel.text = @"Rate";
+        m_searchMode = SearchByRate;
+        m_searchModeButton.titleLabel.text = @"Rate";        
     } else {
         // Change search mode to Title
-        m_searchMode = SearchByTitle;
+        m_searchMode = SearchByTitle;   
         m_searchModeButton.titleLabel.text = @"Title";
     }
     
