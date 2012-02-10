@@ -61,7 +61,7 @@
 	[self.view addSubview:m_splashImageView];
     
     m_loadingLabel = [[UILabel alloc] init];
-    m_loadingLabel.frame = CGRectMake(0, boundRect.size.height/2-2, boundRect.size.width, 30);
+    m_loadingLabel.frame = CGRectMake(0, boundRect.size.height/2, boundRect.size.width, 30);
     m_loadingLabel.textAlignment = UITextAlignmentCenter;
     
     //m_loadingLabel.font = [UIFont fontNamesForFamilyName:@"font-family: Arial; font-size: 20px; font-weight: bold; font-style : italic;"];
@@ -71,7 +71,7 @@
     // Transparent background
     m_loadingLabel.backgroundColor = [UIColor clearColor];
     m_loadingLabel.textColor = [UIColor blueColor];
-    m_loadingLabel.text = @"...SdtReader is loading...";
+    m_loadingLabel.text = @"SdtReader is loading...";
     
 	[self.view addSubview:m_loadingLabel];
 	

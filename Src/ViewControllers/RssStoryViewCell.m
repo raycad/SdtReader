@@ -22,12 +22,12 @@
         // Initialization code
         m_titleLabel = [[UILabel alloc] init];
         m_titleLabel.textAlignment = UITextAlignmentLeft;
-        m_titleLabel.font = [UIFont fontWithName:@"Arial" size:17];
+        m_titleLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:18];
         
         m_descriptionLabel = [[UITextView alloc] init];
         m_descriptionLabel.textAlignment = UITextAlignmentLeft;
         //m_descriptionLabel.font = [UIFont fontNamesForFamilyName:@"font-family: Arial; font-size: 13px; font-style : italic;"];
-        m_descriptionLabel.font = [UIFont fontWithName:@"Arial-ItalicMT" size:13];
+        m_descriptionLabel.font = [UIFont fontWithName:@"Arial-ItalicMT" size:14];
         m_descriptionLabel.textColor = [UIColor blueColor];
         [m_descriptionLabel setEditable:NO];
         [m_descriptionLabel setUserInteractionEnabled:NO];
@@ -62,10 +62,10 @@
     frame = CGRectMake(leftBoundsX+2, 10, iconSize, iconSize);
     m_thumbnailImageView.frame = frame;    
     
-    frame = CGRectMake(leftTitleX, 3, rightBoundsX-iconSize-5, 25);
+    frame = CGRectMake(leftTitleX, 1, rightBoundsX-iconSize-5, 25);
     m_titleLabel.frame = frame;
     
-    frame = CGRectMake(leftTitleX-6, 26, rightBoundsX-iconSize-5, 55);
+    frame = CGRectMake(leftTitleX-6, 24, rightBoundsX-iconSize-5, 62);
     m_descriptionLabel.frame = frame;
     
     /*frame = CGRectMake(rightBoundsX-50, 18, 40, 20);

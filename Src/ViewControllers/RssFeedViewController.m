@@ -51,7 +51,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 71;
+    return 72;
 }
 
 - (void)refreshData
@@ -82,7 +82,7 @@
     
     // Configure the table view    
     //m_rssFeedTableView.editing = YES;
-    //m_rssFeedTableView.allowsSelectionDuringEditing = YES;
+    m_rssFeedTableView.allowsSelectionDuringEditing = YES;
     
     // Hide the navigation bar
     [self hideNavigationBar];
@@ -353,9 +353,9 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
 
 //This defines for each row its editing style, i.e. whether it shows a remove sign (Red circle with subtract sign) or 
 //and add sign (Green circle with addition sign). I have hard coded the first row (the one that says "New Item") to display the add sign and all others to display the subtract sign. 
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+/*- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
     return UITableViewCellEditingStyleDelete;
-}
+}*/
 
 //This method is invoked when the user has finished editing one of the rows of the table. The three parameters
 //respectivly proivide, the table being edited, the style of the row being edited (Add or Delete) and the row being 

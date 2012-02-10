@@ -253,8 +253,17 @@
 						<reference key="IBUIHighlightedTitleColor" ref="432222201"/>
 						<reference key="IBUINormalTitleColor" ref="254516356"/>
 						<reference key="IBUINormalTitleShadowColor" ref="962445641"/>
-						<reference key="IBUIFontDescription" ref="447937562"/>
-						<reference key="IBUIFont" ref="12688677"/>
+						<object class="IBUIFontDescription" key="IBUIFontDescription">
+							<string key="name">Noteworthy-Bold</string>
+							<string key="family">Noteworthy</string>
+							<int key="traits">2</int>
+							<double key="pointSize">16</double>
+						</object>
+						<object class="NSFont" key="IBUIFont">
+							<string key="NSName">Noteworthy-Bold</string>
+							<double key="NSSize">16</double>
+							<int key="NSfFlags">16</int>
+						</object>
 					</object>
 				</object>
 				<string key="NSFrame">{{0, 20}, {320, 460}}</string>

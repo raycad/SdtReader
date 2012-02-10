@@ -85,7 +85,7 @@
     
     double x = 52;
     double y = 42;
-    int buttonSize = 26;
+    int buttonSize = 28;
     int buttonSpace = 9;
     
     // Create new dynamic buttons
