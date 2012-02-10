@@ -24,8 +24,7 @@
         // Initialization code
         m_titleLabel = [[UILabel alloc] init];
         m_titleLabel.textAlignment = UITextAlignmentLeft;
-        //m_titleLabel.font = [UIFont fontNamesForFamilyName:@"font-family: Arial; font-size: 17px; font-weight: bold;"];
-        m_titleLabel.font = [UIFont fontWithName:@"Arial" size:17];
+        m_titleLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:17];
         // Transparent background
         m_titleLabel.backgroundColor = [UIColor clearColor];
         
@@ -38,8 +37,7 @@
         m_categoryLabel = [[UILabel alloc] init];
         m_categoryLabel.textAlignment = UITextAlignmentLeft;
         //m_indexLabel.font = [UIFont systemFontOfSize:10];
-        //m_categoryLabel.font = [UIFont fontNamesForFamilyName:@"font-family: Arial; font-size: 13px; font-weight: bold; font-style : italic;"];
-        m_categoryLabel.font = [UIFont fontWithName:@"Arial" size:13];
+        m_categoryLabel.font = [UIFont fontWithName:@"Arial-BoldItalicMT" size:14];
         m_categoryLabel.textColor = [UIColor blueColor];
         // Transparent background
         m_categoryLabel.backgroundColor = [UIColor clearColor];
@@ -66,7 +64,7 @@
     CGFloat leftBoundsX = contentRect.origin.x;
     CGFloat rightBoundsX = contentRect.size.width;
     CGRect frame;
-    frame = CGRectMake(leftBoundsX+7, 15, 38, 38);
+    frame = CGRectMake(leftBoundsX+7, 16, 38, 38);
     m_thumbnailImageView.frame = frame;
     
     frame = CGRectMake(leftBoundsX+52, 1, contentRect.size.width - 80, 25);
@@ -75,7 +73,7 @@
     /*frame = CGRectMake(rightBoundsX-50, 18, 40, 20);
     m_indexLabel.frame = frame;*/
     
-    frame = CGRectMake(leftBoundsX+52, 23, contentRect.size.width - 80, 20);
+    frame = CGRectMake(leftBoundsX+52, 22, contentRect.size.width - 80, 20);
     m_categoryLabel.frame = frame;
 }
 
@@ -88,7 +86,7 @@
     double x = 52;
     double y = 42;
     int buttonSize = 26;
-    int buttonSpace = 10;
+    int buttonSpace = 9;
     
     // Create new dynamic buttons
     for (int i = 0; i < 5; i++) {

@@ -81,8 +81,8 @@
     [super viewDidLoad];
     
     // Configure the table view    
-    m_rssFeedTableView.editing = YES;
-    m_rssFeedTableView.allowsSelectionDuringEditing = YES;
+    //m_rssFeedTableView.editing = YES;
+    //m_rssFeedTableView.allowsSelectionDuringEditing = YES;
     
     // Hide the navigation bar
     [self hideNavigationBar];
@@ -502,7 +502,7 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     CGRect baseBound = [m_rateLabel bounds];
     CGRect leftBound = [m_rateLabel convertRect:baseBound toView:self.view];
     
-    double x = leftBound.origin.x + m_rateLabel.bounds.size.width + 15;
+    double x = leftBound.origin.x + m_rateLabel.bounds.size.width + 12;
     double y = leftBound.origin.y;
     
     // Create a new dynamic buttons
@@ -520,7 +520,7 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
         [self.view addSubview:rateButton];
         [m_rateButtons addObject:rateButton];
         
-        x += 45;
+        x += 50;
     }
 }
 

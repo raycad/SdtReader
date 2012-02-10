@@ -22,12 +22,12 @@
         // Initialization code
         m_titleLabel = [[UILabel alloc] init];
         m_titleLabel.textAlignment = UITextAlignmentLeft;
-        m_titleLabel.font = [UIFont fontWithName:@"Arial" size:20];
+        m_titleLabel.font = [UIFont fontWithName:@"Arial" size:17];
         
         m_descriptionLabel = [[UITextView alloc] init];
         m_descriptionLabel.textAlignment = UITextAlignmentLeft;
         //m_descriptionLabel.font = [UIFont fontNamesForFamilyName:@"font-family: Arial; font-size: 13px; font-style : italic;"];
-        m_descriptionLabel.font = [UIFont fontWithName:@"Arial" size:13];
+        m_descriptionLabel.font = [UIFont fontWithName:@"Arial-ItalicMT" size:13];
         m_descriptionLabel.textColor = [UIColor blueColor];
         [m_descriptionLabel setEditable:NO];
         [m_descriptionLabel setUserInteractionEnabled:NO];

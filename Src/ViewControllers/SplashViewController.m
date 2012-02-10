@@ -66,7 +66,7 @@
     
     //m_loadingLabel.font = [UIFont fontNamesForFamilyName:@"font-family: Arial; font-size: 20px; font-weight: bold; font-style : italic;"];
     
-    m_loadingLabel.font = [UIFont fontWithName:@"Arial" size:20];
+    m_loadingLabel.font = [UIFont fontWithName:@"Arial-BoldItalicMT" size:19];
     
     // Transparent background
     m_loadingLabel.backgroundColor = [UIColor clearColor];
