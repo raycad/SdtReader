@@ -24,7 +24,7 @@
 {
     UINavigationController *nav;        
     // Create a navigation controller with us as its root.    
-    nav = [[[UINavigationController alloc] initWithRootViewController:self] autorelease];
+    nav = [[UINavigationController alloc] initWithRootViewController:self];
     assert(nav != nil);    
         
     // Present the navigation controller on the specified parent 
@@ -46,11 +46,6 @@
 - (void)showNavigationBar 
 {    
     self.navigationController.navigationBarHidden = NO;
-}
-
-- (void)dealloc
-{
-    [super dealloc];
 }
 
 @end

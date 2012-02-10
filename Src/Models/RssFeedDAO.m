@@ -56,12 +56,6 @@
                 if ([readerModel addRssFeed:rssFeed]) {
                     NSLog(@"Added rss feed sucessfully");
                 }
-                [title          release];
-                [link           release];
-                [website        release];
-                [description    release];
-                [rssFeedPK      release];
-                [rssFeed        release];  
             }
         }
         // Release the compiled statement from memory

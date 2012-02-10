@@ -43,10 +43,6 @@
                 if ([readerModel addRssCategory:rssCategory]) {
                     NSLog(@"Added rss category sucessfully");
                 }
-                [title release];
-                [description release];
-                [rssCategoryPK release];
-                [rssCategory release];
             }
         }
         // Release the compiled statement from memory

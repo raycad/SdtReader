@@ -24,7 +24,8 @@
         // Initialization code
         m_titleLabel = [[UILabel alloc] init];
         m_titleLabel.textAlignment = UITextAlignmentLeft;
-        m_titleLabel.font = [UIFont fontWithMarkupDescription:@"font-family: Arial; font-size: 17px; font-weight: bold;"];
+        //m_titleLabel.font = [UIFont fontNamesForFamilyName:@"font-family: Arial; font-size: 17px; font-weight: bold;"];
+        m_titleLabel.font = [UIFont fontWithName:@"Arial" size:17];
         // Transparent background
         m_titleLabel.backgroundColor = [UIColor clearColor];
         
@@ -37,7 +38,8 @@
         m_categoryLabel = [[UILabel alloc] init];
         m_categoryLabel.textAlignment = UITextAlignmentLeft;
         //m_indexLabel.font = [UIFont systemFontOfSize:10];
-        m_categoryLabel.font = [UIFont fontWithMarkupDescription:@"font-family: Arial; font-size: 13px; font-weight: bold; font-style : italic;"];
+        //m_categoryLabel.font = [UIFont fontNamesForFamilyName:@"font-family: Arial; font-size: 13px; font-weight: bold; font-style : italic;"];
+        m_categoryLabel.font = [UIFont fontWithName:@"Arial" size:13];
         m_categoryLabel.textColor = [UIColor blueColor];
         // Transparent background
         m_categoryLabel.backgroundColor = [UIColor clearColor];
@@ -64,7 +66,7 @@
     CGFloat leftBoundsX = contentRect.origin.x;
     CGFloat rightBoundsX = contentRect.size.width;
     CGRect frame;
-    frame = CGRectMake(leftBoundsX+7, 13, 38, 38);
+    frame = CGRectMake(leftBoundsX+7, 15, 38, 38);
     m_thumbnailImageView.frame = frame;
     
     frame = CGRectMake(leftBoundsX+52, 1, contentRect.size.width - 80, 25);
@@ -85,13 +87,13 @@
     
     double x = 52;
     double y = 42;
-    int buttonSize = 20;
-    int buttonSpace = 7;
+    int buttonSize = 26;
+    int buttonSpace = 10;
     
     // Create new dynamic buttons
     for (int i = 0; i < 5; i++) {
         CGRect frame = CGRectMake(x, y, buttonSize, buttonSize);
-        RateButton *rateButton = [[RateButton buttonWithType:UIButtonTypeCustom] retain];
+        RateButton *rateButton = [RateButton buttonWithType:UIButtonTypeCustom];
         rateButton.frame = frame;
         //[rateButton setTitle:(NSString *)@"Rate" forState:(UIControlState)UIControlStateNormal];
         [rateButton addTarget:self action:@selector(rateButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -131,14 +133,12 @@
         for (int i = 0; i < [m_rateButtons count]; i++) {
             id rateButton = [m_rateButtons objectAtIndex:i];
             if (rateButton) {
-                [rateButton release];
                 rateButton = nil;
             }
         }        
     }
     
     [m_rateButtons removeAllObjects];
-    [m_rateButtons release];
 }
 
 - (void)setRateValue:(int)rateValue
@@ -258,17 +258,5 @@
     // Update data
     self.titleLabel.text = m_rssFeed.title;
     self.categoryLabel.text = m_rssFeed.rssCategory.title; 
-}
-
-- (void)dealloc
-{
-    [self releaseRateButtons];
-    
-    [m_rssFeed release];
-    [m_titleLabel release];
-    [m_indexLabel release];
-    [m_categoryLabel release];
-    [m_thumbnailImageView release];
-    [m_delegate release];
 }
 @end

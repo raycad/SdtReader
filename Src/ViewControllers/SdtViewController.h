@@ -27,4 +27,5 @@ typedef enum {
 
 - (void)hideNavigationBar;
 - (void)showNavigationBar;
+- (void)refreshData;
 @end

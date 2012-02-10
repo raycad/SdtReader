@@ -23,7 +23,8 @@
         // Initialization code
         m_titleLabel = [[UILabel alloc] init];
         m_titleLabel.textAlignment = UITextAlignmentLeft;
-        m_titleLabel.font = [UIFont fontWithMarkupDescription:@"font-family: Arial; font-size: 18px; font-weight: bold;"];
+        //m_titleLabel.font = [UIFont fontNamesForFamilyName:@"font-family: Arial; font-size: 18px; font-weight: bold;"];
+        m_titleLabel.font = [UIFont fontWithName:@"Arial" size:18];
         
         /*m_indexLabel = [[UILabel alloc]init];
         m_indexLabel.textAlignment = UITextAlignmentRight;
@@ -33,7 +34,8 @@
         
         m_totalRssFeedsLabel = [[UILabel alloc] init];
         m_totalRssFeedsLabel.textAlignment = UITextAlignmentLeft;
-        m_totalRssFeedsLabel.font = [UIFont fontWithMarkupDescription:@"font-family: Arial; font-size: 13px; font-weight: bold; font-style : italic;"];
+        //m_totalRssFeedsLabel.font = [UIFont fontNamesForFamilyName:@"font-family: Arial; font-size: 13px; font-weight: bold; font-style : italic;"];
+        m_totalRssFeedsLabel.font = [UIFont fontWithName:@"Arial" size:13];
         m_totalRssFeedsLabel.textColor = [UIColor blueColor];
         
         //m_thumbnailImageView = [[UIImageView alloc] init];
@@ -78,11 +80,4 @@
     //self.thumbnailImageView.image = [UIImage imageNamed:@"category32.png"];
 }
 
-- (void)dealloc
-{
-    [m_titleLabel release];
-    [m_indexLabel release];
-    [m_totalRssFeedsLabel release];
-    [m_thumbnailImageView release];
-}
 @end

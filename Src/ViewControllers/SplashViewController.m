@@ -24,15 +24,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [m_timer release];
-    [m_splashImageView release];
-    [m_loadingLabel release];
-    
-    [super dealloc];
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -64,7 +55,6 @@
 	self.view = view;
 		
     CGRect boundRect = [view bounds];
-    [view release];
     
 	m_splashImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"newsreader.jpg"]];
 	m_splashImageView.frame = CGRectMake(0, 0, boundRect.size.width, boundRect.size.height);
@@ -73,7 +63,11 @@
     m_loadingLabel = [[UILabel alloc] init];
     m_loadingLabel.frame = CGRectMake(0, boundRect.size.height/2-2, boundRect.size.width, 30);
     m_loadingLabel.textAlignment = UITextAlignmentCenter;
-    m_loadingLabel.font = [UIFont fontWithMarkupDescription:@"font-family: Arial; font-size: 20px; font-weight: bold; font-style : italic;"];
+    
+    //m_loadingLabel.font = [UIFont fontNamesForFamilyName:@"font-family: Arial; font-size: 20px; font-weight: bold; font-style : italic;"];
+    
+    m_loadingLabel.font = [UIFont fontWithName:@"Arial" size:20];
+    
     // Transparent background
     m_loadingLabel.backgroundColor = [UIColor clearColor];
     m_loadingLabel.textColor = [UIColor blueColor];

@@ -28,7 +28,7 @@
 {
     UINavigationController *nav;        
     // Create a navigation controller with us as its root.    
-    nav = [[[UINavigationController alloc] initWithRootViewController:self] autorelease];
+    nav = [[UINavigationController alloc] initWithRootViewController:self];
     assert(nav != nil);    
         
     // Present the navigation controller on the specified parent 
@@ -55,7 +55,7 @@
         int buttonSize = 40;        
         
         CGRect frame = CGRectMake(5, 5, buttonSize, buttonSize);
-        m_cancelButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
+        m_cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
         m_cancelButton.frame = frame;
         UIImage *buttonImage = [UIImage imageNamed:@"cancel.png"];        
         [m_cancelButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
@@ -63,7 +63,7 @@
         [self.view addSubview:m_cancelButton];
         
         frame = CGRectMake(rect.size.width-5-buttonSize, 5, buttonSize, buttonSize);
-        m_saveButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
+        m_saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
         m_saveButton.frame = frame;
         buttonImage = [UIImage imageNamed:@"save.png"];        
         [m_saveButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
@@ -85,11 +85,8 @@
     self.navigationController.navigationBarHidden = NO;
 }
 
-- (void)dealloc
+- (void)refreshData
 {
-    [m_saveButton release];
-    [m_cancelButton release];
-    [super dealloc];
+    
 }
-
 @end

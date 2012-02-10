@@ -51,28 +51,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 67;
-}
-
-- (void)dealloc
-{
-    [self releaseRateButtons];
-    [m_rssCategory release];
-    [m_rssFeedModel release];
-    [m_filterRssFeedModel release];
-    [m_searchBar release];
-    [m_rssFeedTableView release];
-    [m_searchModeButton release];
-    [m_viewSelectionModeButton release];
-    [m_editSelectionModeButton release];
-    [m_viewSelectionModeLabel release];
-    [m_editSelectionModeLabel release];
-    [m_rateLabel release];
-    [m_searchModeLabel release];
-    [m_backButton release];
-    [m_addNewRssFeedButton release];
-    [m_addNewRssFeedLabel release];
-    [super dealloc];
+    return 71;
 }
 
 - (void)refreshData
@@ -185,11 +164,10 @@
         NSString *alertString = [NSString stringWithFormat:@"RSS link is empty. Please enter the link"];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:alertString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
         return;
     }
     
-    RssStoryListViewController *rssStoryListViewController = [[[RssStoryListViewController alloc] init] autorelease];
+    RssStoryListViewController *rssStoryListViewController = [[RssStoryListViewController alloc] init];
     
     rssStoryListViewController.rssFeed = rssFeed;
     rssStoryListViewController.delegate = self;
@@ -216,7 +194,7 @@
     if (!rssFeed)
         return;    
     
-    RssFeedDetailViewController *rssFeedDetailViewController = [[[RssFeedDetailViewController alloc] init] autorelease];
+    RssFeedDetailViewController *rssFeedDetailViewController = [[RssFeedDetailViewController alloc] init];
     assert(rssFeedDetailViewController != nil);        
     rssFeedDetailViewController.delegate = self;  
     rssFeedDetailViewController.rssFeed = rssFeed;
@@ -240,7 +218,7 @@
 
 - (IBAction)addRssFeed:(id)sender 
 {
-    RssFeedDetailViewController *rssFeedDetailViewController = [[[RssFeedDetailViewController alloc] init] autorelease];
+    RssFeedDetailViewController *rssFeedDetailViewController = [[RssFeedDetailViewController alloc] init];
     assert(rssFeedDetailViewController != nil);        
     rssFeedDetailViewController.delegate = self;  
     rssFeedDetailViewController.viewMode = CreateNewMode;
@@ -320,7 +298,7 @@
     
     RssFeedViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-		cell = [[[RssFeedViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+		cell = [[RssFeedViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier];
         // Show row with the AccessoryDisclosureIndicator
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	}
@@ -507,14 +485,12 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
         for (int i = 0; i < [m_rateButtons count]; i++) {
             id rateButton = [m_rateButtons objectAtIndex:i];
             if (rateButton) {
-                [rateButton release];
                 rateButton = nil;
             }
         }        
     }
     
     [m_rateButtons removeAllObjects];
-    [m_rateButtons release];
 }
 
 - (void)createRateButtons
@@ -532,7 +508,7 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     // Create a new dynamic buttons
     for (int i = 0; i < 5; i++) {
         CGRect frame = CGRectMake(x, y, 40, 40);
-        RateButton *rateButton = [[RateButton buttonWithType:UIButtonTypeCustom] retain];
+        RateButton *rateButton = [RateButton buttonWithType:UIButtonTypeCustom];
         rateButton.frame = frame;
         //[rateButton setTitle:(NSString *)@"Rate" forState:(UIControlState)UIControlStateNormal];
         [rateButton addTarget:self action:@selector(rateButtonClicked:) forControlEvents:UIControlEventTouchUpInside];

@@ -131,7 +131,7 @@
     if ([rssFeedModel count] == 0)
         return nil;
     
-    return [rssFeedModel autorelease];
+    return rssFeedModel;
 }
 
 - (RssFeedModel *)searchByTitle:(NSString *)searchText
@@ -153,7 +153,7 @@
     if ([rssFeedModel count] == 0)
         return nil;
 
-    return [rssFeedModel autorelease];
+    return rssFeedModel;
 }
 
 - (RssFeedModel *)searchByRate:(int)rate
@@ -170,7 +170,7 @@
     if ([rssFeedModel count] == 0)
         return nil;
     
-    return [rssFeedModel autorelease];
+    return rssFeedModel;
 }
 
 - (void)clear
@@ -183,9 +183,4 @@
     return [m_rssFeedList count];
 }
 
-- (void)dealloc
-{
-    [m_rssFeedList release];    
-    [super dealloc];
-}
 @end

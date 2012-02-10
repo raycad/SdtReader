@@ -31,6 +31,7 @@
 - (IBAction)backWebPageButtonClicked:(id)sender;
 - (IBAction)forwardWebPageButtonClicked:(id)sender;
 
+- (void)showLoadingIndicator:(BOOL)show;
 - (id)initWithRssStory:(RssStory *)rssStory;
 - (void)reload;
 @end

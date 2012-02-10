@@ -22,13 +22,13 @@
     RssStory                *m_currentRssStory;
 }
 
-@property (nonatomic, copy) NSString *rssFeedLink;
-@property (nonatomic, retain) RssStory *currentRssStory;
-@property (nonatomic, retain) NSMutableString *currentItemValue;
+@property (nonatomic, strong) NSString *rssFeedLink;
+@property (nonatomic, strong) RssStory *currentRssStory;
+@property (nonatomic, strong) NSMutableString *currentItemValue;
 @property (readonly) RssStoryModel *rssStoryModel;
 
-@property (nonatomic, assign) id<RssParserDelegate> delegate;
-@property (nonatomic, retain) NSOperationQueue *retrieverQueue;
+@property (nonatomic, strong) id<RssParserDelegate> delegate;
+@property (nonatomic, strong) NSOperationQueue *retrieverQueue;
 
 - (void)startProcess;
 

@@ -67,9 +67,4 @@
     return m_rateState;
 }
 
-- (void)dealloc
-{
-    [m_rateImageName release];
-    [m_unrateImageName release];
-}
 @end

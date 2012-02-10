@@ -29,4 +29,7 @@
 - (void)didCancel:(NSObject *)object;
 - (void)didSelect:(NSObject *)object;
 - (void)didUpdate:(NSObject *)object;
+@optional
+- (void)didBackView:(NSObject *)object;
+- (void)hideNavigationBar;
 @end

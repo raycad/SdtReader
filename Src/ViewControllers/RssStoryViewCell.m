@@ -22,11 +22,12 @@
         // Initialization code
         m_titleLabel = [[UILabel alloc] init];
         m_titleLabel.textAlignment = UITextAlignmentLeft;
-        m_indexLabel.font = [UIFont fontWithMarkupDescription:@"font-family: Arial; font-size: 22px; font-weight: bold;"];
+        m_titleLabel.font = [UIFont fontWithName:@"Arial" size:20];
         
         m_descriptionLabel = [[UITextView alloc] init];
         m_descriptionLabel.textAlignment = UITextAlignmentLeft;
-        m_descriptionLabel.font = [UIFont fontWithMarkupDescription:@"font-family: Arial; font-size: 13px; font-style : italic;"];
+        //m_descriptionLabel.font = [UIFont fontNamesForFamilyName:@"font-family: Arial; font-size: 13px; font-style : italic;"];
+        m_descriptionLabel.font = [UIFont fontWithName:@"Arial" size:13];
         m_descriptionLabel.textColor = [UIColor blueColor];
         [m_descriptionLabel setEditable:NO];
         [m_descriptionLabel setUserInteractionEnabled:NO];
@@ -34,7 +35,7 @@
         m_indexLabel = [[UILabel alloc] init];
         m_indexLabel.textAlignment = UITextAlignmentLeft;
         //m_indexLabel.font = [UIFont systemFontOfSize:10];
-        m_indexLabel.font = [UIFont fontWithMarkupDescription:@"font-family: Arial; font-size: 15px; font-weight: bold; font-style : italic;"];
+        //m_indexLabel.font = [UIFont fontNamesForFamilyName:@"font-family: Arial; font-size: 15px; font-weight: bold; font-style : italic;"];
         m_indexLabel.textColor = [UIColor grayColor];
         
         m_thumbnailImageView = [[UIImageView alloc] init];
@@ -79,7 +80,7 @@
     
     NSURL *url = [NSURL URLWithString:imageLink];
     
-    UIImage *image = [[UIImage imageWithData: [NSData dataWithContentsOfURL:url]] retain];
+    UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL:url]];
     
     // Update thumbnail image
     m_rssStory.image = image;
@@ -108,14 +109,5 @@
     } 
     
     m_thumbnailImageView.image = image;
-}
-
-- (void)dealloc
-{
-    [m_rssStory release];
-    [m_titleLabel release];
-    [m_descriptionLabel release];
-    [m_indexLabel release];
-    [m_thumbnailImageView release];
 }
 @end

@@ -45,18 +45,6 @@
     return 55;
 }
 
-- (void)dealloc
-{
-    [m_rssCategoryModel release];
-    [m_searchBar release];
-    [m_rssCategoryTableView release];
-    [m_viewSelectionModeButton release];
-    [m_editSelectionModeButton release];
-    [m_viewSelectionModeLabel release];
-    [m_editSelectionModeLabel release];
-    [super dealloc];
-}
-
 - (void)refreshView
 {
     if (m_searchMode == SearchByTitle) {
@@ -159,7 +147,7 @@
     
     RssCategoryViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-		cell = [[[RssCategoryViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+		cell = [[RssCategoryViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier];
         // Show row with the AccessoryDisclosureIndicator
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	}
@@ -353,7 +341,7 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
 
 - (IBAction)addRssCategory:(id)sender 
 {
-    RssCategoryDetailViewController *rssCategoryDetailViewController = [[[RssCategoryDetailViewController alloc] init] autorelease];
+    RssCategoryDetailViewController *rssCategoryDetailViewController = [[RssCategoryDetailViewController alloc] init];
      assert(rssCategoryDetailViewController != nil);        
      rssCategoryDetailViewController.delegate = self;  
      rssCategoryDetailViewController.viewMode = CreateNewMode;
@@ -373,7 +361,7 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     if (!rssCategory)
         return;   
     
-    RssFeedViewController *rssFeedViewController = [[[RssFeedViewController alloc] init] autorelease];
+    RssFeedViewController *rssFeedViewController = [[RssFeedViewController alloc] init];
     rssFeedViewController.rssCategory = rssCategoryViewCell.rssCategory;
     rssFeedViewController.delegate = self;
     assert(rssFeedViewController != nil);        
@@ -393,7 +381,7 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     if (!rssCategory)
         return;    
     
-    RssCategoryDetailViewController *rssCategoryDetailViewController = [[[RssCategoryDetailViewController alloc] init] autorelease];
+    RssCategoryDetailViewController *rssCategoryDetailViewController = [[RssCategoryDetailViewController alloc] init];
     assert(rssCategoryDetailViewController != nil);        
     rssCategoryDetailViewController.delegate = self;  
     rssCategoryDetailViewController.rssCategory = rssCategory;

@@ -73,21 +73,9 @@
 {
     if ((self = [super init])) {
         // Initialize parameters
-        [m_rssStory autorelease]; // Use this to avoid releasing itself
-        m_rssStory = [rssStory retain];
+        m_rssStory = rssStory; 
     }
     return self; 
-}
-
-- (void)dealloc
-{
-    [m_webView release];
-    [m_rssStory release];
-    [m_activityIndicatorView release];
-    [m_loadingLabel release];
-    [m_backWebPageButton release];
-    [m_forwardWebPageButton release];
-    [super dealloc];
 }
 
 #pragma mark - View lifecycle
