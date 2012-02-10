@@ -45,13 +45,10 @@
 																	 selector:method 
 																	   object:nil];
 	[self.retrieverQueue addOperation:op];
-	[op release];
 }
 
 -(BOOL)fetchAndParseRss
 {
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
 	//To suppress the leak in NSXMLParser
@@ -66,8 +63,6 @@
 	[parser setShouldReportNamespacePrefixes:YES];
 	[parser setShouldResolveExternalEntities:NO];
 	success = [parser parse];
-	[parser release];
-	[pool drain];
 	return success;
 }
 
@@ -78,7 +73,7 @@
 		elementName = qualifiedName;
 	}
 	if ([elementName isEqualToString:@"item"]) {
-		self.currentRssStory = [[[RssStory alloc] init] autorelease];
+		self.currentRssStory = [[RssStory alloc] init];
 	}else if ([elementName isEqualToString:@"media:thumbnail"]) {
 		self.currentRssStory.mediaUrl = [attributeDict valueForKey:@"url"];
 	} else if([elementName isEqualToString:@"title"] || 
@@ -109,7 +104,6 @@
 		NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 		[formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
 		self.currentRssStory.pubDate = [formatter dateFromString:self.currentItemValue];
-		[formatter release];
 	}else if([elementName isEqualToString:@"item"]){
         [m_rssStoryModel addRssStory:self.currentRssStory];
 	}
@@ -143,16 +137,6 @@
                                           withObject:nil
                                        waitUntilDone:NO];
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-}
-
--(void)dealloc
-{
-	self.currentRssStory = nil;
-	self.currentItemValue = nil;
-	self.delegate = nil;
-	
-	[m_rssStoryModel release];
-	[super dealloc];
 }
 
 @end

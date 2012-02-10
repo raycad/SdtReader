@@ -103,12 +103,7 @@
     if ([rssStoryModel count] == 0)
         return nil;
     
-    return [rssStoryModel autorelease];
+    return rssStoryModel;
 }
 
-- (void)dealloc
-{
-    [m_rssStoryList release];    
-    [super dealloc];
-}
 @end

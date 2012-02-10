@@ -53,16 +53,6 @@ static ReaderModel *_instance = nil;
 	return self;
 }
 
-- (void) dealloc
-{
-    [m_rssFeedModel release];
-    [m_rssCategoryModel release];
-    
-    sqlite3_close(m_database);
-    
-    [super dealloc];
-}
-
 - (void) checkAndCreateDatabase 
 {
     @try {
@@ -86,8 +76,6 @@ static ReaderModel *_instance = nil;
                 NSLog(@"Could not create database");
             }
         }
-        
-        [fileManager release];
         
         // Open the database from the users filessytem
         if(!sqlite3_open([m_databasePath UTF8String], &m_database) == SQLITE_OK) {
@@ -166,9 +154,6 @@ static ReaderModel *_instance = nil;
         // Decrease total rss feeds
         rssCategory.totalRssFeeds -= 1;
     }
-    
-    if (result)
-        [rssFeed release];
     
     return result;
 }
@@ -274,7 +259,6 @@ static ReaderModel *_instance = nil;
     
     if (result) {
         result = [self removeRssFeedByCategory:rssCategory];
-        [rssCategory release];
     }
     
     return result;

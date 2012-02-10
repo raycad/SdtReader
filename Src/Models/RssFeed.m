@@ -16,8 +16,7 @@
 {
     if ((self = [super init])) {
         // Initialize parameters
-        [m_title autorelease]; // Use this to avoid releasing itself
-        m_title = [title retain];
+        m_title = title;
     }
     return self;   
 }
@@ -61,8 +60,7 @@
 {
     if ((self = [super init])) {
         // Initialize parameters
-        [m_rssFeedPK autorelease]; // Use this to avoid releasing itself
-        m_rssFeedPK = [rssFeedPK retain];
+        m_rssFeedPK = rssFeedPK;
         m_rate = -1;
     }
     
@@ -72,15 +70,5 @@
 - (RssFeedPK *)rssFeedPK
 {
     return m_rssFeedPK;
-}
-
-- (void)dealloc
-{
-    [m_title release];
-    [m_link release];
-    [m_website release];
-    [m_description release];
-    [m_rssCategory release];
-    [super dealloc];
 }
 @end

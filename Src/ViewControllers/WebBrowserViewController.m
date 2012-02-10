@@ -36,7 +36,7 @@
     UINavigationController *nav;
     
     // Create a navigation controller with us as its root.    
-    nav = [[[UINavigationController alloc] initWithRootViewController:self] autorelease];
+    nav = [[UINavigationController alloc] initWithRootViewController:self];
     assert(nav != nil);
     
     // Present the navigation controller on the specified parent 
@@ -49,16 +49,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.navigationItem.leftBarButtonItem  = [[[UIBarButtonItem alloc] initWithTitle:@"Back View" style:UIBarButtonItemStylePlain target:self action:@selector(backViewAction:)] autorelease]; 
+    self.navigationItem.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithTitle:@"Back View" style:UIBarButtonItemStylePlain target:self action:@selector(backViewAction:)]; 
     assert(self.navigationItem.leftBarButtonItem != nil);
-    self.navigationItem.rightBarButtonItem  = [[[UIBarButtonItem alloc] initWithTitle:@"Back Page" style:UIBarButtonItemStylePlain target:self action:@selector(goBackPageAction:)] autorelease]; 
+    self.navigationItem.rightBarButtonItem  = [[UIBarButtonItem alloc] initWithTitle:@"Back Page" style:UIBarButtonItemStylePlain target:self action:@selector(goBackPageAction:)]; 
     assert(self.navigationItem.rightBarButtonItem != nil);     
-}
-
-- (void)dealloc
-{
-    [m_delegate release];
-    [super dealloc];
 }
 
 @end

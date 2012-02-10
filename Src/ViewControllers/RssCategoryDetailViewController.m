@@ -27,14 +27,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [m_rssCategory release];
-    [m_titleTextField release];
-    [m_descriptionTextView release];
-    [super dealloc];
-}
-
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -104,7 +96,6 @@
         NSString *alertString = [NSString stringWithFormat:@"Title must not be empty"];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:alertString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
         
         return;
     }
@@ -124,7 +115,6 @@
             NSString *alertString = [NSString stringWithFormat:@"This RSS Category is existing"];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:alertString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
-            [alert release];
             
             return;
         }
@@ -145,7 +135,6 @@
             NSString *alertString = [NSString stringWithFormat:@"The RSS Category is existing. Please enter another title name"];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:alertString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
-            [alert release];
             
             return;
         }

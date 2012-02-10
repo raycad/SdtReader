@@ -12,7 +12,7 @@
     NSString *m_title;    
 }
 
-@property NSString *title;
+@property (nonatomic, strong) NSString *title;
 
 -(id)initWithTitle:(NSString *)title;
 @end

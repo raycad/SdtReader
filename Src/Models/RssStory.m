@@ -26,16 +26,4 @@
     }
     return self;   
 }
-
-- (void) dealloc
-{
-    [m_title release];
-	[m_description release];
-	[m_linkUrl release];
-	[m_guidUrl release];
-	[m_pubDate release];
-	[m_mediaUrl release];
-    [m_image release];
-    [super dealloc];
-}
 @end

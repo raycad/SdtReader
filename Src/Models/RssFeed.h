@@ -13,7 +13,7 @@
     NSString *m_title;    
 }
 
-@property NSString *title;
+@property (nonatomic, strong) NSString *title;
 
 -(id)initWithTitle:(NSString *)title;
 @end
@@ -31,11 +31,11 @@
 }
 
 @property (nonatomic)           int         rssFeedId;
-@property (nonatomic, copy)     NSString    *title;
-@property (nonatomic, copy)     NSString    *link;
-@property (nonatomic, copy)     NSString    *website;
-@property (nonatomic, copy)     NSString    *description;
-@property (nonatomic, retain)   RssCategory *rssCategory;
+@property (nonatomic, strong)     NSString    *title;
+@property (nonatomic, strong)     NSString    *link;
+@property (nonatomic, strong)     NSString    *website;
+@property (nonatomic, strong)     NSString    *description;
+@property (nonatomic, strong)   RssCategory *rssCategory;
 @property int rate;
 
 - (id)initWithRssFeedPK:(RssFeedPK *)rssFeedPK;

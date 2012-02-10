@@ -120,7 +120,7 @@
     if ([rssCategoryModel count] == 0)
         return nil;
 
-    return [rssCategoryModel autorelease];
+    return rssCategoryModel;
 }
 
 - (void)setValue:(RssCategory *)rssCategory atIndex:(int)index
@@ -175,9 +175,4 @@
     return [m_rssCategoryList count];
 }
 
-- (void)dealloc
-{
-    [m_rssCategoryList release];    
-    [super dealloc];
-}
 @end

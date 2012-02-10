@@ -39,6 +39,8 @@
 - (void)refreshView;
 - (void)refreshData;
 
+- (void)updateSelectionMode;
+
 - (void)viewRssCategoryAtCell:(UITableViewCell *)cell;
 - (void)editRssCategoryAtCell:(UITableViewCell *)cell;
 @end
