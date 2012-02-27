@@ -30,19 +30,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [self releaseRateButtons];
-    
-    [m_rssFeed release];
-    [m_titleTextField release];
-    [m_linkTextField release];
-    [m_websiteTextField release];
-    [m_descriptionTextView release];
-    [m_rateLabel release];
-    [super dealloc];
-}
-
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -103,14 +90,12 @@
         for (int i = 0; i < [m_rateButtons count]; i++) {
             id rateButton = [m_rateButtons objectAtIndex:i];
             if (rateButton) {
-                [rateButton release];
                 rateButton = nil;
             }
         }        
     }
     
     [m_rateButtons removeAllObjects];
-    [m_rateButtons release];
 }
 
 - (void)createRateButtons
@@ -128,7 +113,7 @@
     // Create a new dynamic buttons
     for (int i = 0; i < 5; i++) {
         CGRect frame = CGRectMake(x, y, 48, 48);
-        RateButton *rateButton = [[RateButton buttonWithType:UIButtonTypeCustom] retain];
+        RateButton *rateButton = [RateButton buttonWithType:UIButtonTypeCustom];
         rateButton.frame = frame;
         //[rateButton setTitle:(NSString *)@"Rate" forState:(UIControlState)UIControlStateNormal];
         [rateButton addTarget:self action:@selector(rateButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -267,7 +252,6 @@
         NSString *alertString = [NSString stringWithFormat:@"Title must not be empty"];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:alertString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
         
         return;
     }
@@ -294,7 +278,6 @@
             NSString *alertString = [NSString stringWithFormat:@"This RSS Feed is existing"];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:alertString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
-            [alert release];
             
             return;
         }
@@ -312,7 +295,6 @@
             NSString *alertString = [NSString stringWithFormat:@"The RSS Feed is existing. Please enter another title name"];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:alertString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
-            [alert release];
             
             return;
         }

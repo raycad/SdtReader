@@ -38,14 +38,6 @@
     return 50;
 }
 
-- (void)dealloc
-{
-    [m_rssFeedModel release];
-    [m_searchBar release];
-    [m_rssFeedTableView release];
-    [super dealloc];
-}
-
 - (void)loadDataFromDB
 {
     if (m_readerModel.rssFeedModel == nil) {
@@ -72,12 +64,6 @@
         if ([rssFeedModel addRssFeed:rssFeed]) {
             NSLog(@"Added rss feed sucessfully");
         }
-        [title release];
-        [link release];
-        [website release];
-        [description release];
-        [rssFeedPK release];
-        [rssFeed release];  
         
         title = [NSString stringWithFormat:@"MSDN"];
         rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
@@ -93,12 +79,6 @@
         if ([rssFeedModel addRssFeed:rssFeed]) {
             NSLog(@"Added rss feed sucessfully");
         }
-        [title release];
-        [link release];
-        [website release];
-        [description release];
-        [rssFeedPK release];
-        [rssFeed release];http:
         
         title = [NSString stringWithFormat:@"BBC Top Stories"];
         rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
@@ -114,13 +94,7 @@
         if ([rssFeedModel addRssFeed:rssFeed]) {
             NSLog(@"Added rss feed sucessfully");
         }
-        [title release];
-        [link release];
-        [website release];
-        [description release];
-        [rssFeedPK release];
-        [rssFeed release]; 
-        
+       
         title = [NSString stringWithFormat:@"BBC"];
         rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
         rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
@@ -135,12 +109,6 @@
         if ([rssFeedModel addRssFeed:rssFeed]) {
             NSLog(@"Added rss feed sucessfully");
         }
-        [title release];
-        [link release];
-        [website release];
-        [description release];
-        [rssFeedPK release];
-        [rssFeed release];        
                 
         title = [NSString stringWithFormat:@"BBC Education"];
         rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
@@ -156,13 +124,7 @@
         if ([rssFeedModel addRssFeed:rssFeed]) {
             NSLog(@"Added rss feed sucessfully");
         }
-        [title release];
-        [link release];
-        [website release];
-        [description release];
-        [rssFeedPK release];
-        [rssFeed release]; 
-        
+       
         title = [NSString stringWithFormat:@"BBC Politics"];
         rssFeedPK = [[RssFeedPK alloc] initWithTitle:title];
         rssFeed = [[RssFeed alloc] initWithRssFeedPK:rssFeedPK];
@@ -177,17 +139,9 @@
         if ([rssFeedModel addRssFeed:rssFeed]) {
             NSLog(@"Added rss feed sucessfully");
         }
-        [title release];
-        [link release];
-        [website release];
-        [description release];
-        [rssFeedPK release];
-        [rssFeed release]; 
         
         // Set data model
         m_readerModel.rssFeedModel = rssFeedModel;
-        
-        [rssFeedModel release];
     }
 }
 
@@ -229,7 +183,6 @@
         NSString *alertString = [NSString stringWithFormat:@"You must select an RSS Feed to view"];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:alertString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
         return;
     }
     
@@ -247,11 +200,10 @@
         NSString *alertString = [NSString stringWithFormat:@"RSS link is empty. Please enter the link"];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:alertString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
         return;
     }
     
-    RssStoryListViewController *rssStoryListViewController = [[[RssStoryListViewController alloc] init] autorelease];
+    RssStoryListViewController *rssStoryListViewController = [[RssStoryListViewController alloc] init];
     
     rssStoryListViewController.rssFeed = rssFeed;
     rssStoryListViewController.delegate = self;
@@ -271,7 +223,6 @@
         NSString *alertString = [NSString stringWithFormat:@"You must select an RSS Feed to view"];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:alertString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
         return;
     }
     
@@ -283,7 +234,7 @@
     if (!rssFeed)
         return;    
     
-    RssFeedDetailViewController *rssFeedDetailViewController = [[[RssFeedDetailViewController alloc] init] autorelease];
+    RssFeedDetailViewController *rssFeedDetailViewController = [[RssFeedDetailViewController alloc] init];
     assert(rssFeedDetailViewController != nil);        
     rssFeedDetailViewController.delegate = self;  
     rssFeedDetailViewController.rssFeed = rssFeed;
@@ -293,7 +244,7 @@
 
 - (IBAction)addRssFeed:(id)sender 
 {
-    RssFeedDetailViewController *rssFeedDetailViewController = [[[RssFeedDetailViewController alloc] init] autorelease];
+    RssFeedDetailViewController *rssFeedDetailViewController = [[RssFeedDetailViewController alloc] init];
     assert(rssFeedDetailViewController != nil);        
     rssFeedDetailViewController.delegate = self;  
     rssFeedDetailViewController.viewMode = CreateNewMode;
@@ -352,7 +303,7 @@
     
     RssFeedViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-		cell = [[[RssFeedViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+		cell = [[RssFeedViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier];
         // Show row with the AccessoryDisclosureIndicator
 		cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
 	}

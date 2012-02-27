@@ -46,10 +46,4 @@ static ReaderModel *_instance = nil;
 	return self;
 }
 
-- (void) dealloc
-{
-    [m_rssFeedModel release];
-    [super dealloc];
-}
-
 @end

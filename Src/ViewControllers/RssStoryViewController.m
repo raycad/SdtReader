@@ -27,18 +27,9 @@
 {
     if ((self = [super init])) {
         // Initialize parameters
-        [m_rssStory autorelease]; // Use this to avoid releasing itself
-        m_rssStory = [rssStory retain];
+        m_rssStory = rssStory;
     }
     return self; 
-}
-
-- (void)dealloc
-{
-    [m_webView release];
-    [m_rssStory release];
-    [m_activityIndicatorView release];
-    [super dealloc];
 }
 
 #pragma mark - View lifecycle
@@ -53,9 +44,9 @@
     [self.view addSubview: m_activityIndicatorView];
     
     //m_webView.userInteractionEnabled = NO;
-    self.navigationItem.leftBarButtonItem  = [[[UIBarButtonItem alloc] initWithTitle:RssStoryTitle style:UIBarButtonItemStylePlain target:self action:@selector(backViewAction:)] autorelease]; 
+    self.navigationItem.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithTitle:RssStoryTitle style:UIBarButtonItemStylePlain target:self action:@selector(backViewAction:)]; 
     assert(self.navigationItem.leftBarButtonItem != nil);
-    self.navigationItem.rightBarButtonItem  = [[[UIBarButtonItem alloc] initWithTitle:@"Back Page" style:UIBarButtonItemStylePlain target:self action:@selector(goBackPageAction:)] autorelease]; 
+    self.navigationItem.rightBarButtonItem  = [[UIBarButtonItem alloc] initWithTitle:@"Back Page" style:UIBarButtonItemStylePlain target:self action:@selector(goBackPageAction:)]; 
     assert(self.navigationItem.rightBarButtonItem != nil);
     
     [self reload];
@@ -73,6 +64,19 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+- (void)showLoadingIndicator:(BOOL)show
+{
+    if (show) {
+        self.title = @"Loading ..."; 
+        [m_activityIndicatorView startAnimating];
+    } else {
+        self.title = @"";
+        [m_activityIndicatorView stopAnimating];
+    }
+    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = show;
 }
 
 -(void)webViewDidStartLoad:(UIWebView *) portal 
@@ -115,16 +119,4 @@
     [m_webView loadRequest:request];
 }
 
-- (void)showLoadingIndicator:(BOOL)show
-{
-    if (show) {
-        self.title = @"Loading ..."; 
-        [m_activityIndicatorView startAnimating];
-    } else {
-        self.title = @"";
-        [m_activityIndicatorView stopAnimating];
-    }
-    
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = show;
-}
 @end

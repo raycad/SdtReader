@@ -26,19 +26,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [m_storyListTableView release];
-    [m_rssFeed release];
-    //[m_rssStoryModel release];
-    [m_filterRssStoryModel release];
-    [m_totalStoriesLabel release];
-    //[m_rssParser release];
-    [m_searchBar release];
-    [m_activityIndicatorView release];
-    [super dealloc];
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 105;
@@ -61,6 +48,17 @@
     m_activityIndicatorView = [[UIActivityIndicatorView alloc]     initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     m_activityIndicatorView.center = self.view.center;
     [self.view addSubview: m_activityIndicatorView];
+}
+
+
+- (void)hideNavigationBar 
+{    
+    self.navigationController.navigationBarHidden = YES;
+}
+
+- (void)showNavigationBar 
+{    
+    self.navigationController.navigationBarHidden = NO;
 }
 
 - (void)backView
@@ -122,7 +120,7 @@
     
     RssStoryViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-		cell = [[[RssStoryViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+		cell = [[RssStoryViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier];
         // Show row with the AccessoryDisclosureIndicator
 		cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
 	}
@@ -178,7 +176,7 @@
         [rssStoryViewController reload];
         [rssStoryViewController release];*/
         
-        RssStoryViewController *rssStoryViewController = [[[RssStoryViewController alloc] initWithRssStory:rssStory] autorelease];
+        RssStoryViewController *rssStoryViewController = [[RssStoryViewController alloc] initWithRssStory:rssStory];
         assert(rssStoryViewController != nil);        
         rssStoryViewController.delegate = self;  
         [rssStoryViewController presentModallyOn:self];
@@ -218,9 +216,7 @@
     m_rssParser.rssFeedLink = rssFeedLink;
     m_rssParser.delegate = self;
     [m_rssParser startProcess];
-    
-    [m_rssParser release];
- }
+}
 
 //Delegate method for blog parser will get fired when the process is completed
 - (void)processCompleted
@@ -238,7 +234,6 @@
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Unable to download rss. Please check if you are connected to internet."
 												   delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
 	[alert show];	
-	[alert release];
 	//[self toggleToolBarButtons:YES];
     
     [m_activityIndicatorView stopAnimating];

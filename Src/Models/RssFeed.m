@@ -16,16 +16,9 @@
 {
     if ((self = [super init])) {
         // Initialize parameters
-        [m_title autorelease]; // Use this to avoid releasing itself
-        m_title = [title retain];
+        m_title = title;
     }
     return self;   
-}
-
-- (void)dealloc 
-{
-    // Don't release or autorelease the m_courseTitle since it might cause the crash. m_title has been set autorelease in the initWithTitle: function already.
-    //[m_title release];
 }
 
 - (BOOL)isEqual:(id)object
@@ -59,8 +52,7 @@
 {
     if ((self = [super init])) {
         // Initialize parameters
-        [m_rssFeedPK autorelease]; // Use this to avoid releasing itself
-        m_rssFeedPK = [rssFeedPK retain];
+        m_rssFeedPK = rssFeedPK;
         m_rate = -1;
     }
     
@@ -72,12 +64,4 @@
     return m_rssFeedPK;
 }
 
-- (void)dealloc
-{
-    [m_title release];
-    [m_link release];
-    [m_website release];
-    [m_description release];
-    [super dealloc];
-}
 @end
