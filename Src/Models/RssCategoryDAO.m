@@ -49,6 +49,7 @@
         sqlite3_finalize(queryStatement);
     } @catch (NSException *e) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[e name] message:[e reason] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
     }
 }
 
@@ -82,6 +83,7 @@
         sqlite3_finalize(queryStatement);
     } @catch (NSException *e) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[e name] message:[e reason] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
         return FALSE;
     }
     
@@ -114,6 +116,7 @@
         sqlite3_finalize(queryStatement);
     } @catch (NSException *e) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[e name] message:[e reason] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
         return FALSE;
     }
     
@@ -144,6 +147,7 @@
         sqlite3_finalize(queryStatement);
     } @catch (NSException *e) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[e name] message:[e reason] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
         return FALSE;
     }
     

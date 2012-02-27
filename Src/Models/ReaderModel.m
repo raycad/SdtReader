@@ -83,6 +83,7 @@ static ReaderModel *_instance = nil;
         }
     } @catch (NSException *e) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[e name] message:[e reason] delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
     }
 }
 

@@ -312,7 +312,7 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
         [m_editSelectionModeButton setHidden:NO]; 
         
         // Set the table view as uneditable
-        [m_rssCategoryTableView setEditing:NO];
+        [m_rssCategoryTableView setEditing:NO animated:YES];
     } else if (m_selectionMode == EditSelectionMode) {
         [m_viewSelectionModeLabel setHidden:NO];
         [m_viewSelectionModeButton setHidden:NO];
@@ -321,7 +321,7 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
         [m_editSelectionModeButton setHidden:YES];
         
         // Set the table view as editable
-        [m_rssCategoryTableView setEditing:YES];
+        [m_rssCategoryTableView setEditing:YES animated:YES];
     }
 }
 
